@@ -15,223 +15,300 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            900: '#1e3a8a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
         }
         
-        .hero-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
-            min-height: 80vh;
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23000" width="1000" height="600"/><g opacity="0.3"><circle cx="200" cy="200" r="100" fill="%23333"/><circle cx="800" cy="400" r="150" fill="%23222"/><rect x="0" y="0" width="1000" height="600" fill="url(%23grain)"/></g><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23fff" opacity="0.1"/><circle cx="80" cy="80" r="1" fill="%23fff" opacity="0.05"/></pattern></defs></svg>') center/cover;
+            min-height: 100vh;
+            position: relative;
         }
         
-        .card-hover {
+        .navbar-dark {
+            background: rgba(0,0,0,0.9) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .accent-red {
+            color: #ff4444;
+        }
+        
+        .btn-custom {
+            background: #ff4444;
+            border: none;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px 30px;
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
         
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        .btn-custom:hover {
+            background: #cc3333;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,68,68,0.3);
         }
         
-        .navbar-brand {
-            font-weight: 800;
-            font-size: 1.5rem;
+        .btn-custom::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
         }
         
-        /* Mobile Sidebar Styles */
+        .btn-custom:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .team-section {
+            background: #2a2a2a;
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: #ff4444;
+        }
+        
+        .trip-card {
+            background: #333333;
+            border: none;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .trip-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .trip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4444, #ff6666);
+        }
+        
+        .trip-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .trip-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,68,68,0.8), rgba(0,0,0,0.6));
+        }
+        
+        .trip-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        /* Mobile Sidebar */
         .mobile-sidebar {
             position: fixed;
             top: 0;
-            left: -300px;
-            width: 300px;
+            left: -100%;
+            width: 100%;
             height: 100vh;
-            background: #1e3a8a;
+            background: rgba(0,0,0,0.95);
             z-index: 1050;
             transition: left 0.3s ease;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
         }
         
         .mobile-sidebar.show {
             left: 0;
         }
         
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1040;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .mobile-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Desktop Navbar */
-        @media (min-width: 992px) {
-            .mobile-only {
-                display: none !important;
-            }
-        }
-        
-        /* Mobile Navbar */
-        @media (max-width: 991.98px) {
-            .desktop-only {
-                display: none !important;
-            }
-            
-            .hero-bg {
-                min-height: 70vh;
-            }
-        }
-        
         .sidebar-item {
             color: rgba(255,255,255,0.8);
             text-decoration: none;
-            padding: 12px 20px;
+            padding: 20px 30px;
             display: block;
             transition: all 0.3s ease;
-            border-left: 3px solid transparent;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .sidebar-item:hover {
-            color: white;
-            background: rgba(255,255,255,0.1);
-            border-left-color: #60a5fa;
+            color: #ff4444;
+            background: rgba(255,68,68,0.1);
+            padding-left: 40px;
         }
         
-        .sidebar-item.active {
-            color: white;
-            background: rgba(255,255,255,0.15);
-            border-left-color: #60a5fa;
+        @media (min-width: 992px) {
+            .mobile-only { display: none !important; }
         }
         
-        .sidebar-header {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.75rem;
+        @media (max-width: 991.98px) {
+            .desktop-only { display: none !important; }
+            .hero-title { font-size: 3rem; }
+        }
+        
+        .navbar-nav .nav-link {
+            font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 15px 20px 5px;
+            color: rgba(255,255,255,0.9) !important;
+            position: relative;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #ff4444 !important;
+        }
+        
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #ff4444;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
         }
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body>
     <!-- Desktop Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary-900 shadow-sm desktop-only">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top desktop-only">
         <div class="container-fluid px-4">
             <!-- Brand -->
             <a class="navbar-brand d-flex align-items-center" href="#home">
-                <i class="fas fa-calendar-check me-2 text-blue-300"></i>
-                <span class="text-white">Taskly Technology</span>
+                <div class="me-3">
+                    <i class="fas fa-calendar-check fa-2x text-white"></i>
+                </div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.8rem; color: #ff4444; font-weight: 600;">TECHNOLOGY</div>
+                </div>
             </a>
             
             <!-- Main Navigation -->
             <div class="navbar-nav d-flex flex-row me-auto ms-5">
-                <a class="nav-link fw-medium px-3" href="#home">Home</a>
-                <a class="nav-link fw-medium px-3" href="#about">About</a>
-                <a class="nav-link fw-medium px-3" href="#services">Services</a>
-                <a class="nav-link fw-medium px-3" href="#contact">Contact</a>
+                <a class="nav-link px-4" href="#home">About</a>
+                <a class="nav-link px-4" href="#services">Services</a>
+                <a class="nav-link px-4" href="#team">Team</a>
+                <a class="nav-link px-4" href="#locations">Locations</a>
+                <a class="nav-link px-4" href="#business">Business Activities</a>
+                <a class="nav-link px-4" href="#reports">Trip Reports</a>
+                <a class="nav-link px-4" href="#contact">Contact</a>
             </div>
             
-            <!-- Trip Reports Dropdown -->
-            <div class="dropdown me-4">
-                <button class="btn btn-outline-light dropdown-toggle fw-medium" type="button" data-bs-toggle="dropdown">
-                    <i class="fas fa-map-marker-alt me-2"></i>Trip Reports
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow-lg">
-                    <li>
-                        <a class="dropdown-item py-2" href="#sihanoukville">
-                            <i class="fas fa-water text-primary me-2"></i>
-                            <span class="fw-medium">Sihanoukville</span>
-                            <small class="text-muted d-block">Investor Meetings • 2 Days</small>
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item py-2" href="#siem-reap">
-                            <i class="fas fa-landmark text-success me-2"></i>
-                            <span class="fw-medium">Siem Reap</span>
-                            <small class="text-muted d-block">Market Expansion • 5 Days</small>
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item py-2" href="#mondulkiri">
-                            <i class="fas fa-mountain text-warning me-2"></i>
-                            <span class="fw-medium">Mondulkiri</span>
-                            <small class="text-muted d-block">Corporate Interview • 3 Days</small>
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item py-2" href="#thailand">
-                            <i class="fas fa-city text-danger me-2"></i>
-                            <span class="fw-medium">Thailand</span>
-                            <small class="text-muted d-block">AI Conference • 3 Days</small>
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item py-2" href="#singapore">
-                            <i class="fas fa-building text-info me-2"></i>
-                            <span class="fw-medium">Singapore</span>
-                            <small class="text-muted d-block">Strategic Planning • 2 Days</small>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Action Buttons -->
-            <div class="d-flex align-items-center gap-2">
-                <button class="btn btn-outline-light btn-sm">Login</button>
-                <button class="btn btn-light btn-sm fw-medium">Get Started</button>
+            <!-- Social Icons -->
+            <div class="d-flex align-items-center gap-3">
+                <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
             </div>
         </div>
     </nav>
 
     <!-- Mobile Navigation -->
-    <nav class="navbar navbar-dark bg-primary-900 shadow-sm mobile-only">
-        <div class="container-fluid">
+    <nav class="navbar navbar-dark fixed-top mobile-only">
+        <div class="container-fluid px-4">
             <!-- Mobile Brand -->
             <a class="navbar-brand d-flex align-items-center" href="#home">
-                <i class="fas fa-calendar-check me-2 text-blue-300"></i>
-                <span class="text-white">Taskly Technology</span>
+                <div class="me-2">
+                    <i class="fas fa-calendar-check fa-lg text-white"></i>
+                </div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.2rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.7rem; color: #ff4444; font-weight: 600;">TECHNOLOGY</div>
+                </div>
             </a>
             
             <!-- Mobile Menu Toggle -->
-            <button class="btn btn-outline-light" type="button" onclick="toggleSidebar()">
+            <button class="btn btn-outline-light" type="button" onclick="toggleMobileSidebar()">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -239,317 +316,216 @@
 
     <!-- Mobile Sidebar -->
     <div class="mobile-sidebar" id="mobileSidebar">
-        <div class="p-4">
-            <!-- Sidebar Header -->
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-calendar-check me-2 text-blue-300"></i>
-                    <span class="text-white fw-bold">Taskly Technology</span>
-                </div>
-                <button class="btn btn-outline-light btn-sm" onclick="toggleSidebar()">
-                    <i class="fas fa-times"></i>
-                </button>
+        <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-calendar-check fa-lg text-white me-2"></i>
+                <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; color: white;">TASKLY TECHNOLOGY</span>
             </div>
-            
-            <!-- Main Menu -->
-            <div class="sidebar-header">Main Menu</div>
-            <a href="#home" class="sidebar-item active" onclick="toggleSidebar()">
-                <i class="fas fa-home me-2"></i>Home
-            </a>
-            <a href="#about" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-info-circle me-2"></i>About
-            </a>
-            <a href="#services" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-cogs me-2"></i>Services
-            </a>
-            <a href="#contact" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-envelope me-2"></i>Contact
-            </a>
-            
-            <!-- Trip Reports -->
-            <div class="sidebar-header mt-4">Trip Reports</div>
-            <a href="#sihanoukville" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-water me-2"></i>Sihanoukville
-                <small class="d-block text-white-50">Investor Meetings</small>
-            </a>
-            <a href="#siem-reap" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-landmark me-2"></i>Siem Reap
-                <small class="d-block text-white-50">Market Expansion</small>
-            </a>
-            <a href="#mondulkiri" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-mountain me-2"></i>Mondulkiri
-                <small class="d-block text-white-50">Corporate Interview</small>
-            </a>
-            <a href="#thailand" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-city me-2"></i>Thailand
-                <small class="d-block text-white-50">AI Conference</small>
-            </a>
-            <a href="#singapore" class="sidebar-item" onclick="toggleSidebar()">
-                <i class="fas fa-building me-2"></i>Singapore
-                <small class="d-block text-white-50">Strategic Planning</small>
-            </a>
-            
-            <!-- Action Buttons -->
-            <div class="sidebar-header mt-4">Account</div>
-            <div class="p-3">
-                <button class="btn btn-outline-light w-100 mb-2">Login</button>
-                <button class="btn btn-light w-100 fw-medium">Get Started</button>
-            </div>
+            <button class="btn btn-outline-light btn-sm" onclick="toggleMobileSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div>
+            <a href="#home" class="sidebar-item" onclick="toggleMobileSidebar()">About</a>
+            <a href="#services" class="sidebar-item" onclick="toggleMobileSidebar()">Services</a>
+            <a href="#team" class="sidebar-item" onclick="toggleMobileSidebar()">Team</a>
+            <a href="#locations" class="sidebar-item" onclick="toggleMobileSidebar()">Locations</a>
+            <a href="#business" class="sidebar-item" onclick="toggleMobileSidebar()">Business Activities</a>
+            <a href="#reports" class="sidebar-item" onclick="toggleMobileSidebar()">Trip Reports</a>
+            <a href="#contact" class="sidebar-item" onclick="toggleMobileSidebar()">Contact</a>
         </div>
     </div>
 
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
-
     <!-- Hero Section -->
-    <section class="hero-bg d-flex align-items-center" id="home">
+    <section class="hero-section d-flex align-items-center" id="home">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 text-white">
-                    <h1 class="display-4 fw-bold mb-4">Business Trip Reports</h1>
-                    <p class="lead mb-4">Comprehensive documentation and analysis of our international business travels and strategic initiatives across Southeast Asia.</p>
-                    <div class="d-flex flex-column flex-sm-row gap-3">
-                        <button class="btn btn-light btn-lg px-4">
-                            <i class="fas fa-chart-bar me-2"></i>View Reports
-                        </button>
-                        <button class="btn btn-outline-light btn-lg px-4">
-                            <i class="fas fa-download me-2"></i>Export Data
-                        </button>
+                <div class="col-lg-6">
+                    <div class="hero-title text-white mb-4">
+                        UNLEASH<br>
+                        THE<br>
+                        <span class="accent-red">BUSINESS</span><br>
+                        WITHIN
                     </div>
-                    
-                    <!-- Quick Stats -->
-                    <div class="row mt-4">
-                        <div class="col-4 text-center">
-                            <h3 class="fw-bold mb-1">5</h3>
-                            <small class="text-blue-200">Countries</small>
-                        </div>
-                        <div class="col-4 text-center">
-                            <h3 class="fw-bold mb-1">15</h3>
-                            <small class="text-blue-200">Days</small>
-                        </div>
-                        <div class="col-4 text-center">
-                            <h3 class="fw-bold mb-1">$8.2K</h3>
-                            <small class="text-blue-200">Budget</small>
-                        </div>
-                    </div>
+                    <p class="hero-subtitle text-white mb-5">Strategic business travel management and comprehensive reporting solutions for modern enterprises.</p>
+                    <button class="btn btn-custom">
+                        LEARN MORE
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <div class="bg-white bg-opacity-10 rounded-4 p-5 backdrop-blur">
-                        <i class="fas fa-globe-asia display-1 text-white mb-3"></i>
-                        <h4 class="text-white fw-semibold mb-2">Global Business Network</h4>
-                        <p class="text-blue-200 mb-0">Strategic expansion across Southeast Asia</p>
+                    <div class="d-flex justify-content-center">
+                        <div style="width: 400px; height: 400px; background: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 400\\'><circle cx=\\'200\\' cy=\\'200\\' r=\\'180\\' fill=\\'none\\' stroke=\\'%23ff4444\\' stroke-width=\\'4\\'/><circle cx=\\'200\\' cy=\\'200\\' r=\\'140\\' fill=\\'none\\' stroke=\\'%23fff\\' stroke-width=\\'2\\' opacity=\\'0.3\\'/><circle cx=\\'200\\' cy=\\'200\\' r=\\'100\\' fill=\\'none\\' stroke=\\'%23ff4444\\' stroke-width=\\'2\\' opacity=\\'0.6\\'/><text x=\\'200\\' y=\\'160\\' text-anchor=\\'middle\\' fill=\\'%23fff\\' font-family=\\'Rajdhani\\' font-size=\\'36\\' font-weight=\\'700\\'>TASKLY</text><text x=\\'200\\' y=\\'200\\' text-anchor=\\'middle\\' fill=\\'%23ff4444\\' font-family=\\'Inter\\' font-size=\\'16\\' font-weight=\\'600\\'>TECHNOLOGY</text><text x=\\'200\\' y=\\'240\\' text-anchor=\\'middle\\' fill=\\'%23fff\\' font-family=\\'Inter\\' font-size=\\'14\\' opacity=\\'0.8\\'>Business Solutions</text></svg>') center/contain no-repeat;"></div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
     <!-- Trip Reports Section -->
-    <section class="py-5 bg-white">
+    <section class="team-section" id="reports">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="fw-bold text-dark mb-3">Our Business Trips</h2>
-                <p class="text-muted">Strategic travels for growth and partnerships</p>
+                <h2 class="section-title text-white">BUSINESS TRIP REPORTS</h2>
             </div>
             
             <div class="row g-4">
                 <!-- Sihanoukville -->
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <div class="card border-0 shadow-sm card-hover h-100">
-                        <div class="card-header bg-primary text-white text-center py-4">
-                            <i class="fas fa-water fa-2x mb-3"></i>
-                            <h5 class="fw-bold mb-1">Sihanoukville</h5>
-                            <small class="opacity-75">Coastal Investment Hub</small>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%23667eea\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><circle cx=\\'100\\' cy=\\'100\\' r=\\'50\\' fill=\\'%23fff\\'/><circle cx=\\'300\\' cy=\\'150\\' r=\\'70\\' fill=\\'%23000\\'/></g></svg>');">
+                            <i class="fas fa-water trip-icon"></i>
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">SIHANOUKVILLE</h3>
+                            <p class="text-light mb-3">Strategic investor meetings and partnership discussions for business expansion funding.</p>
                             <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Duration</h6>
-                                    <span class="fw-bold">2 Days</span>
+                                    <div class="accent-red fw-bold">2 DAYS</div>
+                                    <small class="text-light">Duration</small>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Investment</h6>
-                                    <span class="fw-bold text-success">$700</span>
+                                    <div class="accent-red fw-bold">$700</div>
+                                    <small class="text-light">Investment</small>
                                 </div>
                             </div>
-                            <h6 class="fw-semibold text-primary mb-2">
-                                <i class="fas fa-handshake me-2"></i>Investor Meetings
-                            </h6>
-                            <p class="text-muted mb-3">Strategic discussions with potential investors for expansion funding and partnership opportunities.</p>
                             <div class="mb-3">
-                                <span class="badge bg-primary bg-opacity-10 text-primary">June 16-17, 2025</span>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">INVESTOR MEETINGS</span>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent p-4">
-                            <button class="btn btn-primary w-100 fw-semibold">
-                                <i class="fas fa-eye me-2"></i>View Details
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Siem Reap -->
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <div class="card border-0 shadow-sm card-hover h-100">
-                        <div class="card-header bg-success text-white text-center py-4">
-                            <i class="fas fa-landmark fa-2x mb-3"></i>
-                            <h5 class="fw-bold mb-1">Siem Reap</h5>
-                            <small class="opacity-75">Cultural Heritage Center</small>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%2311998e\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><rect x=\\'50\\' y=\\'50\\' width=\\'100\\' height=\\'100\\' fill=\\'%23fff\\'/><rect x=\\'250\\' y=\\'100\\' width=\\'100\\' height=\\'100\\' fill=\\'%23000\\'/></g></svg>');">
+                            <i class="fas fa-landmark trip-icon"></i>
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">SIEM REAP</h3>
+                            <p class="text-light mb-3">Comprehensive market analysis and location scouting for business expansion opportunities.</p>
                             <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Duration</h6>
-                                    <span class="fw-bold">5 Days</span>
+                                    <div class="accent-red fw-bold">5 DAYS</div>
+                                    <small class="text-light">Duration</small>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Investment</h6>
-                                    <span class="fw-bold text-success">$2,300</span>
+                                    <div class="accent-red fw-bold">$2,300</div>
+                                    <small class="text-light">Investment</small>
                                 </div>
                             </div>
-                            <h6 class="fw-semibold text-success mb-2">
-                                <i class="fas fa-expand-arrows-alt me-2"></i>Market Expansion
-                            </h6>
-                            <p class="text-muted mb-3">Comprehensive market analysis and location scouting for potential business expansion opportunities.</p>
                             <div class="mb-3">
-                                <span class="badge bg-success bg-opacity-10 text-success">July 14-18, 2025</span>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">MARKET EXPANSION</span>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent p-4">
-                            <button class="btn btn-success w-100 fw-semibold">
-                                <i class="fas fa-eye me-2"></i>View Details
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Mondulkiri -->
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <div class="card border-0 shadow-sm card-hover h-100">
-                        <div class="card-header bg-warning text-white text-center py-4">
-                            <i class="fas fa-mountain fa-2x mb-3"></i>
-                            <h5 class="fw-bold mb-1">Mondulkiri</h5>
-                            <small class="opacity-75">Highland Province</small>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%23fc466b\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><polygon points=\\'200,50 150,150 250,150\\' fill=\\'%23fff\\'/><polygon points=\\'100,200 50,250 150,250\\' fill=\\'%23000\\'/></g></svg>');">
+                            <i class="fas fa-mountain trip-icon"></i>
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">MONDULKIRI</h3>
+                            <p class="text-light mb-3">Executive interviews and corporate content creation for company magazine features.</p>
                             <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Duration</h6>
-                                    <span class="fw-bold">3 Days</span>
+                                    <div class="accent-red fw-bold">3 DAYS</div>
+                                    <small class="text-light">Duration</small>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Investment</h6>
-                                    <span class="fw-bold text-success">$620</span>
+                                    <div class="accent-red fw-bold">$620</div>
+                                    <small class="text-light">Investment</small>
                                 </div>
                             </div>
-                            <h6 class="fw-semibold text-warning mb-2">
-                                <i class="fas fa-microphone me-2"></i>Corporate Interview
-                            </h6>
-                            <p class="text-muted mb-3">In-depth interview with retired company personnel for corporate magazine feature article.</p>
                             <div class="mb-3">
-                                <span class="badge bg-warning bg-opacity-10 text-warning">August 6-8, 2025</span>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">CORPORATE INTERVIEW</span>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent p-4">
-                            <button class="btn btn-warning w-100 fw-semibold">
-                                <i class="fas fa-eye me-2"></i>View Details
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Thailand -->
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <div class="card border-0 shadow-sm card-hover h-100">
-                        <div class="card-header bg-danger text-white text-center py-4">
-                            <i class="fas fa-city fa-2x mb-3"></i>
-                            <h5 class="fw-bold mb-1">Thailand</h5>
-                            <small class="opacity-75">Bangkok Tech District</small>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%23fa709a\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><rect x=\\'50\\' y=\\'50\\' width=\\'60\\' height=\\'150\\' fill=\\'%23fff\\'/><rect x=\\'150\\' y=\\'80\\' width=\\'60\\' height=\\'120\\' fill=\\'%23000\\'/><rect x=\\'250\\' y=\\'40\\' width=\\'60\\' height=\\'170\\' fill=\\'%23fff\\'/></g></svg>');">
+                            <i class="fas fa-city trip-icon"></i>
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">THAILAND</h3>
+                            <p class="text-light mb-3">International AI conference and technology innovation summit participation.</p>
                             <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Duration</h6>
-                                    <span class="fw-bold">3 Days</span>
+                                    <div class="accent-red fw-bold">3 DAYS</div>
+                                    <small class="text-light">Duration</small>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Investment</h6>
-                                    <span class="fw-bold text-success">$2,340</span>
+                                    <div class="accent-red fw-bold">$2,340</div>
+                                    <small class="text-light">Investment</small>
                                 </div>
                             </div>
-                            <h6 class="fw-semibold text-danger mb-2">
-                                <i class="fas fa-robot me-2"></i>AI Conference
-                            </h6>
-                            <p class="text-muted mb-3">International conference on artificial intelligence applications in modern workplace environments.</p>
                             <div class="mb-3">
-                                <span class="badge bg-danger bg-opacity-10 text-danger">September 22-24, 2025</span>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">AI CONFERENCE</span>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent p-4">
-                            <button class="btn btn-danger w-100 fw-semibold">
-                                <i class="fas fa-eye me-2"></i>View Details
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Singapore -->
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <div class="card border-0 shadow-sm card-hover h-100">
-                        <div class="card-header bg-info text-white text-center py-4">
-                            <i class="fas fa-building fa-2x mb-3"></i>
-                            <h5 class="fw-bold mb-1">Singapore</h5>
-                            <small class="opacity-75">Marina Bay District</small>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%23667eea\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><rect x=\\'80\\' y=\\'60\\' width=\\'40\\' height=\\'130\\' fill=\\'%23fff\\'/><rect x=\\'140\\' y=\\'40\\' width=\\'40\\' height=\\'150\\' fill=\\'%23000\\'/><rect x=\\'200\\' y=\\'80\\' width=\\'40\\' height=\\'110\\' fill=\\'%23fff\\'/><rect x=\\'260\\' y=\\'30\\' width=\\'40\\' height=\\'160\\' fill=\\'%23000\\'/></g></svg>');">
+                            <i class="fas fa-building trip-icon"></i>
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">SINGAPORE</h3>
+                            <p class="text-light mb-3">Strategic planning sessions and digital marketing research presentations.</p>
                             <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Duration</h6>
-                                    <span class="fw-bold">2 Days</span>
+                                    <div class="accent-red fw-bold">2 DAYS</div>
+                                    <small class="text-light">Duration</small>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-muted mb-1">Investment</h6>
-                                    <span class="fw-bold text-success">$2,300</span>
+                                    <div class="accent-red fw-bold">$2,300</div>
+                                    <small class="text-light">Investment</small>
                                 </div>
                             </div>
-                            <h6 class="fw-semibold text-info mb-2">
-                                <i class="fas fa-chart-line me-2"></i>Strategic Planning
-                            </h6>
-                            <p class="text-muted mb-3">Advanced social media marketing strategies and digital transformation research presentation.</p>
                             <div class="mb-3">
-                                <span class="badge bg-info bg-opacity-10 text-info">October 16-17, 2025</span>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">STRATEGIC PLANNING</span>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent p-4">
-                            <button class="btn btn-info w-100 fw-semibold">
-                                <i class="fas fa-eye me-2"></i>View Details
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Summary Card -->
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <div class="card border-0 shadow-sm h-100 bg-dark text-white">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100" style="background: linear-gradient(135deg, #ff4444, #cc3333); border: none;">
                         <div class="card-body p-4 d-flex flex-column justify-content-center text-center">
-                            <i class="fas fa-chart-pie fa-3x mb-4 text-blue-400"></i>
-                            <h4 class="fw-bold mb-4">Executive Summary</h4>
+                            <i class="fas fa-chart-pie fa-4x mb-4 text-white"></i>
+                            <h3 class="mb-4" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: white;">EXECUTIVE SUMMARY</h3>
                             <div class="row g-3 mb-4">
                                 <div class="col-6">
-                                    <h3 class="fw-bold mb-1">5</h3>
-                                    <small class="text-white-50">Countries</small>
+                                    <div class="h2 fw-bold mb-1 text-white">5</div>
+                                    <small class="text-white">Countries</small>
                                 </div>
                                 <div class="col-6">
-                                    <h3 class="fw-bold mb-1">15</h3>
-                                    <small class="text-white-50">Total Days</small>
+                                    <div class="h2 fw-bold mb-1 text-white">15</div>
+                                    <small class="text-white">Total Days</small>
                                 </div>
                                 <div class="col-12">
-                                    <h2 class="fw-bold mb-1 text-success">$8,260</h2>
-                                    <small class="text-white-50">Total Strategic Investment</small>
+                                    <div class="h1 fw-bold mb-1 text-white">$8,260</div>
+                                    <small class="text-white">Total Investment</small>
                                 </div>
                             </div>
-                            <button class="btn btn-light fw-semibold">
-                                <i class="fas fa-download me-2"></i>Export Full Report
+                            <button class="btn btn-light fw-bold" style="text-transform: uppercase; letter-spacing: 1px;">
+                                <i class="fas fa-download me-2"></i>EXPORT REPORT
                             </button>
                         </div>
                     </div>
@@ -559,23 +535,26 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-5">
+    <footer style="background: #000; padding: 50px 0;">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
-                        <i class="fas fa-calendar-check me-2 text-primary"></i>
-                        <span class="fw-bold fs-5">Taskly Technology</span>
+                        <i class="fas fa-calendar-check fa-2x text-white me-3"></i>
+                        <div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.5rem; color: white;">TASKLY TECHNOLOGY</div>
+                            <div style="color: #ff4444; font-weight: 600;">Business Solutions</div>
+                        </div>
                     </div>
-                    <p class="text-muted">Smart business travel management solutions for modern enterprises. Streamline your business trips with comprehensive reporting and analytics.</p>
+                    <p class="text-light">Unleashing business potential through strategic travel management and comprehensive reporting solutions.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="text-muted mb-2">&copy; 2025 Taskly Technology. All rights reserved.</p>
-                    <div class="d-flex justify-content-md-end gap-3">
-                        <a href="#" class="text-muted">Privacy Policy</a>
-                        <a href="#" class="text-muted">Terms of Service</a>
-                        <a href="#" class="text-muted">Contact</a>
+                    <div class="d-flex justify-content-md-end gap-4 mb-3">
+                        <a href="#" class="text-light"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
                     </div>
+                    <p class="text-light mb-0">&copy; 2025 Taskly Technology. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -586,29 +565,30 @@
     
     <script>
         // Mobile Sidebar Toggle
-        function toggleSidebar() {
+        function toggleMobileSidebar() {
             const sidebar = document.getElementById('mobileSidebar');
-            const overlay = document.getElementById('mobileOverlay');
-            
             sidebar.classList.toggle('show');
-            overlay.classList.toggle('show');
         }
         
-        // Smooth scrolling
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
         
         // Card hover effects
-        document.querySelectorAll('.card-hover').forEach(card => {
+        document.querySelectorAll('.trip-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
+                this.style.transform = 'translateY(-10px)';
             });
             
             card.addEventListener('mouseleave', function() {
@@ -616,26 +596,107 @@
             });
         });
         
-        // Close sidebar when clicking on links
-        document.querySelectorAll('.sidebar-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Update active state
-                document.querySelectorAll('.sidebar-item').forEach(link => {
-                    link.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0,0,0,0.95)';
+            } else {
+                navbar.style.background = 'rgba(0,0,0,0.9)';
+            }
+        });
+        
+        // Close mobile sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('mobileSidebar');
+            const toggleButton = document.querySelector('[onclick="toggleMobileSidebar()"]');
+            
+            if (sidebar.classList.contains('show') && 
+                !sidebar.contains(event.target) && 
+                !toggleButton.contains(event.target)) {
+                sidebar.classList.remove('show');
+            }
         });
         
         // Handle window resize
         window.addEventListener('resize', function() {
             if (window.innerWidth >= 992) {
                 const sidebar = document.getElementById('mobileSidebar');
-                const overlay = document.getElementById('mobileOverlay');
                 sidebar.classList.remove('show');
-                overlay.classList.remove('show');
             }
         });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe trip cards for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.trip-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+        
+        // Add subtle parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            const parallax = scrolled * 0.5;
+            
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${parallax}px)`;
+            }
+        });
+        
+        // Button click effects
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            button.addEventListener('click', function() {
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = '50%';
+                ripple.style.top = '50%';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.marginLeft = '-10px';
+                ripple.style.marginTop = '-10px';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add CSS animation for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
