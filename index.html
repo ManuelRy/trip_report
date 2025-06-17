@@ -3,9 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskly</title>
+    <title>Mohanokor Corp - Business Trip Reports</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        corporate: {
+                            blue: '#1e3a8a',
+                            light: '#3b82f6',
+                            dark: '#1e40af'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            .print-full { width: 100% !important; }
+        }
+    </style>
 </head>
-<body>
-    <h1>taskly Test app</h1>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-corporate-blue shadow-lg sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-white text-xl font-bold">Mohanokor Corp</h1>
+                </div>
+                <div class="flex space-x-8 items-center">
+                    <a href="#home" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                    <a href="#sihanoukville" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">Sihanoukville</a>
+                    <a href="#siem-reap" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">Siem Reap</a>
+                    <a href="#mondulkiri" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">Mondulkiri</a>
+                    <a href="#thailand" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">Thailand</a>
+                    <a href="#singapore" class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">Singapore</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        
+        <!-- Home Section - Dashboard -->
+        <section id="home" class="mb-16">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-8">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Business Trip Reports</h1>
+                    <p class="text-xl text-gray-600">Comprehensive documentation of business travels and outcomes</p>
+                </div>
+                
+                <!-- Trip Overview Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Sihanoukville Card -->
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200 hover:shadow-lg transition-shadow cursor-pointer" onclick="showTrip('sihanoukville')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-blue-900">Sihanoukville</h3>
+                            <span class="bg-blue-500 text-white px-2 py-1 rounded text-sm">2 Days</span>
+                        </div>
+                        <p class="text-blue-700 mb-2">Investor Meetings</p>
+                        <p class="text-sm text-blue-600">June 16-17, 2025</p>
+                        <div class="mt-4 text-right">
+                            <span class="text-lg font-bold text-blue-900">$700</span>
+                        </div>
+                    </div>
+
+                    <!-- Siem Reap Card -->
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 border border-green-200 hover:shadow-lg transition-shadow cursor-pointer" onclick="showTrip('siem-reap')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-green-900">Siem Reap</h3>
+                            <span class="bg-green-500 text-white px-2 py-1 rounded text-sm">5 Days</span>
+                        </div>
+                        <p class="text-green-700 mb-2">Expansion Research</p>
+                        <p class="text-sm text-green-600">July 14-18, 2025</p>
+                        <div class="mt-4 text-right">
+                            <span class="text-lg font-bold text-green-900">$2,300</span>
+                        </div>
+                    </div>
+
+                    <!-- Mondulkiri Card -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 border border-purple-200 hover:shadow-lg transition-shadow cursor-pointer" onclick="showTrip('mondulkiri')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-purple-900">Mondulkiri</h3>
+                            <span class="bg-purple-500 text-white px-2 py-1 rounded text-sm">3 Days</span>
+                        </div>
+                        <p class="text-purple-700 mb-2">Feature Interview</p>
+                        <p class="text-sm text-purple-600">August 6-8, 2025</p>
+                        <div class="mt-4 text-right">
+                            <span class="text-lg font-bold text-purple-900">$620</span>
+                        </div>
+                    </div>
+
+                    <!-- Thailand Card -->
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-6 border border-orange-200 hover:shadow-lg transition-shadow cursor-pointer" onclick="showTrip('thailand')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-orange-900">Thailand</h3>
+                            <span class="bg-orange-500 text-white px-2 py-1 rounded text-sm">3 Days</span>
+                        </div>
+                        <p class="text-orange-700 mb-2">AI Conference</p>
+                        <p class="text-sm text-orange-600">September 22-24, 2025</p>
+                        <div class="mt-4 text-right">
+                            <span class="text-lg font-bold text-orange-900">$2,340</span>
+                        </div>
+                    </div>
+
+                    <!-- Singapore Card -->
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-6 border border-red-200 hover:shadow-lg transition-shadow cursor-pointer" onclick="showTrip('singapore')">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-red-900">Singapore</h3>
+                            <span class="bg-red-500 text-white px-2 py-1 rounded text-sm">2 Days</span>
+                        </div>
+                        <p class="text-red-700 mb-2">Marketing Research</p>
+                        <p class="text-sm text-red-600">October 16-17, 2025</p>
+                        <div class="mt-4 text-right">
+                            <span class="text-lg font-bold text-red-900">$2,300</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Summary Card -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6 text-white">
+                        <h3 class="text-lg font-semibold mb-4">Total Summary</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Total Trips:</span>
+                                <span class="font-bold">5</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Total Days:</span>
+                                <span class="font-bold">15</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Total Expenses:</span>
+                                <span class="font-bold">$8,260</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sihanoukville Trip Section -->
+        <section id="sihanoukville" class="trip-section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <!-- Trip Header -->
+                <div class="border-b border-gray-200 pb-6 mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h1 class="text-3xl font-bold text-gray-900">Business Trip Report: Sihanoukville</h1>
+                        <button onclick="printReport()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg no-print transition-colors">
+                            Print Report
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                        <div class="bg-blue-50 p-3 rounded">
+                            <span class="font-semibold text-blue-900">Company:</span>
+                            <p class="text-blue-700">Mohanokor Corp</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded">
+                            <span class="font-semibold text-blue-900">Dates:</span>
+                            <p class="text-blue-700">June 16-17, 2025</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded">
+                            <span class="font-semibold text-blue-900">Duration:</span>
+                            <p class="text-blue-700">2 Days</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded">
+                            <span class="font-semibold text-blue-900">Purpose:</span>
+                            <p class="text-blue-700">Investor Meetings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overview Section -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Overview</h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            This two-day business trip to Sihanoukville, Cambodia, was undertaken by our CEO, Mr. Sovandara Phallim, and CFO, Ms. Headangelly Huy, to engage with two different potential investors. The primary objective was to present our company's robust expansion plans and compelling investment opportunities to secure strategic funding for our upcoming digital transformation initiatives.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Team Members</h3>
+                                <ul class="text-gray-700 space-y-1">
+                                    <li>• Mr. Sovandara Phallim (CEO)</li>
+                                    <li>• Ms. Headangelly Huy (CFO)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Key Objectives</h3>
+                                <ul class="text-gray-700 space-y-1">
+                                    <li>• Present expansion plans</li>
+                                    <li>• Secure strategic funding</li>
+                                    <li>• Build investor relationships</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Details -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Locations Visited</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
+                            <h3 class="font-semibold text-blue-900 mb-2">Independence Hotel Resort & Spa</h3>
+                            <p class="text-blue-700 text-sm mb-2">Independence Beach, Sihanoukville</p>
+                            <p class="text-blue-600 text-sm">Accommodation & Meeting Venue</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-lg border border-green-200">
+                            <h3 class="font-semibold text-green-900 mb-2">The Prince Times Hotel</h3>
+                            <p class="text-green-700 text-sm mb-2">Business District, Sihanoukville</p>
+                            <p class="text-green-600 text-sm">Second Investor Meeting</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expense Calculator Section -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Trip Expenses</h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-gray-300">
+                                        <th class="text-left py-3 px-4 font-semibold text-gray-900">Category</th>
+                                        <th class="text-left py-3 px-4 font-semibold text-gray-900">Description</th>
+                                        <th class="text-right py-3 px-4 font-semibold text-gray-900">Amount (USD)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sihanoukville-expenses">
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-4 text-gray-700">Airfare</td>
+                                        <td class="py-3 px-4 text-gray-600">Round-trip flights for 2 team members (PNH-KOS)</td>
+                                        <td class="py-3 px-4 text-right font-medium">$180</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-4 text-gray-700">Accommodation</td>
+                                        <td class="py-3 px-4 text-gray-600">1 night at Independence Hotel Resort & Spa</td>
+                                        <td class="py-3 px-4 text-right font-medium">$150</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-4 text-gray-700">Transportation</td>
+                                        <td class="py-3 px-4 text-gray-600">Airport transfers, inter-city transport</td>
+                                        <td class="py-3 px-4 text-right font-medium">$70</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-4 text-gray-700">Meals</td>
+                                        <td class="py-3 px-4 text-gray-600">2 days x 3 meals for 2 team members</td>
+                                        <td class="py-3 px-4 text-right font-medium">$140</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-4 text-gray-700">Meeting Facilities</td>
+                                        <td class="py-3 px-4 text-gray-600">Use of executive suite / business lounge</td>
+                                        <td class="py-3 px-4 text-right font-medium">$100</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-3 px-4 text-gray-700">Miscellaneous</td>
+                                        <td class="py-3 px-4 text-gray-600">Contingency, business card printing, refreshments</td>
+                                        <td class="py-3 px-4 text-right font-medium">$60</td>
+                                    </tr>
+                                    <tr class="bg-blue-50 font-semibold">
+                                        <td class="py-3 px-4 text-blue-900">Total</td>
+                                        <td class="py-3 px-4"></td>
+                                        <td class="py-3 px-4 text-right text-blue-900 text-lg">$700</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2 no-print">
+                            <button onclick="exportExpenses('sihanoukville')" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors">
+                                Export to CSV
+                            </button>
+                            <button onclick="generateInvoice('sihanoukville')" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors">
+                                Generate Invoice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Gallery Section -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Photo Gallery</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <div class="bg-gray-200 rounded-lg h-32 flex items-center justify-center border-2 border-dashed border-gray-300 hover:border-blue-400 cursor-pointer transition-colors" onclick="uploadImage(this)">
+                            <span class="text-gray-500 text-sm">+ Add Photo</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-lg h-32 flex items-center justify-center border-2 border-dashed border-gray-300 hover:border-blue-400 cursor-pointer transition-colors" onclick="uploadImage(this)">
+                            <span class="text-gray-500 text-sm">+ Add Photo</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-lg h-32 flex items-center justify-center border-2 border-dashed border-gray-300 hover:border-blue-400 cursor-pointer transition-colors" onclick="uploadImage(this)">
+                            <span class="text-gray-500 text-sm">+ Add Photo</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-lg h-32 flex items-center justify-center border-2 border-dashed border-gray-300 hover:border-blue-400 cursor-pointer transition-colors" onclick="uploadImage(this)">
+                            <span class="text-gray-500 text-sm">+ Add Photo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Conclusion</h2>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                        <p class="text-green-800 leading-relaxed">
+                            The two-day business trip to Sihanoukville was highly productive and successfully met its primary objective of engaging with potential investors. Both meetings, with Coastal Horizons Group and Galaxy Capital Ventures, yielded positive outcomes, with strong indications of moving forward to the due diligence phase. The team effectively communicated our company's vision and presented compelling investment cases. We are optimistic about securing the necessary funding to fuel our strategic growth initiatives.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Template sections for other trips (similar structure) -->
+        <section id="siem-reap" class="trip-section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center py-16">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Siem Reap Trip Report</h2>
+                    <p class="text-gray-600">Company expansion research - 5 days</p>
+                    <p class="text-gray-500 mt-2">Content structure similar to Sihanoukville section</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mondulkiri" class="trip-section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center py-16">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Mondulkiri Trip Report</h2>
+                    <p class="text-gray-600">Feature article interview - 3 days</p>
+                    <p class="text-gray-500 mt-2">Content structure similar to Sihanoukville section</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="thailand" class="trip-section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center py-16">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Thailand Trip Report</h2>
+                    <p class="text-gray-600">International AI Conference - 3 days</p>
+                    <p class="text-gray-500 mt-2">Content structure similar to Sihanoukville section</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="singapore" class="trip-section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center py-16">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Singapore Trip Report</h2>
+                    <p class="text-gray-600">Social media marketing presentation - 2 days</p>
+                    <p class="text-gray-500 mt-2">Content structure similar to Sihanoukville section</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript Functions -->
+    <script>
+        // Navigation and Trip Display
+        function showTrip(tripId) {
+            // Hide all trip sections
+            const tripSections = document.querySelectorAll('.trip-section');
+            tripSections.forEach(section => section.classList.add('hidden'));
+            
+            // Hide home section
+            document.getElementById('home').classList.add('hidden');
+            
+            // Show selected trip
+            document.getElementById(tripId).classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Show home
+        function showHome() {
+            const tripSections = document.querySelectorAll('.trip-section');
+            tripSections.forEach(section => section.classList.add('hidden'));
+            document.getElementById('home').classList.remove('hidden');
+        }
+
+        // Expense Calculator Functions
+        function calculateTotal(tripId) {
+            const rows = document.querySelectorAll(`#${tripId}-expenses tr:not(:last-child)`);
+            let total = 0;
+            rows.forEach(row => {
+                const amount = parseFloat(row.cells[2].textContent.replace('$', '').replace(',', ''));
+                if (!isNaN(amount)) total += amount;
+            });
+            return total;
+        }
+
+        // Export Functions
+        function exportExpenses(tripId) {
+            const table = document.querySelector(`#${tripId}-expenses`);
+            let csv = 'Category,Description,Amount\n';
+            
+            const rows = table.querySelectorAll('tr:not(:last-child)');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length >= 3) {
+                    csv += `"${cells[0].textContent}","${cells[1].textContent}","${cells[2].textContent}"\n`;
+                }
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${tripId}-expenses.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function generateInvoice(tripId) {
+            alert(`Generating invoice for ${tripId} trip...`);
+            // Implement PDF generation logic here
+        }
+
+        function printReport() {
+            window.print();
+        }
+
+        // Image Upload
+        function uploadImage(element) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        element.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-lg" alt="Trip photo">`;
+                        element.classList.remove('border-dashed');
+                        element.classList.add('border-solid');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        // Navigation click handlers
+        document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').substring(1);
+                if (target === 'home') {
+                    showHome();
+                } else {
+                    showTrip(target);
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showHome();
+        });
+    </script>
 </body>
 </html>
