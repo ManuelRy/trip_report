@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskly Technology - Business Trip Management</title>
+    <title>Taskly Technology - Business Trip Reports</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,60 +23,15 @@
                 extend: {
                     fontFamily: {
                         'inter': ['Inter', 'sans-serif'],
-                        'poppins': ['Poppins', 'sans-serif'],
                     },
                     colors: {
                         primary: {
                             50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e'
-                        },
-                        taskly: {
-                            blue: '#0066CC',
-                            cyan: '#00C4F4',
-                            navy: '#1e293b',
-                            light: '#f8fafc',
-                            accent: '#6366f1'
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
                         }
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.8s ease-out',
-                        'slide-up': 'slideUp 0.8s ease-out',
-                        'slide-down': 'slideDown 0.8s ease-out',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'bounce-slow': 'bounce 2s infinite',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(50px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        slideDown: {
-                            '0%': { transform: 'translateY(-50px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '33%': { transform: 'translateY(-20px) rotate(1deg)' },
-                            '66%': { transform: 'translateY(-10px) rotate(-1deg)' }
-                        }
-                    },
-                    backgroundImage: {
-                        'hero-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)',
-                        'card-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        'tech-pattern': 'radial-gradient(circle at 20% 80%, #120a8f 0%, transparent 50%), radial-gradient(circle at 80% 20%, #8b5cf6 0%, transparent 50%), radial-gradient(circle at 40% 40%, #00d4aa 0%, transparent 50%)',
                     }
                 }
             }
@@ -86,1105 +41,310 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            position: relative;
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            min-height: 70vh;
         }
         
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a"><stop offset="0" stop-color="%2300d4aa" stop-opacity=".2"/><stop offset="1" stop-color="%2300d4aa" stop-opacity="0"/></radialGradient><radialGradient id="b"><stop offset="0" stop-color="%238b5cf6" stop-opacity=".2"/><stop offset="1" stop-color="%238b5cf6" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="200" fill="url(%23a)"/><circle cx="800" cy="800" r="200" fill="url(%23b)"/><circle cx="400" cy="600" r="150" fill="url(%23a)"/><circle cx="700" cy="300" r="100" fill="url(%23b)"/></svg>') center/cover;
-            opacity: 0.6;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-3d {
-            transform-style: preserve-3d;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-        
-        .card-3d:hover {
-            transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
-            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
-        }
-        
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        
-        .floating-elements::before,
-        .floating-elements::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(45deg, #00d4aa, #8b5cf6);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .floating-elements::before {
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .floating-elements::after {
-            bottom: 10%;
-            right: 10%;
-            animation-delay: 4s;
-        }
-        
-        .tech-grid {
-            background-image: 
-                linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-        
-        .section-divider {
-            height: 100px;
-            background: linear-gradient(to right, transparent, #6366f1, transparent);
-            opacity: 0.3;
-            transform: skewY(-1deg);
-        }
-        
-        .navbar-custom {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-custom {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 12px 30px;
-            border-radius: 50px;
+        .card-hover {
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
         
-        .btn-custom::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
         
-        .btn-custom:hover::before {
-            left: 100%;
-        }
-        
-        .btn-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
-        }
-        
-        .stats-counter {
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
         }
         
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem !important;
-            }
-            .stats-counter {
-                font-size: 2rem;
+            .hero-bg {
+                min-height: 60vh;
             }
         }
     </style>
 </head>
 
-<body class="bg-slate-50">
+<body class="bg-gray-50">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
-        <div class="container-fluid px-4 lg:px-8">
-            <!-- Brand -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary-900 shadow-sm">
+        <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg me-3">
-                    <i class="fas fa-calendar-check text-white fa-lg"></i>
-                </div>
-                <div>
-                    <span class="fw-bold fs-3 text-white">Taskly</span>
-                    <small class="d-block text-slate-300" style="font-size: 0.75rem; margin-top: -5px;">Technology</small>
-                </div>
+                <i class="fas fa-calendar-check me-2 text-blue-300"></i>
+                <span class="text-white">Taskly Technology</span>
             </a>
             
-            <!-- Contact Info (Desktop) -->
-            <div class="d-none d-lg-flex align-items-center me-4">
-                <div class="text-end me-3">
-                    <small class="text-slate-300 d-block">Have Any Questions?</small>
-                    <span class="text-white fw-semibold">+855 (0) 99 123 456</span>
-                </div>
-                <div class="bg-green-500 rounded-circle p-2">
-                    <i class="fas fa-phone text-white"></i>
-                </div>
-            </div>
-            
-            <!-- Mobile Toggle -->
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
-            <!-- Navigation Items -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto ms-lg-5">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link fw-medium px-3" href="#home">
-                            <i class="fas fa-home me-1"></i>Home
-                        </a>
+                        <a class="nav-link fw-medium" href="#home">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fw-medium px-3" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-file-alt me-1"></i>Trip Reports
+                        <a class="nav-link dropdown-toggle fw-medium" href="#" role="button" data-bs-toggle="dropdown">
+                            Trip Reports
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0">
-                            <li>
-                                <a class="dropdown-item py-2" href="#sihanoukville">
-                                    <i class="fas fa-water text-blue-400 me-2"></i>
-                                    <span class="fw-medium">Sihanoukville</span>
-                                    <small class="text-muted d-block">Investor Relations</small>
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider border-slate-600"></li>
-                            <li>
-                                <a class="dropdown-item py-2" href="#siem-reap">
-                                    <i class="fas fa-landmark text-green-400 me-2"></i>
-                                    <span class="fw-medium">Siem Reap</span>
-                                    <small class="text-muted d-block">Market Expansion</small>
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider border-slate-600"></li>
-                            <li>
-                                <a class="dropdown-item py-2" href="#mondulkiri">
-                                    <i class="fas fa-mountain text-yellow-400 me-2"></i>
-                                    <span class="fw-medium">Mondulkiri</span>
-                                    <small class="text-muted d-block">Corporate Interview</small>
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider border-slate-600"></li>
-                            <li>
-                                <a class="dropdown-item py-2" href="#thailand">
-                                    <i class="fas fa-city text-red-400 me-2"></i>
-                                    <span class="fw-medium">Thailand</span>
-                                    <small class="text-muted d-block">Tech Conference</small>
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider border-slate-600"></li>
-                            <li>
-                                <a class="dropdown-item py-2" href="#singapore">
-                                    <i class="fas fa-building text-purple-400 me-2"></i>
-                                    <span class="fw-medium">Singapore</span>
-                                    <small class="text-muted d-block">Strategic Planning</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fw-medium px-3" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-cog me-1"></i>Solutions
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0">
-                            <li><a class="dropdown-item" href="#scheduling">Schedule Management</a></li>
-                            <li><a class="dropdown-item" href="#expense">Expense Tracking</a></li>
-                            <li><a class="dropdown-item" href="#analytics">Business Analytics</a></li>
-                            <li><a class="dropdown-item" href="#reporting">Report Generation</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#sihanoukville">🏖️ Sihanoukville</a></li>
+                            <li><a class="dropdown-item" href="#siem-reap">🏛️ Siem Reap</a></li>
+                            <li><a class="dropdown-item" href="#mondulkiri">🏔️ Mondulkiri</a></li>
+                            <li><a class="dropdown-item" href="#thailand">🏙️ Thailand</a></li>
+                            <li><a class="dropdown-item" href="#singapore">🏢 Singapore</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-medium px-3" href="#about">
-                            <i class="fas fa-info-circle me-1"></i>About
-                        </a>
+                        <a class="nav-link fw-medium" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-medium px-3" href="#contact">
-                            <i class="fas fa-envelope me-1"></i>Contact
-                        </a>
+                        <a class="nav-link fw-medium" href="#contact">Contact</a>
                     </li>
                 </ul>
                 
-                <!-- Action Buttons -->
-                <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
-                    <button class="btn btn-outline-light btn-sm px-3">
-                        <i class="fas fa-sign-in-alt me-1"></i>Login
-                    </button>
-                    <button class="btn btn-custom btn-sm">
-                        <i class="fas fa-rocket me-1"></i>Get Started
-                    </button>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light btn-sm me-2">Login</button>
+                    <button class="btn btn-light btn-sm">Get Started</button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section min-vh-100 d-flex align-items-center position-relative" id="home">
-        <div class="floating-elements"></div>
-        <div class="container-fluid px-4 lg:px-8 position-relative" style="z-index: 2;">
-            <div class="row align-items-center min-vh-100">
-                <!-- Hero Content -->
+    <section class="hero-bg d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row align-items-center">
                 <div class="col-lg-6 text-white">
-                    <div class="py-5">
-                        <!-- Badge -->
-                        <div class="glass-morphism d-inline-flex align-items-center px-4 py-2 rounded-pill mb-4 animate-fade-in">
-                            <i class="fas fa-star text-yellow-400 me-2"></i>
-                            <span class="small fw-medium">Enterprise Business Solutions</span>
-                        </div>
-                        
-                        <h1 class="hero-title display-2 fw-black mb-4 animate-slide-up" style="animation-delay: 0.2s;">
-                            Smart Business 
-                            <span class="text-transparent bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text">Travel Management</span>
-                        </h1>
-                        
-                        <p class="lead fs-4 mb-5 text-slate-200 animate-slide-up" style="animation-delay: 0.4s; line-height: 1.6;">
-                            Revolutionize your business travel with our comprehensive trip reporting, 
-                            expense tracking, and intelligent scheduling platform designed for modern enterprises.
-                        </p>
-                        
-                        <!-- Feature List -->
-                        <div class="row mb-5 animate-slide-up" style="animation-delay: 0.6s;">
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-green-500 rounded-circle p-2 me-3">
-                                        <i class="fas fa-check text-white"></i>
-                                    </div>
-                                    <span class="fw-medium">Real-time Expense Tracking</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-blue-500 rounded-circle p-2 me-3">
-                                        <i class="fas fa-chart-line text-white"></i>
-                                    </div>
-                                    <span class="fw-medium">Advanced Analytics</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-purple-500 rounded-circle p-2 me-3">
-                                        <i class="fas fa-mobile-alt text-white"></i>
-                                    </div>
-                                    <span class="fw-medium">Mobile Integration</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-yellow-500 rounded-circle p-2 me-3">
-                                        <i class="fas fa-shield-alt text-white"></i>
-                                    </div>
-                                    <span class="fw-medium">Enterprise Security</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Action Buttons -->
-                        <div class="d-flex flex-column flex-sm-row gap-3 animate-slide-up" style="animation-delay: 0.8s;">
-                            <button class="btn btn-custom btn-lg px-5 py-3">
-                                <i class="fas fa-play me-2"></i>Start Free Trial
-                            </button>
-                            <button class="btn btn-outline-light btn-lg px-5 py-3 fw-semibold">
-                                <i class="fas fa-calendar me-2"></i>Schedule Demo
-                            </button>
-                        </div>
-                        
-                        <!-- Stats -->
-                        <div class="row mt-5 animate-slide-up" style="animation-delay: 1s;">
-                            <div class="col-4">
-                                <div class="text-center">
-                                    <div class="stats-counter">500+</div>
-                                    <small class="text-slate-300">Enterprises</small>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="text-center">
-                                    <div class="stats-counter">50K+</div>
-                                    <small class="text-slate-300">Trips Managed</small>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="text-center">
-                                    <div class="stats-counter">99.9%</div>
-                                    <small class="text-slate-300">Uptime</small>
-                                </div>
-                            </div>
-                        </div>
+                    <h1 class="display-4 fw-bold mb-4">Business Trip Reports</h1>
+                    <p class="lead mb-4">Comprehensive documentation and analysis of our international business travels and strategic initiatives.</p>
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <button class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-chart-bar me-2"></i>View Reports
+                        </button>
+                        <button class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-download me-2"></i>Export Data
+                        </button>
                     </div>
                 </div>
-                
-                <!-- Hero Visual -->
-                <div class="col-lg-6 d-none d-lg-block">
-                    <div class="position-relative animate-float">
-                        <!-- Main Dashboard Mockup -->
-                        <div class="glass-morphism rounded-4 p-6 mx-auto shadow-2xl" style="max-width: 600px;">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h5 class="text-white fw-bold mb-0">
-                                    <i class="fas fa-chart-bar me-2 text-blue-400"></i>
-                                    Business Dashboard
-                                </h5>
-                                <div class="d-flex gap-2">
-                                    <div class="bg-red-500 rounded-circle" style="width: 12px; height: 12px;"></div>
-                                    <div class="bg-yellow-500 rounded-circle" style="width: 12px; height: 12px;"></div>
-                                    <div class="bg-green-500 rounded-circle" style="width: 12px; height: 12px;"></div>
-                                </div>
-                            </div>
-                            
-                            <!-- Mock Chart -->
-                            <div class="bg-white bg-opacity-10 rounded-3 p-4 mb-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-white fw-medium">Trip Analytics</span>
-                                    <span class="badge bg-success">+24%</span>
-                                </div>
-                                <div class="d-flex align-items-end gap-2" style="height: 80px;">
-                                    <div class="bg-blue-500 rounded-top" style="width: 20px; height: 40%;"></div>
-                                    <div class="bg-purple-500 rounded-top" style="width: 20px; height: 60%;"></div>
-                                    <div class="bg-green-500 rounded-top" style="width: 20px; height: 80%;"></div>
-                                    <div class="bg-yellow-500 rounded-top" style="width: 20px; height: 45%;"></div>
-                                    <div class="bg-pink-500 rounded-top" style="width: 20px; height: 70%;"></div>
-                                    <div class="bg-indigo-500 rounded-top" style="width: 20px; height: 90%;"></div>
-                                </div>
-                            </div>
-                            
-                            <!-- Mock Trip Cards -->
-                            <div class="row g-2">
-                                <div class="col-6">
-                                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-3 p-3 text-white">
-                                        <i class="fas fa-map-marker-alt mb-2 d-block"></i>
-                                        <div class="fw-bold">5 Active</div>
-                                        <small class="opacity-75">Trips</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-3 p-3 text-white">
-                                        <i class="fas fa-dollar-sign mb-2 d-block"></i>
-                                        <div class="fw-bold">$8.2K</div>
-                                        <small class="opacity-75">Budget</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Floating Elements -->
-                        <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index: -1;">
-                            <div class="position-absolute animate-bounce-slow" style="top: 10%; left: -10%;">
-                                <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-3 p-3 text-white shadow-lg">
-                                    <i class="fas fa-calendar fa-lg"></i>
-                                </div>
-                            </div>
-                            <div class="position-absolute animate-pulse-slow" style="bottom: 20%; right: -10%;">
-                                <div class="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3 p-3 text-white shadow-lg">
-                                    <i class="fas fa-chart-line fa-lg"></i>
-                                </div>
-                            </div>
-                            <div class="position-absolute animate-bounce-slow" style="top: 50%; left: -15%; animation-delay: 1s;">
-                                <div class="bg-gradient-to-r from-green-500 to-emerald-500 rounded-3 p-3 text-white shadow-lg">
-                                    <i class="fas fa-check-circle fa-lg"></i>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-lg-6 text-center">
+                    <div class="bg-white bg-opacity-10 rounded-4 p-5 backdrop-blur">
+                        <i class="fas fa-globe-asia display-1 text-white mb-3"></i>
+                        <h4 class="text-white fw-semibold">Global Business Network</h4>
+                        <p class="text-white-50">5 Countries • 15 Days • $8,260 Investment</p>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="position-absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-            <i class="fas fa-chevron-down fa-2x opacity-75"></i>
         </div>
     </section>
 
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-
     <!-- Trip Reports Section -->
-    <section class="py-5 bg-white position-relative" id="reports">
-        <div class="tech-grid position-absolute inset-0 opacity-50"></div>
-        <div class="container-fluid px-4 lg:px-8 position-relative">
-            <!-- Section Header -->
+    <section class="py-5 bg-white">
+        <div class="container">
             <div class="text-center mb-5">
-                <div class="d-inline-flex align-items-center bg-blue-50 text-blue-600 px-4 py-2 rounded-pill mb-3">
-                    <i class="fas fa-briefcase me-2"></i>
-                    <span class="fw-medium">Business Intelligence</span>
-                </div>
-                <h2 class="display-4 fw-bold text-slate-800 mb-4">
-                    Strategic Business
-                    <span class="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">Travel Reports</span>
-                </h2>
-                <p class="lead text-slate-600 mb-5 mx-auto" style="max-width: 600px;">
-                    Comprehensive documentation and analytics from our international business expansion initiatives
-                </p>
+                <h2 class="fw-bold text-dark mb-3">Our Trip Reports</h2>
+                <p class="text-muted">Strategic business travels across Southeast Asia</p>
             </div>
             
-            <!-- Trip Cards Grid -->
-            <div class="row g-4 mb-5">
+            <div class="row g-4">
                 <!-- Sihanoukville -->
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card border-0 shadow-lg card-3d h-100 overflow-hidden">
-                        <div class="position-relative">
-                            <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <div class="bg-white bg-opacity-20 rounded-3 p-3">
-                                        <i class="fas fa-water fa-2x"></i>
-                                    </div>
-                                    <span class="badge bg-white bg-opacity-20">2 Days</span>
-                                </div>
-                                <h4 class="fw-bold mb-2">Sihanoukville</h4>
-                                <p class="mb-0 opacity-90">Coastal Investment Hub</p>
-                            </div>
-                            <div class="position-absolute top-0 end-0 p-3">
-                                <div class="bg-green-500 text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-header bg-primary text-white text-center py-4">
+                            <i class="fas fa-water fa-3x mb-3"></i>
+                            <h5 class="fw-bold mb-1">Sihanoukville</h5>
+                            <small class="opacity-75">Investor Meetings</small>
                         </div>
-                        
                         <div class="card-body p-4">
-                            <div class="row mb-3">
+                            <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <small class="text-muted">Investment</small>
-                                    <div class="fw-bold text-success fs-5">$700</div>
+                                    <h6 class="text-muted mb-1">Duration</h6>
+                                    <span class="fw-bold">2 Days</span>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted">ROI</small>
-                                    <div class="fw-bold text-blue-600 fs-5">+340%</div>
+                                    <h6 class="text-muted mb-1">Budget</h6>
+                                    <span class="fw-bold text-success">$700</span>
                                 </div>
                             </div>
-                            
-                            <h6 class="fw-semibold text-primary mb-3">
-                                <i class="fas fa-handshake me-2"></i>Investor Relations
-                            </h6>
-                            <p class="text-muted mb-3">Strategic partnership discussions with leading investment firms for business expansion and technology advancement.</p>
-                            
+                            <p class="text-muted mb-3">Strategic discussions with potential investors for expansion funding and partnership opportunities.</p>
                             <div class="mb-3">
-                                <small class="text-muted d-block mb-2">Trip Dates</small>
-                                <span class="badge bg-blue-100 text-blue-800">June 16-17, 2025</span>
+                                <span class="badge bg-primary-50 text-primary">June 16-17, 2025</span>
                             </div>
-                            
-                            <div class="mb-4">
-                                <small class="text-muted d-block mb-2">Key Activities</small>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge bg-blue-50 text-blue-700">Presentations</span>
-                                    <span class="badge bg-blue-50 text-blue-700">Negotiations</span>
-                                    <span class="badge bg-blue-50 text-blue-700">Due Diligence</span>
-                                </div>
-                            </div>
-                            
-                            <div class="progress mb-3" style="height: 6px;">
-                                <div class="progress-bar bg-blue-500" style="width: 100%"></div>
-                            </div>
-                            <small class="text-success fw-medium">
-                                <i class="fas fa-check-circle me-1"></i>Completed Successfully
-                            </small>
                         </div>
-                        
-                        <div class="card-footer bg-transparent border-0 p-4">
-                            <button class="btn btn-primary w-100 fw-semibold">
-                                <i class="fas fa-eye me-2"></i>View Detailed Report
-                            </button>
+                        <div class="card-footer bg-transparent p-4">
+                            <button class="btn btn-primary w-100">View Details</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Siem Reap -->
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card border-0 shadow-lg card-3d h-100 overflow-hidden">
-                        <div class="position-relative">
-                            <div class="bg-gradient-to-br from-green-600 to-emerald-700 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <div class="bg-white bg-opacity-20 rounded-3 p-3">
-                                        <i class="fas fa-landmark fa-2x"></i>
-                                    </div>
-                                    <span class="badge bg-white bg-opacity-20">5 Days</span>
-                                </div>
-                                <h4 class="fw-bold mb-2">Siem Reap</h4>
-                                <p class="mb-0 opacity-90">Cultural Heritage Markets</p>
-                            </div>
-                            <div class="position-absolute top-0 end-0 p-3">
-                                <div class="bg-orange-500 text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-header bg-success text-white text-center py-4">
+                            <i class="fas fa-landmark fa-3x mb-3"></i>
+                            <h5 class="fw-bold mb-1">Siem Reap</h5>
+                            <small class="opacity-75">Market Expansion</small>
                         </div>
-                        
                         <div class="card-body p-4">
-                            <div class="row mb-3">
+                            <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <small class="text-muted">Investment</small>
-                                    <div class="fw-bold text-success fs-5">$2,300</div>
+                                    <h6 class="text-muted mb-1">Duration</h6>
+                                    <span class="fw-bold">5 Days</span>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted">Potential ROI</small>
-                                    <div class="fw-bold text-green-600 fs-5">+580%</div>
+                                    <h6 class="text-muted mb-1">Budget</h6>
+                                    <span class="fw-bold text-success">$2,300</span>
                                 </div>
                             </div>
-                            
-                            <h6 class="fw-semibold text-success mb-3">
-                                <i class="fas fa-expand-arrows-alt me-2"></i>Market Expansion
-                            </h6>
-                            <p class="text-muted mb-3">Comprehensive market analysis and site evaluation for establishing regional headquarters in the tourism sector.</p>
-                            
+                            <p class="text-muted mb-3">Comprehensive market analysis and location scouting for potential business expansion opportunities.</p>
                             <div class="mb-3">
-                                <small class="text-muted d-block mb-2">Trip Dates</small>
-                                <span class="badge bg-green-100 text-green-800">July 14-18, 2025</span>
+                                <span class="badge bg-success-50 text-success">July 14-18, 2025</span>
                             </div>
-                            
-                            <div class="mb-4">
-                                <small class="text-muted d-block mb-2">Key Activities</small>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge bg-green-50 text-green-700">Site Survey</span>
-                                    <span class="badge bg-green-50 text-green-700">Market Research</span>
-                                    <span class="badge bg-green-50 text-green-700">Stakeholder Meetings</span>
-                                </div>
-                            </div>
-                            
-                            <div class="progress mb-3" style="height: 6px;">
-                                <div class="progress-bar bg-green-500" style="width: 85%"></div>
-                            </div>
-                            <small class="text-warning fw-medium">
-                                <i class="fas fa-clock me-1"></i>Analysis in Progress
-                            </small>
                         </div>
-                        
-                        <div class="card-footer bg-transparent border-0 p-4">
-                            <button class="btn btn-success w-100 fw-semibold">
-                                <i class="fas fa-eye me-2"></i>View Detailed Report
-                            </button>
+                        <div class="card-footer bg-transparent p-4">
+                            <button class="btn btn-success w-100">View Details</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Mondulkiri -->
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card border-0 shadow-lg card-3d h-100 overflow-hidden">
-                        <div class="position-relative">
-                            <div class="bg-gradient-to-br from-purple-600 to-violet-700 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <div class="bg-white bg-opacity-20 rounded-3 p-3">
-                                        <i class="fas fa-mountain fa-2x"></i>
-                                    </div>
-                                    <span class="badge bg-white bg-opacity-20">3 Days</span>
-                                </div>
-                                <h4 class="fw-bold mb-2">Mondulkiri</h4>
-                                <p class="mb-0 opacity-90">Highland Innovation Hub</p>
-                            </div>
-                            <div class="position-absolute top-0 end-0 p-3">
-                                <div class="bg-blue-500 text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-microphone"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-header bg-warning text-white text-center py-4">
+                            <i class="fas fa-mountain fa-3x mb-3"></i>
+                            <h5 class="fw-bold mb-1">Mondulkiri</h5>
+                            <small class="opacity-75">Corporate Interview</small>
                         </div>
-                        
                         <div class="card-body p-4">
-                            <div class="row mb-3">
+                            <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <small class="text-muted">Investment</small>
-                                    <div class="fw-bold text-success fs-5">$620</div>
+                                    <h6 class="text-muted mb-1">Duration</h6>
+                                    <span class="fw-bold">3 Days</span>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted">Value</small>
-                                    <div class="fw-bold text-purple-600 fs-5">High</div>
+                                    <h6 class="text-muted mb-1">Budget</h6>
+                                    <span class="fw-bold text-success">$620</span>
                                 </div>
                             </div>
-                            
-                            <h6 class="fw-semibold text-purple-600 mb-3">
-                                <i class="fas fa-microphone me-2"></i>Corporate Interview
-                            </h6>
-                            <p class="text-muted mb-3">Executive interview sessions with industry leaders for corporate magazine features and thought leadership content.</p>
-                            
+                            <p class="text-muted mb-3">In-depth interview with retired company personnel for corporate magazine feature article.</p>
                             <div class="mb-3">
-                                <small class="text-muted d-block mb-2">Trip Dates</small>
-                                <span class="badge bg-purple-100 text-purple-800">August 6-8, 2025</span>
+                                <span class="badge bg-warning-50 text-warning">August 6-8, 2025</span>
                             </div>
-                            
-                            <div class="mb-4">
-                                <small class="text-muted d-block mb-2">Key Activities</small>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge bg-purple-50 text-purple-700">Interviews</span>
-                                    <span class="badge bg-purple-50 text-purple-700">Content Creation</span>
-                                    <span class="badge bg-purple-50 text-purple-700">Documentation</span>
-                                </div>
-                            </div>
-                            
-                            <div class="progress mb-3" style="height: 6px;">
-                                <div class="progress-bar bg-purple-500" style="width: 100%"></div>
-                            </div>
-                            <small class="text-success fw-medium">
-                                <i class="fas fa-check-circle me-1"></i>Content Published
-                            </small>
                         </div>
-                        
-                        <div class="card-footer bg-transparent border-0 p-4">
-                            <button class="btn btn-purple w-100 fw-semibold" style="background: linear-gradient(135deg, #8b5cf6, #a855f7); border: none; color: white;">
-                                <i class="fas fa-eye me-2"></i>View Detailed Report
-                            </button>
+                        <div class="card-footer bg-transparent p-4">
+                            <button class="btn btn-warning w-100">View Details</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Thailand -->
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card border-0 shadow-lg card-3d h-100 overflow-hidden">
-                        <div class="position-relative">
-                            <div class="bg-gradient-to-br from-orange-600 to-red-600 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <div class="bg-white bg-opacity-20 rounded-3 p-3">
-                                        <i class="fas fa-city fa-2x"></i>
-                                    </div>
-                                    <span class="badge bg-white bg-opacity-20">3 Days</span>
-                                </div>
-                                <h4 class="fw-bold mb-2">Thailand</h4>
-                                <p class="mb-0 opacity-90">Bangkok Tech District</p>
-                            </div>
-                            <div class="position-absolute top-0 end-0 p-3">
-                                <div class="bg-cyan-500 text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-robot"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-header bg-danger text-white text-center py-4">
+                            <i class="fas fa-city fa-3x mb-3"></i>
+                            <h5 class="fw-bold mb-1">Thailand</h5>
+                            <small class="opacity-75">AI Conference</small>
                         </div>
-                        
                         <div class="card-body p-4">
-                            <div class="row mb-3">
+                            <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <small class="text-muted">Investment</small>
-                                    <div class="fw-bold text-success fs-5">$2,340</div>
+                                    <h6 class="text-muted mb-1">Duration</h6>
+                                    <span class="fw-bold">3 Days</span>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted">Tech Value</small>
-                                    <div class="fw-bold text-orange-600 fs-5">Exceptional</div>
+                                    <h6 class="text-muted mb-1">Budget</h6>
+                                    <span class="fw-bold text-success">$2,340</span>
                                 </div>
                             </div>
-                            
-                            <h6 class="fw-semibold text-orange-600 mb-3">
-                                <i class="fas fa-robot me-2"></i>AI Technology Summit
-                            </h6>
-                            <p class="text-muted mb-3">International AI conference focused on workplace automation and intelligent business process optimization.</p>
-                            
+                            <p class="text-muted mb-3">International conference on artificial intelligence applications in modern workplace environments.</p>
                             <div class="mb-3">
-                                <small class="text-muted d-block mb-2">Trip Dates</small>
-                                <span class="badge bg-orange-100 text-orange-800">September 22-24, 2025</span>
+                                <span class="badge bg-danger-50 text-danger">September 22-24, 2025</span>
                             </div>
-                            
-                            <div class="mb-4">
-                                <small class="text-muted d-block mb-2">Key Activities</small>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge bg-orange-50 text-orange-700">Conferences</span>
-                                    <span class="badge bg-orange-50 text-orange-700">Workshops</span>
-                                    <span class="badge bg-orange-50 text-orange-700">Networking</span>
-                                </div>
-                            </div>
-                            
-                            <div class="progress mb-3" style="height: 6px;">
-                                <div class="progress-bar bg-orange-500" style="width: 95%"></div>
-                            </div>
-                            <small class="text-info fw-medium">
-                                <i class="fas fa-cogs me-1"></i>Implementation Phase
-                            </small>
                         </div>
-                        
-                        <div class="card-footer bg-transparent border-0 p-4">
-                            <button class="btn w-100 fw-semibold" style="background: linear-gradient(135deg, #f97316, #dc2626); border: none; color: white;">
-                                <i class="fas fa-eye me-2"></i>View Detailed Report
-                            </button>
+                        <div class="card-footer bg-transparent p-4">
+                            <button class="btn btn-danger w-100">View Details</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Singapore -->
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card border-0 shadow-lg card-3d h-100 overflow-hidden">
-                        <div class="position-relative">
-                            <div class="bg-gradient-to-br from-indigo-600 to-blue-700 text-white p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <div class="bg-white bg-opacity-20 rounded-3 p-3">
-                                        <i class="fas fa-building fa-2x"></i>
-                                    </div>
-                                    <span class="badge bg-white bg-opacity-20">2 Days</span>
-                                </div>
-                                <h4 class="fw-bold mb-2">Singapore</h4>
-                                <p class="mb-0 opacity-90">Marina Bay Financial District</p>
-                            </div>
-                            <div class="position-absolute top-0 end-0 p-3">
-                                <div class="bg-pink-500 text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-header bg-info text-white text-center py-4">
+                            <i class="fas fa-building fa-3x mb-3"></i>
+                            <h5 class="fw-bold mb-1">Singapore</h5>
+                            <small class="opacity-75">Strategic Planning</small>
                         </div>
-                        
                         <div class="card-body p-4">
-                            <div class="row mb-3">
+                            <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <small class="text-muted">Investment</small>
-                                    <div class="fw-bold text-success fs-5">$2,300</div>
+                                    <h6 class="text-muted mb-1">Duration</h6>
+                                    <span class="fw-bold">2 Days</span>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted">Strategy Value</small>
-                                    <div class="fw-bold text-indigo-600 fs-5">Critical</div>
+                                    <h6 class="text-muted mb-1">Budget</h6>
+                                    <span class="fw-bold text-success">$2,300</span>
                                 </div>
                             </div>
-                            
-                            <h6 class="fw-semibold text-indigo-600 mb-3">
-                                <i class="fas fa-chart-line me-2"></i>Strategic Planning
-                            </h6>
-                            <p class="text-muted mb-3">Advanced digital marketing strategies and regional expansion planning with international business consultants.</p>
-                            
+                            <p class="text-muted mb-3">Advanced social media marketing strategies and digital transformation research presentation.</p>
                             <div class="mb-3">
-                                <small class="text-muted d-block mb-2">Trip Dates</small>
-                                <span class="badge bg-indigo-100 text-indigo-800">October 16-17, 2025</span>
+                                <span class="badge bg-info-50 text-info">October 16-17, 2025</span>
                             </div>
-                            
-                            <div class="mb-4">
-                                <small class="text-muted d-block mb-2">Key Activities</small>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge bg-indigo-50 text-indigo-700">Strategy Sessions</span>
-                                    <span class="badge bg-indigo-50 text-indigo-700">Market Analysis</span>
-                                    <span class="badge bg-indigo-50 text-indigo-700">Partnership Talks</span>
-                                </div>
-                            </div>
-                            
-                            <div class="progress mb-3" style="height: 6px;">
-                                <div class="progress-bar bg-indigo-500" style="width: 75%"></div>
-                            </div>
-                            <small class="text-warning fw-medium">
-                                <i class="fas fa-clock me-1"></i>Strategy Refinement
-                            </small>
                         </div>
-                        
-                        <div class="card-footer bg-transparent border-0 p-4">
-                            <button class="btn w-100 fw-semibold" style="background: linear-gradient(135deg, #6366f1, #3b82f6); border: none; color: white;">
-                                <i class="fas fa-eye me-2"></i>View Detailed Report
-                            </button>
+                        <div class="card-footer bg-transparent p-4">
+                            <button class="btn btn-info w-100">View Details</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Executive Summary Card -->
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card border-0 shadow-lg h-100 overflow-hidden" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
-                        <div class="card-body p-5 text-white d-flex flex-column justify-content-center">
-                            <div class="text-center mb-4">
-                                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
-                                    <i class="fas fa-chart-pie fa-2x"></i>
-                                </div>
-                                <h4 class="fw-bold mb-3">Executive Summary</h4>
-                                <p class="text-slate-300 mb-4">Comprehensive overview of all business travel initiatives and their strategic impact.</p>
-                            </div>
-                            
+                <!-- Summary Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm h-100 bg-dark text-white">
+                        <div class="card-body p-4 d-flex flex-column justify-content-center text-center">
+                            <i class="fas fa-chart-pie fa-4x mb-4 text-primary-300"></i>
+                            <h4 class="fw-bold mb-4">Trip Summary</h4>
                             <div class="row g-3 mb-4">
                                 <div class="col-6">
-                                    <div class="bg-white bg-opacity-10 rounded-3 p-3 text-center">
-                                        <div class="fw-bold fs-4 mb-1">5</div>
-                                        <small class="text-slate-300">Countries</small>
-                                    </div>
+                                    <h3 class="fw-bold mb-1">5</h3>
+                                    <small class="text-white-50">Countries</small>
                                 </div>
                                 <div class="col-6">
-                                    <div class="bg-white bg-opacity-10 rounded-3 p-3 text-center">
-                                        <div class="fw-bold fs-4 mb-1">15</div>
-                                        <small class="text-slate-300">Total Days</small>
-                                    </div>
+                                    <h3 class="fw-bold mb-1">15</h3>
+                                    <small class="text-white-50">Total Days</small>
                                 </div>
                                 <div class="col-12">
-                                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-3 p-4 text-center">
-                                        <div class="fw-bold fs-3 mb-1">$8,260</div>
-                                        <small class="opacity-90">Total Strategic Investment</small>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="bg-gradient-to-r from-blue-500 to-cyan-600 rounded-3 p-4 text-center">
-                                        <div class="fw-bold fs-3 mb-1">+425%</div>
-                                        <small class="opacity-90">Average ROI Potential</small>
-                                    </div>
+                                    <h2 class="fw-bold mb-1 text-success">$8,260</h2>
+                                    <small class="text-white-50">Total Investment</small>
                                 </div>
                             </div>
-                            
-                            <button class="btn btn-light btn-lg fw-semibold">
-                                <i class="fas fa-download me-2"></i>Export Full Report
+                            <button class="btn btn-light fw-semibold">
+                                <i class="fas fa-download me-2"></i>Export Summary
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-5 bg-gradient-to-br from-slate-50 to-blue-50" id="features">
-        <div class="container-fluid px-4 lg:px-8">
-            <div class="text-center mb-5">
-                <div class="d-inline-flex align-items-center bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-4 py-2 rounded-pill mb-3">
-                    <i class="fas fa-rocket me-2"></i>
-                    <span class="fw-medium">Advanced Platform Features</span>
-                </div>
-                <h2 class="display-4 fw-bold text-slate-800 mb-4">
-                    Everything You Need for
-                    <span class="text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">Smart Travel Management</span>
-                </h2>
-                <p class="lead text-slate-600 mx-auto" style="max-width: 600px;">
-                    Powerful tools and intelligent automation to streamline your business travel operations
-                </p>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="text-center p-4">
-                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-3 d-inline-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 80px; height: 80px;">
-                            <i class="fas fa-calculator fa-2x"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3 text-slate-800">Smart Expense Calculator</h5>
-                        <p class="text-slate-600 mb-4">Real-time expense tracking with automated calculations, currency conversion, and receipt management powered by AI.</p>
-                        <a href="#" class="text-blue-600 fw-medium text-decoration-none">
-                            Learn More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="text-center p-4">
-                        <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-3 d-inline-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 80px; height: 80px;">
-                            <i class="fas fa-file-invoice fa-2x"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3 text-slate-800">Professional Invoicing</h5>
-                        <p class="text-slate-600 mb-4">Generate professional invoices and reports with detailed breakdowns, tax calculations, and export capabilities.</p>
-                        <a href="#" class="text-green-600 fw-medium text-decoration-none">
-                            Learn More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="text-center p-4">
-                        <div class="bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-3 d-inline-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 80px; height: 80px;">
-                            <i class="fas fa-chart-bar fa-2x"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3 text-slate-800">Analytics Dashboard</h5>
-                        <p class="text-slate-600 mb-4">Interactive charts and comprehensive analytics for travel expense analysis and business intelligence insights.</p>
-                        <a href="#" class="text-purple-600 fw-medium text-decoration-none">
-                            Learn More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="text-center p-4">
-                        <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-3 d-inline-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 80px; height: 80px;">
-                            <i class="fas fa-camera fa-2x"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3 text-slate-800">Digital Documentation</h5>
-                        <p class="text-slate-600 mb-4">Organized photo management with location tagging, automatic categorization, and cloud synchronization.</p>
-                        <a href="#" class="text-orange-600 fw-medium text-decoration-none">
-                            Learn More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="text-center p-4">
-                        <div class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-3 d-inline-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 80px; height: 80px;">
-                            <i class="fas fa-print fa-2x"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3 text-slate-800">Enterprise Reporting</h5>
-                        <p class="text-slate-600 mb-4">Professional print-ready reports with optimized layouts, branding, and compliance documentation.</p>
-                        <a href="#" class="text-cyan-600 fw-medium text-decoration-none">
-                            Learn More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="text-center p-4">
-                        <div class="bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-3 d-inline-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 80px; height: 80px;">
-                            <i class="fas fa-clock fa-2x"></i>
-                        </div>
-                        <h5 class="fw-bold mb-3 text-slate-800">Timeline Management</h5>
-                        <p class="text-slate-600 mb-4">Detailed timeline views with chronological trip activities, milestones, and automated scheduling.</p>
-                        <a href="#" class="text-pink-600 fw-medium text-decoration-none">
-                            Learn More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="py-5 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
-        <div class="container-fluid px-4 lg:px-8">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <h3 class="display-6 fw-bold mb-3">Ready to Transform Your Business Travel Management?</h3>
-                    <p class="lead mb-4">Join hundreds of enterprises already using Taskly Technology to streamline their business travel operations and maximize ROI.</p>
-                    <div class="d-flex align-items-center gap-4 mb-3">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-check-circle text-green-400 me-2"></i>
-                            <span>30-day free trial</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-check-circle text-green-400 me-2"></i>
-                            <span>No setup fees</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-check-circle text-green-400 me-2"></i>
-                            <span>24/7 support</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
-                    <button class="btn btn-custom btn-lg px-5 py-3 me-3 mb-3 mb-sm-0">
-                        <i class="fas fa-rocket me-2"></i>Start Free Trial
-                    </button>
-                    <button class="btn btn-outline-light btn-lg px-5 py-3">
-                        <i class="fas fa-calendar me-2"></i>Book Demo
-                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-light py-5">
-        <div class="container-fluid px-4 lg:px-8">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-lg me-3">
-                            <i class="fas fa-calendar-check text-white fa-xl"></i>
-                        </div>
-                        <div>
-                            <h5 class="fw-bold mb-0 text-white">Taskly Technology</h5>
-                            <small class="text-slate-400">Smart Business Solutions</small>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 mb-4">Leading the future of business travel management with intelligent automation, comprehensive reporting, and strategic insights for modern enterprises.</p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors">
-                            <i class="fab fa-facebook fa-lg"></i>
-                        </a>
-                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors">
-                            <i class="fab fa-twitter fa-lg"></i>
-                        </a>
-                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors">
-                            <i class="fab fa-linkedin fa-lg"></i>
-                        </a>
-                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors">
-                            <i class="fab fa-instagram fa-lg"></i>
-                        </a>
-                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors">
-                            <i class="fab fa-youtube fa-lg"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-6">
-                    <h6 class="fw-semibold mb-4 text-white">Platform</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Dashboard</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Trip Reports</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Analytics</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Expense Tracking</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Scheduling</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-2 col-md-6">
-                    <h6 class="fw-semibold mb-4 text-white">Destinations</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Sihanoukville</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Siem Reap</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Mondulkiri</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Thailand</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Singapore</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-2 col-md-6">
-                    <h6 class="fw-semibold mb-4 text-white">Resources</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Documentation</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">API Reference</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Help Center</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Blog</a></li>
-                        <li class="mb-3"><a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors">Case Studies</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-2 col-md-6">
-                    <h6 class="fw-semibold mb-4 text-white">Contact</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-3 d-flex align-items-center">
-                            <i class="fas fa-map-marker-alt text-blue-400 me-3"></i>
-                            <div>
-                                <small class="text-slate-400">Phnom Penh, Cambodia</small>
-                            </div>
-                        </li>
-                        <li class="mb-3 d-flex align-items-center">
-                            <i class="fas fa-phone text-green-400 me-3"></i>
-                            <div>
-                                <small class="text-slate-400">+855 (0) 99 123 456</small>
-                            </div>
-                        </li>
-                        <li class="mb-3 d-flex align-items-center">
-                            <i class="fas fa-envelope text-purple-400 me-3"></i>
-                            <div>
-                                <small class="text-slate-400">hello@taskly.tech</small>
-                            </div>
-                        </li>
-                        <li class="mb-3 d-flex align-items-center">
-                            <i class="fas fa-headset text-orange-400 me-3"></i>
-                            <div>
-                                <small class="text-slate-400">24/7 Support</small>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <hr class="my-5 border-slate-700">
-            
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="text-slate-400 mb-0">&copy; 2025 Taskly Technology. All rights reserved.</p>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-calendar-check me-2 text-primary"></i>
+                        <span class="fw-bold">Taskly Technology</span>
+                    </div>
+                    <p class="text-muted mb-0 mt-2">Smart business travel management solutions</p>
                 </div>
                 <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                    <div class="d-flex justify-content-md-end gap-4">
-                        <a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors small">Privacy Policy</a>
-                        <a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors small">Terms of Service</a>
-                        <a href="#" class="text-slate-400 text-decoration-none hover:text-white transition-colors small">Cookie Policy</a>
-                    </div>
+                    <p class="text-muted mb-0">&copy; 2025 Taskly Technology. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -1193,188 +353,26 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Custom JavaScript -->
     <script>
-        // Smooth scrolling for navigation links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-        
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
-                navbar.style.backdropFilter = 'blur(20px)';
-            } else {
-                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-                navbar.style.backdropFilter = 'blur(20px)';
-            }
-        });
-        
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe elements for animation
-        document.querySelectorAll('.card, .animate-fade-in, .animate-slide-up').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-        
-        // Counter animation
-        function animateCounter(element, target, duration = 2000) {
-            let start = 0;
-            const increment = target / (duration / 16);
-            
-            function updateCounter() {
-                start += increment;
-                if (start < target) {
-                    element.textContent = Math.floor(start);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                }
-            }
-            
-            updateCounter();
-        }
-        
-        // Initialize counter animations when stats come into view
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.stats-counter');
-                    counters.forEach(counter => {
-                        const target = counter.textContent.includes('+') ? 
-                            parseInt(counter.textContent.replace(/[^0-9]/g, '')) : 
-                            parseInt(counter.textContent.replace(/[^0-9]/g, ''));
-                        counter.textContent = '0';
-                        animateCounter(counter, target);
-                    });
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        // Observe stats section
-        document.addEventListener('DOMContentLoaded', function() {
-            const statsSection = document.querySelector('.hero-section');
-            if (statsSection) {
-                statsObserver.observe(statsSection);
-            }
         });
         
         // Card hover effects
-        document.querySelectorAll('.card-3d').forEach(card => {
+        document.querySelectorAll('.card-hover').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'rotateY(5deg) rotateX(5deg) translateZ(20px)';
+                this.style.transform = 'translateY(-5px)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px)';
-            });
-        });
-        
-        // Button loading effect
-        document.querySelectorAll('.btn-custom').forEach(button => {
-            button.addEventListener('click', function() {
-                const originalText = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
-                this.disabled = true;
-                
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.disabled = false;
-                }, 2000);
-            });
-        });
-        
-        // Mobile menu handling
-        const navbarToggler = document.querySelector('.navbar-toggler');
-        const navbarCollapse = document.querySelector('.navbar-collapse');
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInsideNav = navbarCollapse.contains(event.target) || navbarToggler.contains(event.target);
-            if (!isClickInsideNav && navbarCollapse.classList.contains('show')) {
-                navbarCollapse.classList.remove('show');
-            }
-        });
-        
-        // Parallax effect for hero section
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.floating-elements');
-            const speed = scrolled * 0.5;
-            
-            parallaxElements.forEach(element => {
-                element.style.transform = `translateY(${speed}px)`;
-            });
-        });
-        
-        // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-        
-        // Progress bar animations
-        const progressObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progressBar = entry.target.querySelector('.progress-bar');
-                    const width = progressBar.style.width;
-                    progressBar.style.width = '0%';
-                    setTimeout(() => {
-                        progressBar.style.transition = 'width 1.5s ease-out';
-                        progressBar.style.width = width;
-                    }, 200);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        document.querySelectorAll('.progress').forEach(progress => {
-            progressObserver.observe(progress.parentElement);
-        });
-        
-        // Loading screen simulation
-        window.addEventListener('load', function() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease-in';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-        
-        // Dynamic year update
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentYear = new Date().getFullYear();
-            const yearElements = document.querySelectorAll('.current-year');
-            yearElements.forEach(element => {
-                element.textContent = currentYear;
+                this.style.transform = 'translateY(0)';
             });
         });
     </script>
