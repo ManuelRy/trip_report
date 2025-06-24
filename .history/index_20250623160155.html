@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskly - Your Schedule, Mastered</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('image/taskly.jpg') center/cover no-repeat;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .navbar-dark {
+            background: rgba(0,0,0,0.9) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .accent-red {
+            color: #ff4444;
+        }
+        
+        .btn-custom {
+            background: #ff4444;
+            border: none;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            background: #cc3333;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,68,68,0.3);
+        }
+        
+        .btn-custom::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .btn-custom:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .team-section {
+            background: #2a2a2a;
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: #ff4444;
+        }
+        
+        .trip-card {
+            background: #333333;
+            border: none;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .trip-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .trip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4444, #ff6666);
+        }
+        
+        .trip-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .trip-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,68,68,0.8), rgba(0,0,0,0.6));
+        }
+        
+        .trip-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        /* Team member image styles */
+        .team-member-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            position: relative;
+            background-color: #555;
+            overflow: hidden;
+        }
+        
+        .team-member-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            z-index: 1;
+        }
+        
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            z-index: 1050;
+            transition: left 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mobile-sidebar.show {
+            left: 0;
+        }
+        
+        .sidebar-item {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 20px 30px;
+            display: block;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sidebar-item:hover {
+            color: #ff4444;
+            background: rgba(255,68,68,0.1);
+            padding-left: 40px;
+        }
+        
+        @media (min-width: 992px) {
+            .mobile-only { display: none !important; }
+        }
+        
+        @media (max-width: 991.98px) {
+            .desktop-only { display: none !important; }
+            .hero-title { font-size: 3rem; }
+        }
+        
+        .navbar-nav .nav-link {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.9) !important;
+            position: relative;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #ff4444 !important;
+        }
+        
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #ff4444;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu-dark {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 10px 0;
+            min-width: 280px;
+            position: absolute;
+            top: 100%;
+            left: -50px;
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-menu-dark {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu-dark .dropdown-item {
+            color: rgba(255,255,255,0.9);
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            text-decoration: none;
+        }
+        
+        .dropdown-menu-dark .dropdown-item:hover,
+        .dropdown-menu-dark .dropdown-item:focus {
+            background: rgba(255,68,68,0.1);
+            color: #ff4444;
+            padding-left: 25px;
+        }
+        
+        .dropdown-menu-dark .dropdown-divider {
+            border-color: rgba(255,255,255,0.1);
+            margin: 5px 0;
+        }
+        
+        .dropdown-menu-dark .dropdown-item small {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .dropdown-menu-dark .dropdown-item:hover small {
+            color: rgba(255,68,68,0.8);
+        }
+        
+        /* Dropdown Toggle Arrow Animation */
+        .dropdown-toggle::after {
+            transition: transform 0.3s ease;
+            margin-left: 0.5em;
+        }
+        
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Ensure dropdown stays visible when hovering over menu items */
+        .dropdown:hover .dropdown-menu-dark,
+        .dropdown-menu-dark:hover {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Hero Logo Styles */
+        .hero-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+        }
+        
+        .hero-logo-circle {
+            width: 350px;
+            height: 350px;
+            border: 4px solid #ff4444;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .hero-logo-circle::before {
+            content: '';
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+        }
+        
+        .hero-logo-circle::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(255,68,68,0.5);
+            border-radius: 50%;
+        }
+        
+        /* Responsive Hero Background */
+        @media (max-width: 1199.98px) {
+            .hero-section {
+                background-attachment: scroll;
+            }
+            
+            .hero-logo-circle {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 3rem"] {
+                font-size: 2.5rem !important;
+            }
+        }
+        
+        @media (max-width: 991.98px) {
+            .hero-logo-container {
+                height: 300px;
+                margin-top: 40px;
+            }
+            
+            .hero-logo-circle {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 3rem"] {
+                font-size: 2rem !important;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 1.2rem"] {
+                font-size: 1rem !important;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .hero-section {
+                background-position: center center;
+            }
+            
+            .hero-logo-container {
+                height: 250px;
+            }
+            
+            .hero-logo-circle {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 3rem"] {
+                font-size: 1.5rem !important;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 1.2rem"] {
+                font-size: 0.9rem !important;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 1rem"] {
+                font-size: 0.8rem !important;
+            }
+            
+            .hero-logo-circle::before {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .hero-logo-circle::after {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            .hero-logo-container {
+                height: 200px;
+            }
+            
+            .hero-logo-circle {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 3rem"] {
+                font-size: 1.3rem !important;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 1.2rem"] {
+                font-size: 0.8rem !important;
+            }
+            
+            .hero-logo-circle div[style*="font-size: 1rem"] {
+                font-size: 0.7rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Desktop Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top desktop-only">
+        <div class="container-fluid px-4">
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <div class="me-3">
+                    <i class="fas fa-tasks fa-2x text-white"></i>
+                </div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.8rem; color: #ff4444; font-weight: 600;">SOFTWARE</div>
+                </div>
+            </a>
+            
+            <!-- Main Navigation -->
+            <div class="navbar-nav d-flex flex-row me-auto ms-5">
+                <a class="nav-link px-4" href="#home">About</a>
+                <a class="nav-link px-4" href="#services">Services</a>
+                <a class="nav-link px-4" href="#team">Team</a>
+                <a class="nav-link px-4" href="#locations">Locations</a>
+                <a class="nav-link px-4" href="#business">Business Activities</a>
+                
+                <!-- Trip Reports Dropdown -->
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-4" href="#" role="button" aria-expanded="false">
+                        Trip Reports
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0">
+                        <li>
+                            <a class="dropdown-item py-2" href="#sihanoukville">
+                                <i class="fas fa-water text-primary me-2"></i>
+                                <span class="fw-medium">Sihanoukville</span>
+                                <small class="text-muted d-block">Client Meetings • 2 Days • Software Demo</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#siem-reap">
+                                <i class="fas fa-landmark text-success me-2"></i>
+                                <span class="fw-medium">Siem Reap</span>
+                                <small class="text-muted d-block">Market Research • 5 Days • User Testing</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#mondulkiri">
+                                <i class="fas fa-mountain text-warning me-2"></i>
+                                <span class="fw-medium">Mondulkiri</span>
+                                <small class="text-muted d-block">Team Building • 3 Days • Development Planning</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#thailand">
+                                <i class="fas fa-city text-danger me-2"></i>
+                                <span class="fw-medium">Thailand</span>
+                                <small class="text-muted d-block">Tech Conference • 3 Days • Product Launch</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#singapore">
+                                <i class="fas fa-building text-info me-2"></i>
+                                <span class="fw-medium">Singapore</span>
+                                <small class="text-muted d-block">Partnership Meetings • 2 Days • API Integration</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#reports">
+                                <i class="fas fa-chart-pie text-warning me-2"></i>
+                                <span class="fw-medium">View All Reports</span>
+                                <small class="text-muted d-block">Complete Travel Summary • 15 Days Total</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <a class="nav-link px-4" href="#contact">Contact</a>
+            </div>
+            
+            <!-- Social Icons -->
+            <div class="d-flex align-items-center gap-3">
+                <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="navbar navbar-dark fixed-top mobile-only">
+        <div class="container-fluid px-4">
+            <!-- Mobile Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <div class="me-2">
+                    <i class="fas fa-tasks fa-lg text-white"></i>
+                </div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.2rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.7rem; color: #ff4444; font-weight: 600;">SOFTWARE</div>
+                </div>
+            </a>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="btn btn-outline-light" type="button" onclick="toggleMobileSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-tasks fa-lg text-white me-2"></i>
+                <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; color: white;">TASKLY SOFTWARE</span>
+            </div>
+            <button class="btn btn-outline-light btn-sm" onclick="toggleMobileSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div>
+            <a href="#home" class="sidebar-item" onclick="toggleMobileSidebar()">About</a>
+            <a href="#services" class="sidebar-item" onclick="toggleMobileSidebar()">Services</a>
+            <a href="#team" class="sidebar-item" onclick="toggleMobileSidebar()">Team</a>
+            <a href="#locations" class="sidebar-item" onclick="toggleMobileSidebar()">Locations</a>
+            <a href="#business" class="sidebar-item" onclick="toggleMobileSidebar()">Business Activities</a>
+            <a href="#features" class="sidebar-item" onclick="toggleMobileSidebar()">Trip Reports</a>
+            <a href="#contact" class="sidebar-item" onclick="toggleMobileSidebar()">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-title text-white mb-4">
+                        MASTER<br>
+                        YOUR<br>
+                        <span class="accent-red">PRODUCTIVITY</span><br>
+                        WITH US
+                    </div>
+                    <p class="hero-subtitle text-white mb-5">Revolutionary personal and professional productivity through innovative scheduling and task management solutions for modern enterprises.</p>
+                    <button class="btn btn-custom">
+                        LEARN MORE
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <div class="hero-logo-container">
+                            <div class="hero-logo-circle">
+                                <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 3rem; color: white; text-transform: uppercase; letter-spacing: 3px; line-height: 1;">TASKLY</div>
+                                <div style="color: #ff4444; font-weight: 600; font-size: 1.2rem; letter-spacing: 2px; margin-top: 5px;">SOFTWARE</div>
+                                <div style="color: rgba(255,255,255,0.8); font-size: 1rem; margin-top: 10px; letter-spacing: 1px;">Schedule Mastered</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team" style="background: #1a1a1a;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">MEET OUR TEAM</h2>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Headangelly Huy - Visionary Leader -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card team-member-card">
+                        <div class="team-member-image" style="background-image: url('image/headangelly.jpg');"></div>
+                        <div class="team-member-overlay"></div>
+                        
+                        <!-- Basic info - always visible -->
+                        <div class="team-member-basic">
+                            <h3 class="h4 mb-1" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: #ff4444;">HEADANGELLY HUY</h3>
+                            <h4 class="h6 mb-0" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9);">VISIONARY LEADER</h4>
+                        </div>
+                        
+                        <!-- Detailed info - shown on hover -->
+                        <div class="team-member-details">
+                            <p class="text-light mb-3" style="font-size: 0.9rem;">Headangelly leads Taskly with a clear vision to redefine productivity, guiding the company's strategic direction and ensuring its innovative edge in the market.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div>
+                                        <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">SUPPORT TEAM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> class="accent-red fw-bold" style="font-size: 0.8rem;">STRATEGIC</div>
+                                    <small class="text-light">Leadership</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">VISIONARY</div>
+                                    <small class="text-light">Innovation</small>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">EXECUTIVE TEAM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vongsorya Uch - Product Architect -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card team-member-card">
+                        <div class="team-member-image" style="background-image: url('image/vongsorya.jpg');"></div>
+                        <div class="team-member-overlay"></div>
+                        
+                        <div class="team-member-basic">
+                            <h3 class="h4 mb-1" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: #ff4444;">VONGSORYA UCH</h3>
+                            <h4 class="h6 mb-0" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9);">PRODUCT ARCHITECT</h4>
+                        </div>
+                        
+                        <div class="team-member-details">
+                            <p class="text-light mb-3" style="font-size: 0.9rem;">Vongsorya meticulously designs Taskly's features and user experience, ensuring the platform is intuitive, powerful, and perfectly aligned with user needs.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">UX/UI</div>
+                                    <small class="text-light">Design</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">PRODUCT</div>
+                                    <small class="text-light">Strategy</small>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">PRODUCT TEAM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sokleng RY - Technical Lead -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card team-member-card">
+                        <div class="team-member-image" style="background-image: url('image/sokleng.jpg');"></div>
+                        <div class="team-member-overlay"></div>
+                        
+                        <div class="team-member-basic">
+                            <h3 class="h4 mb-1" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: #ff4444;">SOKLENG RY</h3>
+                            <h4 class="h6 mb-0" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9);">TECHNICAL LEAD</h4>
+                        </div>
+                        
+                        <div class="team-member-details">
+                            <p class="text-light mb-3" style="font-size: 0.9rem;">Sokleng oversees the development and technical architecture of Taskly, building a robust and scalable platform that delivers seamless performance.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">TECHNICAL</div>
+                                    <small class="text-light">Excellence</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">SCALABLE</div>
+                                    <small class="text-light">Solutions</small>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">DEVELOPMENT TEAM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kanold Vyry - Growth Strategist -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card team-member-card">
+                        <div class="team-member-image" style="background-image: url('image/kanold.jpg');"></div>
+                        <div class="team-member-overlay"></div>
+                        
+                        <div class="team-member-basic">
+                            <h3 class="h4 mb-1" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: #ff4444;">KANOLD VYRY</h3>
+                            <h4 class="h6 mb-0" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9);">GROWTH STRATEGIST</h4>
+                        </div>
+                        
+                        <div class="team-member-details">
+                            <p class="text-light mb-3" style="font-size: 0.9rem;">Kanold drives Taskly's market presence and user acquisition, crafting compelling strategies to connect with our audience and expand our community.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">GROWTH</div>
+                                    <small class="text-light">Strategy</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">MARKET</div>
+                                    <small class="text-light">Expansion</small>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">MARKETING TEAM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sovandara Phallim - Growth Strategist -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card team-member-card">
+                        <div class="team-member-image" style="background-image: url('image/sovandara.jpg');"></div>
+                        <div class="team-member-overlay"></div>
+                        
+                        <div class="team-member-basic">
+                            <h3 class="h4 mb-1" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: #ff4444;">SOVANDARA PHALLIM</h3>
+                            <h4 class="h6 mb-0" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9);">GROWTH STRATEGIST</h4>
+                        </div>
+                        
+                        <div class="team-member-details">
+                            <p class="text-light mb-3" style="font-size: 0.9rem;">Sovandara collaborates with Kanold to develop comprehensive growth strategies, focusing on community building and sustainable user engagement.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">COMMUNITY</div>
+                                    <small class="text-light">Building</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">USER</div>
+                                    <small class="text-light">Engagement</small>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">MARKETING TEAM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sok Eng Huot - User Advocate -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card team-member-card">
+                        <div class="team-member-image" style="background-image: url('image/sokeng.jpg');"></div>
+                        <div class="team-member-overlay"></div>
+                        
+                        <div class="team-member-basic">
+                            <h3 class="h4 mb-1" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: #ff4444;">SOK ENG HUOT</h3>
+                            <h4 class="h6 mb-0" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.9);">USER ADVOCATE</h4>
+                        </div>
+                        
+                        <div class="team-member-details">
+                            <p class="text-light mb-3" style="font-size: 0.9rem;">Sok Eng is dedicated to ensuring user satisfaction, providing exceptional support, and gathering valuable feedback to continuously improve the Taskly experience.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">USER</div>
+                                    <small class="text-light">Advocacy</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold" style="font-size: 0.8rem;">24/7</div>
+                                    <small class="text-light">Support</small>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">SUPPORT TEAM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>>
+                                        <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444; font-size: 0.7rem;">SUPPORT TEAM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trip Reports Section -->
+    <section class="team-section" id="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">BUSINESS TRIP REPORTS</h2>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Sihanoukville -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%23667eea\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><circle cx=\\'100\\' cy=\\'100\\' r=\\'50\\' fill=\\'%23fff\\'/><circle cx=\\'300\\' cy=\\'150\\' r=\\'70\\' fill=\\'%23000\\'/></g></svg>');">
+                            <i class="fas fa-water trip-icon"></i>
+                        </div>
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">SIHANOUKVILLE</h3>
+                            <p class="text-light mb-3">Client meetings and software demonstrations for local businesses implementing our scheduling platform.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">2 DAYS</div>
+                                    <small class="text-light">Duration</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">5 CLIENTS</div>
+                                    <small class="text-light">Meetings</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">SOFTWARE DEMO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Siem Reap -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%2311998e\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><rect x=\\'50\\' y=\\'50\\' width=\\'100\\' height=\\'100\\' fill=\\'%23fff\\'/><rect x=\\'250\\' y=\\'100\\' width=\\'100\\' height=\\'100\\' fill=\\'%23000\\'/></g></svg>');">
+                            <i class="fas fa-landmark trip-icon"></i>
+                        </div>
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">SIEM REAP</h3>
+                            <p class="text-light mb-3">Market research and user testing sessions to gather feedback for platform improvements.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">5 DAYS</div>
+                                    <small class="text-light">Duration</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">50+ USERS</div>
+                                    <small class="text-light">Tested</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">USER RESEARCH</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mondulkiri -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 400 250\\'><rect fill=\\'%23fc466b\\' width=\\'400\\' height=\\'250\\'/><g opacity=\\'0.3\\'><polygon points=\\'200,50 150,150 250,150\\' fill=\\'%23fff\\'/><polygon points=\\'100,200 50,250 150,250\\' fill=\\'%23000\\'/></g></svg>');">
+                            <i class="fas fa-mountain trip-icon"></i>
+                        </div>
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">MONDULKIRI</h3>
+                            <p class="text-light mb-3">Team building retreat and development planning for upcoming software features and roadmap.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">3 DAYS</div>
+                                    <small class="text-light">Duration</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">FULL TEAM</div>
+                                    <small class="text-light">Attended</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">TEAM BUILDING</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thailand -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 250\'><rect fill=\'%23fa709a\' width=\'400\' height=\'250\'/><g opacity=\'0.3\'><rect x=\'50\' y=\'50\' width=\'60\' height=\'150\' fill=\'%23fff\'/><rect x=\'150\' y=\'80\' width=\'60\' height=\'120\' fill=\'%23000\'/><rect x=\'250\' y=\'40\' width=\'60\' height=\'170\' fill=\'%23fff\'/></g></svg>');">
+                            <i class="fas fa-city trip-icon"></i>
+                        </div>
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">THAILAND</h3>
+                            <p class="text-light mb-3">Technology conference participation and product launch presentation to international audience.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">3 DAYS</div>
+                                    <small class="text-light">Duration</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">500+</div>
+                                    <small class="text-light">Attendees</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">PRODUCT LAUNCH</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Singapore -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card trip-card h-100">
+                        <div class="trip-image" style="background-image: url('data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 250\'><rect fill=\'%23667eea\' width=\'400\' height=\'250\'/><g opacity=\'0.3\'><rect x=\'80\' y=\'60\' width=\'40\' height=\'130\' fill=\'%23fff\'/><rect x=\'140\' y=\'40\' width=\'40\' height=\'150\' fill=\'%23000\'/><rect x=\'200\' y=\'80\' width=\'40\' height=\'110\' fill=\'%23fff\'/><rect x=\'260\' y=\'30\' width=\'40\' height=\'160\' fill=\'%23000\'/></g></svg>');">
+                            <i class="fas fa-building trip-icon"></i>
+                        </div>
+                        <div class="card-body p-4 text-white">
+                            <h3 class="h4 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">SINGAPORE</h3>
+                            <p class="text-light mb-3">Partnership meetings and API integration discussions with potential software integrators.</p>
+                            <div class="row text-center mb-3">
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">2 DAYS</div>
+                                    <small class="text-light">Duration</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="accent-red fw-bold">3 PARTNERS</div>
+                                    <small class="text-light">Meetings</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="badge" style="background: rgba(255,68,68,0.2); color: #ff4444;">API INTEGRATION</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100" style="background: linear-gradient(135deg, #ff4444, #cc3333); border: none;">
+                        <div class="card-body p-4 d-flex flex-column justify-content-center text-center">
+                            <i class="fas fa-chart-pie fa-4x mb-4 text-white"></i>
+                            <h3 class="mb-4" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: white;">TRIP SUMMARY</h3>
+                            <div class="row g-3 mb-4">
+                                <div class="col-6">
+                                    <div class="h2 fw-bold mb-1 text-white">5</div>
+                                    <small class="text-white">Locations</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h2 fw-bold mb-1 text-white">15</div>
+                                    <small class="text-white">Total Days</small>
+                                </div>
+                                <div class="col-12">
+                                    <div class="h1 fw-bold mb-1 text-white">SUCCESS</div>
+                                    <small class="text-white">Business Expansion</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-light fw-bold" style="text-transform: uppercase; letter-spacing: 1px;">
+                                <i class="fas fa-download me-2"></i>EXPORT REPORT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #000; padding: 50px 0;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-tasks fa-2x text-white me-3"></i>
+                        <div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.5rem; color: white;">TASKLY SOFTWARE</div>
+                            <div style="color: #ff4444; font-weight: 600;">Your Schedule, Mastered</div>
+                        </div>
+                    </div>
+                    <p class="text-light">Revolutionizing personal and professional productivity through innovative scheduling and task management solutions.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-md-end gap-4 mb-3">
+                        <a href="#" class="text-light"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                    <p class="text-light mb-0">&copy; 2025 Taskly Software. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Mobile Sidebar Toggle
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('mobileSidebar');
+            sidebar.classList.toggle('show');
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Card hover effects for both trip cards and team member cards
+        document.querySelectorAll('.trip-card, .team-member-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0,0,0,0.95)';
+            } else {
+                navbar.style.background = 'rgba(0,0,0,0.9)';
+            }
+        });
+        
+        // Close mobile sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('mobileSidebar');
+            const toggleButton = document.querySelector('[onclick="toggleMobileSidebar()"]');
+            
+            if (sidebar.classList.contains('show') && 
+                !sidebar.contains(event.target) && 
+                !toggleButton.contains(event.target)) {
+                sidebar.classList.remove('show');
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 992) {
+                const sidebar = document.getElementById('mobileSidebar');
+                sidebar.classList.remove('show');
+            }
+        });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe trip cards and team member cards for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.trip-card, .team-member-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+        
+        // Add subtle parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            const parallax = scrolled * 0.5;
+            
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${parallax}px)`;
+            }
+        });
+        
+        // Button click effects
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            button.addEventListener('click', function() {
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = '50%';
+                ripple.style.top = '50%';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.marginLeft = '-10px';
+                ripple.style.marginTop = '-10px';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add CSS animation for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
