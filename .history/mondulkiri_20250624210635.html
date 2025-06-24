@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mondulkiri Feature Article Interview - Trip Report | Taskly</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #ff4444;
+            --dark-bg: #1a1a1a;
+            --light-gray: #f8f9fa;
+            --medium-gray: #6c757d;
+            --interview-green: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(26,26,26,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-red) !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-red) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-red);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu-dark {
+            background: rgba(26,26,26,0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 10px 0;
+            min-width: 200px;
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-menu-dark .dropdown-item {
+            color: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            margin: 2px 8px;
+        }
+        
+        .dropdown-menu-dark .dropdown-item:hover {
+            background: rgba(255,68,68,0.15);
+            color: var(--primary-red);
+            transform: translateX(5px);
+        }
+        
+        /* Hover to show dropdown */
+        .nav-item.dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 90px;
+            padding: 40px 0;
+        }
+
+        .trip-header {
+            background: linear-gradient(135deg, rgba(40,167,69,0.1) 0%, rgba(26,26,26,0.9) 100%);
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .trip-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--interview-green);
+        }
+
+        .trip-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .meta-item i {
+            color: var(--interview-green);
+            margin-right: 8px;
+        }
+
+        .content-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            color: var(--interview-green);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .day-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--interview-green);
+        }
+
+        .day-title {
+            color: var(--interview-green);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-time {
+            background: var(--interview-green);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            min-width: 140px;
+            text-align: center;
+            margin-right: 20px;
+            align-self: flex-start;
+        }
+
+        .timeline-content h5 {
+            color: var(--interview-green);
+            margin-bottom: 8px;
+        }
+
+        .interview-highlight {
+            background: linear-gradient(135deg, rgba(40,167,69,0.1), rgba(60,179,113,0.1));
+            border: 1px solid rgba(40,167,69,0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+
+        .interview-session {
+            background: rgba(40,167,69,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--interview-green);
+            margin: 10px 0;
+        }
+
+        .expense-table {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .expense-table table {
+            width: 100%;
+            margin: 0;
+        }
+
+        .expense-table th {
+            background: var(--interview-green);
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        .expense-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .expense-table tr:hover {
+            background: rgba(40,167,69,0.1);
+        }
+
+        .total-row {
+            background: rgba(40,167,69,0.2) !important;
+            font-weight: 600;
+        }
+
+        /* Navigation Links */
+        .trip-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--interview-green), #32cd32);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(40,167,69,0.3);
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, var(--primary-red), #ff6666);
+        }
+
+        .nav-btn.primary:hover {
+            box-shadow: 0 10px 25px rgba(255,68,68,0.3);
+        }
+
+        /* Back to Top Button */
+        #scrollToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--interview-green), #32cd32);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        #scrollToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #scrollToTop:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(40,167,69,0.4);
+        }
+
+        /* Quote Styling */
+        .quote-box {
+            background: rgba(40,167,69,0.1);
+            border-left: 4px solid var(--interview-green);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-style: italic;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--interview-green);
+            line-height: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .trip-header h1 {
+                font-size: 2rem;
+            }
+
+            .trip-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-time {
+                margin-right: 0;
+                margin-bottom: 10px;
+                align-self: flex-start;
+            }
+
+            .trip-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Taskly</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Company
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="index.html#about">About Us</a></li>
+                            <li><a class="dropdown-item" href="index.html#team">Our Team</a></li>
+                            <li><a class="dropdown-item" href="index.html#careers">Careers</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sihanoukville-trip.html">Sihanoukville Trip</a></li>
+                            <li><a class="dropdown-item" href="thailand-ai-conference.html">Thailand AI Conference</a></li>
+                            <li><a class="dropdown-item" href="#" style="color: var(--interview-green);">Mondulkiri Interview</a></li>
+                            <li><a class="dropdown-item" href="siem-reap-expansion.html">Siem Reap Expansion</a></li>
+                            <li><a class="dropdown-item" href="singapore-marketing.html">Singapore Marketing</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Trip Header -->
+            <div class="trip-header">
+                <h1><i class="fas fa-microphone"></i> Mondulkiri Feature Article Interview</h1>
+                <p class="lead">Capturing Taskly's legacy through the insights of our esteemed retired founder</p>
+                <div class="trip-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        August 6-8, 2025
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Sen Monorom, Mondulkiri
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        Product Architect
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        $620 Total Cost
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    Interview Mission
+                </h2>
+                <div class="interview-highlight">
+                    <p>This three-day business trip to Mondulkiri, Cambodia, was undertaken by Vongsorya Uch, Taskly's Product Architect, to conduct an in-depth interview with Mr. Chan Vuthy, a highly respected retired staff member and founding developer of Taskly.</p>
+                    
+                    <p><strong>Interview Purpose:</strong></p>
+                    <ul>
+                        <li>Gather invaluable insights, experiences, and contributions during his long tenure with the company</li>
+                        <li>Document Taskly's early product development challenges and architectural decisions</li>
+                        <li>Capture the evolution of our user-centric design philosophy</li>
+                        <li>Create content for a feature article in Taskly's official magazine</li>
+                        <li>Preserve historical perspective on Taskly's journey and product vision</li>
+                    </ul>
+                    
+                    <div class="quote-box">
+                        The material collected will be meticulously crafted into a feature article celebrating Mr. Vuthy's legacy and providing historical perspective on Taskly's journey, particularly concerning the evolution of its product vision and architecture.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip Highlights Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Interview Journey
+                </h2>
+
+                <!-- Day 1 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 1 - Wednesday, August 6, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">8:00 AM</div>
+                        <div class="timeline-content">
+                            <h5>Departure to Mondulkiri</h5>
+                            <p>Scenic drive from Phnom Penh via private car/SUV to Sen Monorom, Mondulkiri. Strategic stops for leg stretching and appreciating the changing landscape.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">1:00 PM</div>
+                        <div class="timeline-content">
+                            <h5>Arrival & Preparation</h5>
+                            <p>Check-in at Phnong Retreat Resort, followed by final review of interview questions and recording equipment setup.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">3:00 PM</div>
+                        <div class="timeline-content">
+                            <div class="interview-session">
+                                <h5>First Interview Session with Mr. Chan Vuthy</h5>
+                                <p><strong>Location:</strong> Mr. Chan Vuthy's home - No. 456, Keo Seima Village, Sen Monorom</p>
+                                <p><strong>Focus:</strong> Taskly's foundational years, initial product development challenges, rationale behind early architectural decisions, and journey from concept to first prototype.</p>
+                                <p><strong>Key Insight:</strong> Mr. Vuthy shared insights into the initial "pain points" Taskly aimed to solve for users and the challenges of building intuitive productivity tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">7:00 PM</div>
+                        <div class="timeline-content">
+                            <h5>Initial Transcription</h5>
+                            <p>Dinner followed by initial transcription of interview notes and review of audio recordings, identifying key quotes related to Taskly's product evolution.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 2 - Thursday, August 7, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:00 AM</div>
+                        <div class="timeline-content">
+                            <div class="interview-session">
+                                <h5>Second Interview Session with Mr. Chan Vuthy</h5>
+                                <p><strong>Focus:</strong> Key product milestones, major feature releases, challenges in scaling Taskly's platform, and how user feedback shaped development over the decades.</p>
+                                <p><strong>Key Topics:</strong></p>
+                                <ul>
+                                    <li>Maintaining intuitive user experience while adding complex functionalities</li>
+                                    <li>Perspectives on feature development and scalability challenges</li>
+                                    <li>Evolution of user feedback integration processes</li>
+                                    <li>Technical architecture decisions that shaped Taskly's growth</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:30 PM</div>
+                        <div class="timeline-content">
+                            <h5>Family Lunch</h5>
+                            <p>Lunch with Mr. Vuthy and his family, fostering a more personal connection and understanding of his life beyond Taskly.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">2:00 PM</div>
+                        <div class="timeline-content">
+                            <h5>Content Organization</h5>
+                            <p>Preliminary outlining of the feature article, identifying key quotes, anecdotes about product breakthroughs, and narratives highlighting Taskly's commitment to user-centric design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 3 - Friday, August 8, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">9:00 AM</div>
+                        <div class="timeline-content">
+                            <h5>Final Review</h5>
+                            <p>Final review of notes and audio recordings to ensure all necessary information for the feature article has been captured, particularly product-related historical data.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:00 PM</div>
+                        <div class="timeline-content">
+                            <h5>Return Journey</h5>
+                            <p>Return journey from Sen Monorom, Mondulkiri, to Phnom Penh with comprehensive interview materials and historical insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip Expenses Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-receipt"></i>
+                    Interview Expenses
+                </h2>
+                <div class="expense-table">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Amount (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>Private car/SUV rental with driver (3 days)</td>
+                                <td>$250</td>
+                            </tr>
+                            <tr>
+                                <td>Accommodation</td>
+                                <td>2 nights at Phnong Retreat Resort</td>
+                                <td>$160</td>
+                            </tr>
+                            <tr>
+                                <td>Meals</td>
+                                <td>3 days x 3 meals for 1 staff</td>
+                                <td>$90</td>
+                            </tr>
+                            <tr>
+                                <td>Interview Setup</td>
+                                <td>Portable audio recorder, notebook, pens, batteries</td>
+                                <td>$70</td>
+                            </tr>
+                            <tr>
+                                <td>Miscellaneous</td>
+                                <td>Small thank-you gift for interviewee, contingency</td>
+                                <td>$50</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total</strong></td>
+                                <td><strong>Complete Interview Trip Cost</strong></td>
+                                <td><strong>$620</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Conclusion Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-check-circle"></i>
+                    Mission Accomplished
+                </h2>
+                <div class="interview-highlight">
+                    <p>The three-day trip to Mondulkiri was highly successful in achieving its primary objective: securing a rich and insightful interview with Mr. Chan Vuthy, Taskly's esteemed retired staff member. Vongsorya Uch effectively captured his articulate recounting of Taskly's early product development, architectural challenges, and the evolution of its user-centric design.</p>
+                    
+                    <div class="quote-box">
+                        This invaluable historical perspective will serve as the cornerstone of a compelling feature article for our company magazine, reinforcing Taskly's commitment to continuous innovation and user empowerment.
+                    </div>
+                    
+                    <p><strong>Next Steps:</strong></p>
+                    <ul>
+                        <li>Complete transcription of full interview recordings</li>
+                        <li>Draft feature article highlighting key insights and historical moments</li>
+                        <li>Editorial review and publication in Taskly's company magazine</li>
+                        <li>Archive interview materials for future company history documentation</li>
+                    </ul>
+                    
+                    <p>The Marketing team will now proceed with transcribing the full interview and drafting the article for publication, ensuring Mr. Vuthy's legacy and contributions to Taskly's success are properly documented and celebrated.</p>
+                </div>
+            </div>
+
+            <!-- Trip Navigation -->
+            <div class="trip-navigation">
+                <a href="thailand-ai-conference.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous: Thailand AI Conference
+                </a>
+                <a href="siem-reap-expansion.html" class="nav-btn">
+                    Next Trip: Siem Reap Expansion
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="scrollToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fixed dropdown hover functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.nav-item.dropdown');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+            
+            dropdown.addEventListener('mouseenter', function() {
+                dropdownMenu.style.display = 'block';
+                setTimeout(() => {
+                    dropdownMenu.style.opacity = '1';
+                    dropdownMenu.style.visibility = 'visible';
+                    dropdownMenu.style.transform = 'translateY(0)';
+                }, 10);
+            });
+            
+            dropdown.addEventListener('mouseleave', function() {
+                dropdownMenu.style.opacity = '0';
+                dropdownMenu.style.visibility = 'hidden';
+                dropdownMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    dropdownMenu.style.display = 'none';
+                }, 200);
+            });
+        });
+
+        // Scroll to top functionality
+        window.addEventListener('scroll', function() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

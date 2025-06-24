@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siem Reap Expansion Research - Trip Report | Taskly</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #ff4444;
+            --dark-bg: #1a1a1a;
+            --light-gray: #f8f9fa;
+            --medium-gray: #6c757d;
+            --expansion-purple: #8a2be2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(26,26,26,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-red) !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-red) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-red);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu-dark {
+            background: rgba(26,26,26,0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 10px 0;
+            min-width: 200px;
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-menu-dark .dropdown-item {
+            color: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            margin: 2px 8px;
+        }
+        
+        .dropdown-menu-dark .dropdown-item:hover {
+            background: rgba(255,68,68,0.15);
+            color: var(--primary-red);
+            transform: translateX(5px);
+        }
+        
+        /* Hover to show dropdown */
+        .nav-item.dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 90px;
+            padding: 40px 0;
+        }
+
+        .trip-header {
+            background: linear-gradient(135deg, rgba(138,43,226,0.1) 0%, rgba(26,26,26,0.9) 100%);
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .trip-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--expansion-purple);
+        }
+
+        .trip-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .meta-item i {
+            color: var(--expansion-purple);
+            margin-right: 8px;
+        }
+
+        .content-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            color: var(--expansion-purple);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .day-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--expansion-purple);
+        }
+
+        .day-title {
+            color: var(--expansion-purple);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-time {
+            background: var(--expansion-purple);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            min-width: 140px;
+            text-align: center;
+            margin-right: 20px;
+            align-self: flex-start;
+        }
+
+        .timeline-content h5 {
+            color: var(--expansion-purple);
+            margin-bottom: 8px;
+        }
+
+        .location-highlight {
+            background: linear-gradient(135deg, rgba(138,43,226,0.1), rgba(147,112,219,0.1));
+            border: 1px solid rgba(138,43,226,0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+
+        .site-visit {
+            background: rgba(138,43,226,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--expansion-purple);
+            margin: 10px 0;
+        }
+
+        .assessment-criteria {
+            background: rgba(138,43,226,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .criteria-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .criteria-item {
+            background: rgba(138,43,226,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(138,43,226,0.2);
+        }
+
+        .criteria-item i {
+            color: var(--expansion-purple);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .expense-table {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .expense-table table {
+            width: 100%;
+            margin: 0;
+        }
+
+        .expense-table th {
+            background: var(--expansion-purple);
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        .expense-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .expense-table tr:hover {
+            background: rgba(138,43,226,0.1);
+        }
+
+        .total-row {
+            background: rgba(138,43,226,0.2) !important;
+            font-weight: 600;
+        }
+
+        /* Navigation Links */
+        .trip-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--expansion-purple), #9370db);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138,43,226,0.3);
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, var(--primary-red), #ff6666);
+        }
+
+        .nav-btn.primary:hover {
+            box-shadow: 0 10px 25px rgba(255,68,68,0.3);
+        }
+
+        /* Back to Top Button */
+        #scrollToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--expansion-purple), #9370db);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        #scrollToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #scrollToTop:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138,43,226,0.4);
+        }
+
+        /* Site Visit Cards */
+        .site-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .site-card {
+            background: rgba(138,43,226,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(138,43,226,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .site-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .site-card h4 {
+            color: var(--expansion-purple);
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .trip-header h1 {
+                font-size: 2rem;
+            }
+
+            .trip-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-time {
+                margin-right: 0;
+                margin-bottom: 10px;
+                align-self: flex-start;
+            }
+
+            .trip-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .criteria-list {
+                grid-template-columns: 1fr;
+            }
+
+            .site-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Taskly</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Company
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="index.html#about">About Us</a></li>
+                            <li><a class="dropdown-item" href="index.html#team">Our Team</a></li>
+                            <li><a class="dropdown-item" href="index.html#careers">Careers</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sihanoukville-trip.html">Sihanoukville Trip</a></li>
+                            <li><a class="dropdown-item" href="thailand-ai-conference.html">Thailand AI Conference</a></li>
+                            <li><a class="dropdown-item" href="mondulkiri-interview.html">Mondulkiri Interview</a></li>
+                            <li><a class="dropdown-item" href="#" style="color: var(--expansion-purple);">Siem Reap Expansion</a></li>
+                            <li><a class="dropdown-item" href="singapore-marketing.html">Singapore Marketing</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Trip Header -->
+            <div class="trip-header">
+                <h1><i class="fas fa-search-location"></i> Siem Reap Expansion Research</h1>
+                <p class="lead">Strategic location scouting for Taskly's next operational hub</p>
+                <div class="trip-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        July 14-18, 2025
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Siem Reap, Cambodia
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        Visionary Leader & User Advocate
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        $1,924 Total Cost
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    Expansion Mission
+                </h2>
+                <div class="location-highlight">
+                    <p>This five-day intensive business trip to Siem Reap, Cambodia, was undertaken by Headangelly Huy (Visionary Leader) and Sok Eng Huot (User Advocate) to find potential locations for Taskly's expansion. The team's mission was to visit five specific areas to assess their suitability for our future operations.</p>
+                    
+                    <div class="assessment-criteria">
+                        <h4>Key Assessment Criteria</h4>
+                        <div class="criteria-list">
+                            <div class="criteria-item">
+                                <i class="fas fa-network-wired"></i>
+                                <strong>Infrastructure</strong>
+                                <p>Technology readiness & connectivity</p>
+                            </div>
+                            <div class="criteria-item">
+                                <i class="fas fa-route"></i>
+                                <strong>Accessibility</strong>
+                                <p>Transportation & logistics</p>
+                            </div>
+                            <div class="criteria-item">
+                                <i class="fas fa-users-cog"></i>
+                                <strong>Talent Pool</strong>
+                                <p>Tech & customer service expertise</p>
+                            </div>
+                            <div class="criteria-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <strong>Regulatory Environment</strong>
+                                <p>Business-friendly policies</p>
+                            </div>
+                            <div class="criteria-item">
+                                <i class="fas fa-seedling"></i>
+                                <strong>Growth Potential</strong>
+                                <p>Sustainable long-term development</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Potential Operations:</strong> Regional development hub, customer support center, or creative innovation lab</p>
+                </div>
+            </div>
+
+            <!-- Site Visits Overview -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-map-marked-alt"></i>
+                    Five Strategic Locations Assessed
+                </h2>
+                <div class="site-grid">
+                    <div class="site-card">
+                        <h4><i class="fas fa-plane"></i> Airport Development Zones</h4>
+                        <p><strong>Location:</strong> Near Siem Reap-Angkor International Airport</p>
+                        <p>Large land parcels for tech zones, excellent connectivity, future growth potential</p>
+                    </div>
+                    <div class="site-card">
+                        <h4><i class="fas fa-road"></i> Airport Road Corridor</h4>
+                        <p><strong>Location:</strong> Main road to airport</p>
+                        <p>Data centers, R&D facilities, good access and logistics potential</p>
+                    </div>
+                    <div class="site-card">
+                        <h4><i class="fas fa-building"></i> Wat Bo Commercial Zone</h4>
+                        <p><strong>Location:</strong> East bank of Siem Reap River</p>
+                        <p>Boutique offices, creative spaces, vibrant business environment</p>
+                    </div>
+                    <div class="site-card">
+                        <h4><i class="fas fa-shopping-bag"></i> Pub Street & Old Market</h4>
+                        <p><strong>Location:</strong> Central Siem Reap</p>
+                        <p>High traffic, branding presence, client-facing opportunities</p>
+                    </div>
+                    <div class="site-card">
+                        <h4><i class="fas fa-home"></i> Sala Kamreuk Community</h4>
+                        <p><strong>Location:</strong> South of city center</p>
+                        <p>Cost-effective, community-oriented, residential proximity</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip Highlights Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Research Journey Highlights
+                </h2>
+
+                <!-- Day 1 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 1 - Monday, July 14, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">8:00 AM</div>
+                        <div class="timeline-content">
+                            <h5>Departure to Siem Reap</h5>
+                            <p>Flight from Phnom Penh International Airport (PNH) to Siem Reap Angkor International Airport (SAI)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">9:30 AM</div>
+                        <div class="timeline-content">
+                            <h5>Hotel Check-in & Team Briefing</h5>
+                            <p>Check-in at Borei Angkor Resort & Spa and initial team briefing on assessment criteria for potential Taskly locations</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:30 AM</div>
+                        <div class="timeline-content">
+                            <h5>Cultural Visit: Angkor Wat Temple Complex</h5>
+                            <p>Team bonding and appreciation of local heritage, relevant for understanding the region's appeal for attracting and retaining future Taskly talent</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">1:00 PM</div>
+                        <div class="timeline-content">
+                            <div class="site-visit">
+                                <h5>Site Visit 1: Airport Development Zones</h5>
+                                <p><strong>Location:</strong> Areas surrounding Siem Reap-Angkor International Airport, Sotr Nikum District</p>
+                                <p><strong>Assessment:</strong> Large land parcels for future commercial and industrial development, focusing on infrastructure readiness and airport connectivity advantages</p>
+                                <p><strong>Key Finding:</strong> High potential for large-scale Taskly office or data center with dedicated tech innovation zones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 2 - Tuesday, July 15, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">9:00 AM</div>
+                        <div class="timeline-content">
+                            <div class="site-visit">
+                                <h5>Site Visit 2: Airport Road Corridor</h5>
+                                <p><strong>Focus:</strong> Large land parcels suitable for data centers, specialized R&D facilities, or support centers requiring significant space and access</p>
+                                <p>Met with local land broker specializing in commercial plots</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:30 PM</div>
+                        <div class="timeline-content">
+                            <div class="site-visit">
+                                <h5>Site Visit 3: Wat Bo Area - Commercial & Boutique Zone</h5>
+                                <p><strong>Location:</strong> East bank of Siem Reap River</p>
+                                <p><strong>Assessment:</strong> Existing commercial properties, boutique office spaces, and co-working potential</p>
+                                <p><strong>Appeal:</strong> Vibrant area for potential Taskly regional office or creative innovation lab with good appeal to tech talent</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">6:00 PM</div>
+                        <div class="timeline-content">
+                            <h5>Cultural Show and Dinner</h5>
+                            <p>Team building and cultural immersion at Apsara Theatre</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 3 - Wednesday, July 16, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">9:00 AM</div>
+                        <div class="timeline-content">
+                            <div class="site-visit">
+                                <h5>Site Visit 4: Pub Street & Old Market Area</h5>
+                                <p><strong>Location:</strong> Central Siem Reap tourist and entertainment hub</p>
+                                <p><strong>Analysis:</strong> Commercial real estate for potential Taskly branding presence, pop-up experience centers, or client-facing office</p>
+                                <p><strong>Research:</strong> Property availability, foot traffic patterns, and market insights</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">1:00 PM</div>
+                        <div class="timeline-content">
+                            <div class="site-visit">
+                                <h5>Site Visit 5: Sala Kamreuk Community Zone</h5>
+                                <p><strong>Location:</strong> South of city center, rapidly developing residential and mixed-use area</p>
+                                <p><strong>Assessment:</strong> Local workforce availability, residential options for future staff, potential for community-oriented business models</p>
+                                <p><strong>Community Engagement:</strong> Spoke with commune council representatives and residents about talent pool and community dynamics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 4 - Thursday, July 17, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">8:30 AM</div>
+                        <div class="timeline-content">
+                            <h5>Stakeholder Meetings & Data Analysis</h5>
+                            <div class="location-highlight">
+                                <p><strong>Morning Meeting:</strong> Ms. Chanthy Soeun (Director, Siem Reap Provincial Department of Commerce) - discussed business registration, investment incentives, and local economic policies for tech businesses</p>
+                                <p><strong>Afternoon Meeting:</strong> Representatives from Paññāsāstra University of Cambodia (Siem Reap Campus) - explored talent pipelines for software development and potential internship programs</p>
+                                <p><strong>Analysis Session:</strong> Comprehensive data analysis of all five sites, comparing pros and cons against Taskly's operational needs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="day-section">
+                    <h3 class="day-title">Day 5 - Friday, July 18, 2025</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">9:00 AM</div>
+                        <div class="timeline-content">
+                            <h5>Final Strategic Discussion</h5>
+                            <p>Final internal discussion and agreement on top recommendations for expansion, outlining next steps for detailed feasibility studies and architectural planning</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">2:00 PM</div>
+                        <div class="timeline-content">
+                            <h5>Return to Phnom Penh</h5>
+                            <p>Flight back to Phnom Penh International Airport with comprehensive expansion research</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip Expenses Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-receipt"></i>
+                    Expansion Research Expenses
+                </h2>
+                <div class="expense-table">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Amount (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Airfare</td>
+                                <td>Round-trip flights for 2 team members (PNH-SAI)</td>
+                                <td>$300</td>
+                            </tr>
+                            <tr>
+                                <td>Accommodation</td>
+                                <td>4 nights at Borei Angkor Resort & Spa (2 rooms)</td>
+                                <td>$400</td>
+                            </tr>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>Car rental with driver for 5 days (incl. Angkor Wat)</td>
+                                <td>$450</td>
+                            </tr>
+                            <tr>
+                                <td>Meals</td>
+                                <td>5 days x 3 meals for 2 team members</td>
+                                <td>$300</td>
+                            </tr>
+                            <tr>
+                                <td>Local Expertise</td>
+                                <td>$250</td>
+                            </tr>
+                            <tr>
+                                <td>Attractions</td>
+                                <td>Angkor Wat entrance fees (for 2)</td>
+                                <td>$74</td>
+                            </tr>
+                            <tr>
+                                <td>Miscellaneous</td>
+                                <td>Maps, local SIM cards, printing, contingency</td>
+                                <td>$150</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total</strong></td>
+                                <td><strong>Complete Research Trip Cost</strong></td>
+                                <td><strong>$1,924</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Conclusion Section -->
+            <div class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-check-circle"></i>
+                    Research Outcomes & Strategic Recommendations
+                </h2>
+                <div class="location-highlight">
+                    <p>The five-day trip to Siem Reap was an unqualified success in identifying and evaluating potential locations for Taskly's expansion. Headangelly Huy and Sok Eng Huot meticulously assessed five distinct areas, engaged with key local stakeholders, and gathered comprehensive data on infrastructure, talent, and growth potential.</p>
+                    
+                    <div class="assessment-criteria">
+                        <h4>Top Recommendations</h4>
+                        <div class="criteria-list">
+                            <div class="criteria-item">
+                                <i class="fas fa-star"></i>
+                                <strong>Airport Development Zones</strong>
+                                <p>Highest potential for large-scale operations</p>
+                            </div>
+                            <div class="criteria-item">
+                                <i class="fas fa-heart"></i>
+                                <strong>Wat Bo Area</strong>
+                                <p>Ideal for creative innovation lab</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>The detailed site visits and stakeholder meetings, complemented by the cultural experience at Angkor Wat, provided invaluable insights that will inform our strategic decisions. We have identified several highly promising locations that align with Taskly's long-term objectives for a new operational hub or innovation lab.</p>
+                    
+                    <p><strong>Next Steps:</strong> A detailed internal report with specific recommendations and a comprehensive feasibility study will follow this trip report, enabling us to advance Taskly's mission of revolutionizing productivity.</p>
+                </div>
+            </div>
+
+            <!-- Trip Navigation -->
+            <div class="trip-navigation">
+                <a href="mondulkiri-interview.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous: Mondulkiri Interview
+                </a>
+                <a href="singapore-marketing.html" class="nav-btn">
+                    Next Trip: Singapore Marketing
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="scrollToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fixed dropdown hover functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.nav-item.dropdown');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+            
+            dropdown.addEventListener('mouseenter', function() {
+                dropdownMenu.style.display = 'block';
+                setTimeout(() => {
+                    dropdownMenu.style.opacity = '1';
+                    dropdownMenu.style.visibility = 'visible';
+                    dropdownMenu.style.transform = 'translateY(0)';
+                }, 10);
+            });
+            
+            dropdown.addEventListener('mouseleave', function() {
+                dropdownMenu.style.opacity = '0';
+                dropdownMenu.style.visibility = 'hidden';
+                dropdownMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    dropdownMenu.style.display = 'none';
+                }, 200);
+            });
+        });
+
+        // Scroll to top functionality
+        window.addEventListener('scroll', function() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
