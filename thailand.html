@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Report: Thailand - Taskly Software</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+     
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            prefix: 'tw-',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-red': '#ff4444',
+                        'dark-bg': '#1a1a1a',
+                        'section-bg': '#2a2a2a',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --primary-red: #ff4444;
+            --dark-bg: #1a1a1a;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+        }
+
+        .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .parallax-header { height: 70vh; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; }
+        .section-icon-bg { position: absolute; top: 50%; left: 0; transform: translateY(-50%); font-size: 16rem; color: rgba(255, 255, 255, 0.03); z-index: 0; line-height: 1; }
+        .gradient-title { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 1px; background: linear-gradient(90deg, var(--primary-red), #ff8c8c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .timeline-point { background-color: var(--dark-bg); border: 3px solid var(--primary-red); box-shadow: 0 0 15px rgba(255, 68, 68, 0.4); }
+        .expense-item { background: var(--dark-bg); border: 1px solid #444; border-left: 5px solid var(--primary-red); transition: background-color 0.3s, transform 0.3s; }
+        .expense-item:hover { background-color: #252525; transform: translateX(10px); }
+
+        .navbar-dark { background: rgba(0,0,0,0.85) !important; backdrop-filter: blur(10px); }
+        .navbar-nav .nav-link { font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.9) !important; position: relative; transition: all 0.3s ease; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-red) !important; }
+    </style>
+</head>
+
+<body class="tw-bg-dark-bg">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top desktop-only">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="me-3"><i class="fas fa-tasks fa-2x text-white"></i></div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.8rem; color: var(--primary-red); font-weight: 600;">SOFTWARE</div>
+                </div>
+            </a>
+            
+            <div class="navbar-nav d-flex flex-row me-auto ms-5">
+                <a class="nav-link px-4" href="index.html#home">Home</a>
+                <a class="nav-link px-4" href="index.html#about">About</a>
+                <a class="nav-link px-4" href="index.html#services">Services</a>
+                <a class="nav-link px-4" href="index.html#team">Team</a>
+                <a class="nav-link px-4" href="index.html#story">Our Story</a>
+                
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Trip Reports
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0">
+                        <li>
+                            <a class="dropdown-item py-2" href="sihanoukville.html">
+                                <i class="fas fa-water text-primary me-2"></i>
+                                <span class="fw-medium">Sihanoukville</span>
+                                <small class="text-muted d-block">Client Meetings • 2 Days • Software Demo</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="siem-reap.html">
+                                <i class="fas fa-landmark text-success me-2"></i>
+                                <span class="fw-medium">Siem Reap</span>
+                                <small class="text-muted d-block">Market Research • 5 Days • User Testing</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="mondulkiri.html">
+                                <i class="fas fa-mountain text-warning me-2"></i>
+                                <span class="fw-medium">Mondulkiri</span>
+                                <small class="text-muted d-block">Team Building • 3 Days • Development Planning</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="thailand.html">
+                                <i class="fas fa-city text-danger me-2"></i>
+                                <span class="fw-medium">Thailand</span>
+                                <small class="text-muted d-block">AI Conference • 3 Days • FutureAI Summit</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="singapore.html">
+                                <i class="fas fa-building text-info me-2"></i>
+                                <span class="fw-medium">Singapore</span>
+                                <small class="text-muted d-block">Partnership Meetings • 2 Days • API Integration</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#reports">
+                                <i class="fas fa-chart-pie text-warning me-2"></i>
+                                <span class="fw-medium">View All Reports</span>
+                                <small class="text-muted d-block">Complete Travel Summary • 15 Days Total</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <a class="nav-link px-4" href="index.html#contact">Contact</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <a href="#" class="text-white" aria-label="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-white" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-dark fixed-top mobile-only">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="me-2"><i class="fas fa-tasks fa-lg text-white"></i></div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.2rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.7rem; color: var(--primary-red); font-weight: 600;">SOFTWARE</div>
+                </div>
+            </a>
+            <button class="btn btn-outline-light" type="button" onclick="toggleMobileSidebar()" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-tasks fa-lg text-white me-2"></i>
+                <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; color: white;">TASKLY SOFTWARE</span>
+            </div>
+            <button class="btn btn-outline-light btn-sm" onclick="toggleMobileSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div>
+            <a href="index.html" class="sidebar-item">Home</a>
+            <a href="thailand.html" class="sidebar-item active">Thailand Report</a>
+            <a href="sihanoukville.html" class="sidebar-item">Sihanoukville Report</a>
+            <a href="index.html#contact" class="sidebar-item">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <header class="parallax-header tw-flex tw-items-center tw-justify-center tw-text-center" style="background-image: url('image/thailand/BITEC Conference Hall.jpg');">
+            <div class="tw-absolute tw-inset-0 tw-bg-black/60"></div>
+            <div class="tw-relative tw-z-10 tw-p-4">
+                <h1 class="tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif; font-size: 4.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">Business Trip Report</h1>
+                <p class="tw-text-2xl tw-text-gray-200 tw-mt-2">Thailand FutureAI Conference</p>
+            </div>
+        </header>
+
+        <div class="tw-py-16 tw-px-4 md:tw-px-8 tw-max-w-7xl tw-mx-auto">
+            <section class="reveal tw-bg-section-bg/80 tw-p-8 tw-rounded-lg tw-border tw-border-gray-700 tw-mb-16">
+                <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8">
+                    <div>
+                        <h3 class="tw-text-primary-red tw-font-semibold" style="font-family: 'Rajdhani', sans-serif;"><i class="fas fa-building tw-mr-2"></i>Company</h3>
+                        <p class="tw-text-lg tw-text-gray-200">Taskly Software</p>
+                    </div>
+                    <div>
+                        <h3 class="tw-text-primary-red tw-font-semibold" style="font-family: 'Rajdhani', sans-serif;"><i class="fas fa-calendar-alt tw-mr-2"></i>Trip Dates</h3>
+                        <p class="tw-text-lg tw-text-gray-200">September 22 – September 24, 2025</p>
+                    </div>
+                    <div>
+                        <h3 class="tw-text-primary-red tw-font-semibold" style="font-family: 'Rajdhani', sans-serif;"><i class="fas fa-users tw-mr-2"></i>Team Members</h3>
+                        <p class="tw-text-lg tw-text-gray-200">Headangelly Huy (Visionary Leader), Sokleng Ry (Technical Lead)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal tw-relative tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-12 tw-items-center tw-mb-24">
+                <i class="fas fa-rocket section-icon-bg"></i>
+                <div class="tw-relative tw-z-10">
+                    <h2 class="gradient-title tw-text-5xl">1. Overview</h2>
+                    <p class="tw-mt-6 tw-text-xl tw-italic tw-text-gray-400">"A strategic three-day immersion into the future of AI-powered workplace solutions, positioning Taskly at the forefront of productivity innovation."</p>
+                </div>
+                <div class="tw-text-lg tw-text-gray-300">
+                    <p>This comprehensive business trip to Bangkok was designed to gain cutting-edge knowledge on AI integration, particularly in intelligent scheduling and task prioritization. Our objectives included networking with global AI leaders, identifying potential AI tools for Taskly's platform, and exploring new innovation avenues to revolutionize productivity.</p>
+                </div>
+            </section>
+
+            <section class="reveal tw-mb-24">
+                <div class="tw-text-center tw-mb-16">
+                    <h2 class="gradient-title tw-text-5xl">2. Trip Highlights</h2>
+                    <p class="tw-text-lg tw-text-gray-400 tw-mt-4">A comprehensive timeline of our AI conference experience.</p>
+                </div>
+                <div class="tw-relative">
+                    <div class="tw-absolute tw-w-1 tw-bg-gray-700 tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
+                    
+                    <div class="reveal tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-mb-16">
+                        <div class="tw-p-6">
+                            <h3 class="tw-text-3xl tw-font-bold" style="font-family: 'Rajdhani', sans-serif;"><i class="fas fa-plane-departure tw-text-primary-red tw-mr-3"></i>Day 1: Arrival & Opening Keynote</h3>
+                            <p class="tw-mt-4 tw-text-gray-300">The team departed from Phnom Penh at 7:00 AM, arriving at Suvarnabhumi Airport at 8:15 AM. After check-in at Amari Watergate Bangkok, we attended the opening keynote "AI as the New Colleague: Redefining Human-Machine Collaboration" by Dr. Li Wei, followed by workshops on predictive analytics for resource optimization.</p>
+                        </div>
+                        <div class="tw-relative tw-flex tw-justify-center tw-items-center">
+                            <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                            <img src="image/thailand/Suvarnabhumi Airport (BKK), Bangkok..jpg" alt="Suvarnabhumi Airport Bangkok" class="tw-rounded-lg tw-shadow-xl hover:tw-scale-105 tw-transition-transform tw-duration-300">
+                        </div>
+                    </div>
+
+                    <div class="reveal tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-mb-16">
+                        <div class="tw-p-6 lg:tw-order-last lg:tw-text-right">
+                            <h3 class="tw-text-3xl tw-font-bold" style="font-family: 'Rajdhani', sans-serif;">Day 2: AI & Cybersecurity <i class="fas fa-shield-alt tw-text-primary-red tw-ml-3"></i></h3>
+                            <p class="tw-mt-4 tw-text-gray-300">Day two focused on AI in cybersecurity and project management optimization. The plenary session on enterprise AI protection was crucial for Taskly's platform security. We also had strategic vendor meetings with AI solution providers to explore integration opportunities.</p>
+                        </div>
+                        <div class="tw-relative tw-flex tw-justify-center tw-items-center">
+                            <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                            <img src="image/thailand/Amari Watergate Bangkok..jpg" alt="Amari Watergate Bangkok Hotel" class="tw-rounded-lg tw-shadow-xl hover:tw-scale-105 tw-transition-transform tw-duration-300">
+                        </div>
+                    </div>
+                    
+                    <div class="reveal tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-mb-16">
+                        <div class="tw-p-6">
+                            <h3 class="tw-text-3xl tw-font-bold" style="font-family: 'Rajdhani', sans-serif;"><i class="fas fa-rocket tw-text-primary-red tw-mr-3"></i>Day 3: Closing Keynote & Strategic Insights</h3>
+                            <p class="tw-mt-4 tw-text-gray-300">The final day featured the closing keynote "Beyond Automation: AI for Strategic Decision Making and Innovation" which perfectly aligned with Taskly's vision. We concluded with final networking sessions and collected valuable conference materials before departing Bangkok with actionable insights for our platform's AI integration roadmap.</p>
+                        </div>
+                        <div class="tw-relative tw-flex tw-justify-center tw-items-center">
+                            <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                            <img src="image/thailand/The Royal Orchid Sheraton Hotel.jpg" alt="Conference networking at The Royal Orchid Sheraton" class="tw-rounded-lg tw-shadow-xl hover:tw-scale-105 tw-transition-transform tw-duration-300">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal tw-relative tw-bg-section-bg/80 tw-p-8 md:tw-p-12 tw-rounded-lg tw-border tw-border-gray-700 tw-mb-24">
+                <i class="fas fa-file-invoice-dollar section-icon-bg" style="left: auto; right: -2rem; color: rgba(255, 68, 68, 0.05);"></i>
+                <div class="tw-relative tw-z-10">
+                    <h2 class="gradient-title tw-text-5xl">3. Trip Expenses</h2>
+                    <div class="tw-mt-8 tw-space-y-4">
+                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg"><i class="fas fa-plane-departure tw-text-2xl tw-text-primary-red tw-w-12"></i><span class="tw-flex-grow tw-ml-4">Airfare: Round-trip for 2 (PNH-BKK)</span><span class="tw-font-semibold">$400</span></div>
+                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg"><i class="fas fa-hotel tw-text-2xl tw-text-primary-red tw-w-12"></i><span class="tw-flex-grow tw-ml-4">Accommodation: 2 nights (2 rooms)</span><span class="tw-font-semibold">$360</span></div>
+                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg"><i class="fas fa-taxi tw-text-2xl tw-text-primary-red tw-w-12"></i><span class="tw-flex-grow tw-ml-4">Transportation: Transfers & local transport</span><span class="tw-font-semibold">$80</span></div>
+                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg"><i class="fas fa-utensils tw-text-2xl tw-text-primary-red tw-w-12"></i><span class="tw-flex-grow tw-ml-4">Meals: 3 days × 3 meals for 2</span><span class="tw-font-semibold">$200</span></div>
+                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg"><i class="fas fa-ticket-alt tw-text-2xl tw-text-primary-red tw-w-12"></i><span class="tw-flex-grow tw-ml-4">Conference Fees: Registration for 2</span><span class="tw-font-semibold">$1,200</span></div>
+                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg"><i class="fas fa-ellipsis tw-text-2xl tw-text-primary-red tw-w-12"></i><span class="tw-flex-grow tw-ml-4">Miscellaneous: Business cards, data roaming</span><span class="tw-font-semibold">$100</span></div>
+                    </div>
+                    <div class="tw-mt-8 tw-pt-4 tw-border-t-2 tw-border-primary-red tw-flex tw-justify-between tw-items-center">
+                        <span class="tw-text-2xl tw-font-bold" style="font-family: 'Rajdhani', sans-serif;">TOTAL</span>
+                        <span class="tw-text-3xl tw-font-bold tw-text-primary-red">$2,340</span>
+                    </div>
+                    <div class="tw-mt-8 tw-text-center">
+                        <a href="#" class="tw-inline-block tw-bg-primary-red hover:tw-bg-red-700 tw-text-white tw-font-bold tw-py-3 tw-px-8 tw-rounded-lg tw-transition-all tw-duration-300">
+                            <i class="fas fa-file-excel tw-mr-2"></i> Export to Sheets
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal tw-text-center">
+                <h2 class="gradient-title tw-text-5xl">4. Conclusion</h2>
+                <div class="tw-max-w-3xl tw-mx-auto">
+                    <p class="tw-mt-6 tw-text-xl tw-text-gray-300">Attending the "FutureAI Workplace Summit 2025" in Bangkok was an extremely valuable and insightful experience for our team. The conference provided comprehensive understanding of the latest trends, ethical considerations, and practical applications of AI in diverse workplace settings. The knowledge gained from keynotes, workshops, and direct interactions with AI solution providers will directly inform Taskly's strategy for integrating advanced AI tools to boost efficiency, enhance our scheduling algorithms, and drive innovation across our platform. We are now well-equipped to propose specific AI initiatives and pilot projects based on the intelligence gathered, further solidifying Taskly's commitment to revolutionizing personal and professional productivity.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer class="tw-bg-black/50 tw-p-8 tw-mt-12 tw-text-center">
+        <p class="tw-text-gray-400">&copy; 2025 Taskly Software. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleMobileSidebar() { 
+            const sidebar = document.getElementById('mobileSidebar');
+            sidebar.classList.toggle('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
