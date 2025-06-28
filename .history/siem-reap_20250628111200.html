@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Trip Report: Siem Reap - Taskly</title>
+    <title>Business Trip Report: Singapore - Taskly</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    <link rel="stylesheet" href="style.css"> <script>
         tailwind.config = {
-            prefix: 'tw-',
+            prefix: 'tw-', // Prevents conflicts with Bootstrap
             theme: {
                 extend: {
                     colors: {
-                        'primary-accent': '#20c997',
-                        'dark-bg': '#121212',
+                        'primary-accent': '#20c997', /* Vibrant Blue-Green */
+                        'dark-bg': '#121212', /* Slightly darker for deeper contrast */
                         'section-bg': '#1e1e1e',
-                        'card-bg': '#2a2a2a',
+                        'card-bg': '#2a2a2a', /* For a subtle difference */
                     }
                 }
             }
@@ -28,7 +28,7 @@
 
     <style>
         :root {
-            --primary-accent: #20c997;
+            --primary-accent: #20c997; /* Vibrant Blue-Green */
             --dark-bg: #121212;
             --section-bg: #1e1e1e;
             --card-bg: #2a2a2a;
@@ -60,6 +60,7 @@
         .staggered-grid.is-visible > *:nth-child(5) { transition-delay: 0.5s; }
         .staggered-grid.is-visible > *:nth-child(6) { transition-delay: 0.6s; }
 
+
         .parallax-header { 
             height: 80vh; 
             background-attachment: fixed; 
@@ -76,7 +77,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(32, 201, 151, 0.3), rgba(0, 0, 0, 0.7));
+            background: linear-gradient(135deg, rgba(32, 201, 151, 0.3), rgba(0, 0, 0, 0.7)); /* New gradient */
             z-index: 1;
         }
         .section-icon-bg { position: absolute; top: 50%; left: 0; transform: translateY(-50%); font-size: 16rem; color: rgba(255, 255, 255, 0.03); z-index: 0; line-height: 1; }
@@ -84,16 +85,17 @@
             font-family: 'Rajdhani', sans-serif; 
             font-weight: 700; 
             letter-spacing: 1px; 
-            background: linear-gradient(135deg, var(--primary-accent), #6be8c2, #a7f0da);
+            background: linear-gradient(135deg, var(--primary-accent), #6be8c2, #a7f0da); /* New gradient */
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
             background-clip: text;
             position: relative;
-            text-shadow: 0 0 30px rgba(32, 201, 151, 0.3);
+            text-shadow: 0 0 30px rgba(32, 201, 151, 0.3); /* New shadow */
         }
         .timeline-point { 
             background-color: var(--dark-bg); 
-            border: 3px solid var(--primary-accent);
+            border: 3px solid var(--primary-accent); /* New border color */
+            /* Removed glow effect */
         }
         
         .investor-logo { 
@@ -106,18 +108,18 @@
         }
         .investor-logo:hover { 
             transform: scale(1.15) rotate(2deg); 
-            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.2);
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.2); /* New shadow */
         }
 
         /* Enhanced Cards */
         .info-card {
             background: linear-gradient(135deg, var(--card-bg), var(--section-bg));
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px); /* Slightly less blur */
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Subtle shadow for depth */
         }
         .info-card::before {
             content: '';
@@ -126,7 +128,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary-accent), #6be8c2, var(--primary-accent));
+            background: linear-gradient(90deg, var(--primary-accent), #6be8c2, var(--primary-accent)); /* New accent color in shimmer */
             background-size: 200% 100%;
             animation: shimmer 3s linear infinite;
         }
@@ -135,8 +137,8 @@
             100% { background-position: 200% 0; }
         }
         .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(32, 201, 151, 0.2);
+            transform: translateY(-8px); /* More noticeable lift */
+            box-shadow: 0 15px 40px rgba(32, 201, 151, 0.2); /* New shadow */
             border-color: rgba(32, 201, 151, 0.3);
         }
 
@@ -153,7 +155,7 @@
             transform: translate(-50%, -50%);
             width: 4px;
             height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(32, 201, 151, 0.3), transparent);
+            background: linear-gradient(to bottom, transparent, rgba(32, 201, 151, 0.3), transparent); /* New accent color */
             z-index: 0;
         }
 
@@ -161,7 +163,7 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
-            color: var(--primary-accent);
+            color: var(--primary-accent); /* New accent color */
             font-family: 'Rajdhani', sans-serif;
         }
         .stat-label {
@@ -185,7 +187,7 @@
             border: 1px solid transparent;
             border-top-left-radius: 0.5rem;
             border-top-right-radius: 0.5rem;
-            margin-bottom: -2px;
+            margin-bottom: -2px; /* Overlap border */
             transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
@@ -207,18 +209,18 @@
             padding: 2rem;
             border-radius: 0 0 0.75rem 0.75rem;
             border: 1px solid rgba(255,255,255,0.1);
-            border-top: none;
+            border-top: none; /* Hide top border as tabs provide it */
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         /* Table Styling */
         .expense-table {
             width: 100%;
-            border-collapse: separate;
+            border-collapse: separate; /* Allows border-radius */
             border-spacing: 0;
             margin-top: 2rem;
             border-radius: 0.75rem;
-            overflow: hidden;
+            overflow: hidden; /* Ensures child elements respect border-radius */
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
 
@@ -246,7 +248,7 @@
         }
 
         .expense-table tbody tr:hover {
-            background-color: var(--card-bg);
+            background-color: var(--card-bg); /* Slightly lighter on hover */
         }
 
         .expense-table tbody tr:last-child td {
@@ -262,7 +264,7 @@
 
         @media (max-width: 768px) {
             .expense-table thead {
-                display: none;
+                display: none; /* Hide table headers on small screens */
             }
 
             .expense-table, .expense-table tbody, .expense-table tr, .expense-table td {
@@ -296,38 +298,6 @@
             .expense-table .amount {
                 font-size: 1.2rem;
             }
-        }
-
-        .desktop-only { display: block; }
-        .mobile-only { display: none; }
-        .mobile-sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: var(--section-bg);
-            z-index: 1050;
-            transition: right 0.3s ease;
-            border-left: 1px solid rgba(255,255,255,0.1);
-        }
-        .mobile-sidebar.show { right: 0; }
-        .sidebar-item {
-            display: block;
-            padding: 1rem 1.5rem;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-        }
-        .sidebar-item:hover, .sidebar-item.active {
-            background: rgba(32, 201, 151, 0.1);
-            color: var(--primary-accent);
-        }
-
-        @media (max-width: 991px) {
-            .desktop-only { display: none; }
-            .mobile-only { display: block; }
         }
     </style>
 </head>
@@ -364,10 +334,10 @@
                         </li>
                         <li><hr class="dropdown-divider border-secondary"></li>
                         <li>
-                            <a class="dropdown-item py-2 active" href="siem-reap.html">
+                            <a class="dropdown-item py-2" href="siem-reap.html">
                                 <i class="fas fa-landmark text-success me-2"></i>
                                 <span class="fw-medium">Siem Reap</span>
-                                <small class="text-muted d-block">Expansion Research • 5 Days • Site Evaluation</small>
+                                <small class="text-muted d-block">Market Research • 5 Days • User Testing</small>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider border-secondary"></li>
@@ -388,7 +358,7 @@
                         </li>
                         <li><hr class="dropdown-divider border-secondary"></li>
                         <li>
-                            <a class="dropdown-item py-2" href="singapore.html">
+                            <a class="dropdown-item py-2 active" href="singapore.html">
                                 <i class="fas fa-building text-info me-2"></i>
                                 <span class="fw-medium">Singapore</span>
                                 <small class="text-muted d-block">Social Media Marketing • 2 Days</small>
@@ -442,14 +412,14 @@
         </div>
         <div>
             <a href="index.html" class="sidebar-item">Home</a>
-            <a href="siem-reap.html" class="sidebar-item active">Siem Reap Report</a>
+            <a href="singapore.html" class="sidebar-item active">Singapore Report</a>
             <a href="#reports" class="sidebar-item">All Trip Reports</a>
             <a href="#contact" class="sidebar-item">Contact</a>
         </div>
     </div>
 
     <main>
-        <header class="parallax-header tw-flex tw-items-center tw-justify-center tw-text-center" style="background-image: url('https://via.placeholder.com/1920x1080/8B4513/FFFFFF?text=Angkor+Wat+Siem+Reap');">
+        <header class="parallax-header tw-flex tw-items-center tw-justify-center tw-text-center" style="background-image: url('https://via.placeholder.com/1920x1080/007bff/FFFFFF?text=Singapore+Skyline');">
             <div class="tw-relative tw-z-10 tw-p-4 reveal">
                 <div class="tw-mb-6 reveal-item">
                     <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-4 tw-py-2 tw-rounded-full tw-text-sm tw-font-semibold tw-uppercase tw-tracking-wide">
@@ -457,24 +427,24 @@
                     </span>
                 </div>
                 <h1 class="tw-font-bold tw-text-white tw-mb-4 reveal-item" style="font-family: 'Rajdhani', sans-serif; font-size: 4.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">
-                    SIEM REAP
-                    <span class="tw-block tw-text-primary-accent">EXPANSION RESEARCH</span>
+                    SINGAPORE
+                    <span class="tw-block tw-text-primary-accent">SOCIAL MEDIA MARKETING</span>
                 </h1>
                 <p class="tw-text-xl tw-text-gray-200 tw-mt-4 tw-max-w-2xl tw-mx-auto reveal-item">
-                    Exploring potential sites for Taskly's expansion across five strategic areas in Siem Reap, Cambodia.
+                    Acquiring cutting-edge insights into social media marketing trends and strategies at SocialPulse 2025.
                 </p>
                 <div class="tw-flex tw-justify-center tw-items-center tw-gap-8 tw-mt-8 tw-text-sm reveal-item">
                     <div class="tw-flex tw-items-center tw-gap-2">
                         <i class="fas fa-calendar-alt tw-text-primary-accent"></i>
-                        <span>May 14-18, 2025</span>
+                        <span>Oct 16-17, 2025</span>
                     </div>
                     <div class="tw-flex tw-items-center tw-gap-2">
                         <i class="fas fa-users tw-text-primary-accent"></i>
                         <span>2 Team Members</span>
                     </div>
                     <div class="tw-flex tw-items-center tw-gap-2">
-                        <i class="fas fa-search tw-text-primary-accent"></i>
-                        <span>Site Research</span>
+                        <i class="fas fa-chart-line tw-text-primary-accent"></i>
+                        <span>SocialPulse 2025</span>
                     </div>
                 </div>
             </div>
@@ -485,12 +455,12 @@
             <section class="reveal tw-mb-16">
                 <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-6 staggered-grid">
                     <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Days Research</div>
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Conference Days</div>
                     </div>
                     <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Site Visits</div>
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Research Sessions</div>
                     </div>
                     <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
                         <div class="stat-number">Taskly</div>
@@ -516,15 +486,15 @@
                         <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
                             <i class="fas fa-calendar-alt tw-mr-2"></i>Trip Dates
                         </h3>
-                        <p class="tw-text-xl tw-text-gray-200">May 14 – May 18, 2025</p>
-                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">5 Days of Research</p>
+                        <p class="tw-text-xl tw-text-gray-200">Oct 16 – Oct 17, 2025</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">2 Days of Insights</p>
                     </div>
                     <div class="tw-text-center md:tw-text-right reveal-item" style="transition-delay: 0.3s;">
                         <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
                             <i class="fas fa-users tw-mr-2"></i>Team Members
                         </h3>
-                        <p class="tw-text-xl tw-text-gray-200">Headangelly Huy, Sok Eng Huot</p>
-                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Visionary Leader, User Advocate</p>
+                        <p class="tw-text-xl tw-text-gray-200">Sokleng Ry, Sok Eng Huot</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Technical Lead, User Advocate</p>
                     </div>
                 </div>
             </section>
@@ -537,22 +507,22 @@
                             Trip Overview
                         </span>
                     </div>
-                    <h2 class="gradient-title tw-text-5xl tw-mb-6">Expansion Research for Taskly</h2>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-6">Social Media Marketing for Taskly</h2>
                     <p class="tw-mt-6 tw-text-xl tw-italic tw-text-gray-400 tw-leading-relaxed">
-                        "A five-day comprehensive evaluation of potential sites for Taskly's expansion across five strategic areas in Siem Reap, Cambodia."
+                        "A two-day deep dive into the latest social media marketing trends and data analytics at SocialPulse 2025, crucial for refining Taskly's digital strategy and user engagement."
                     </p>
                 </div>
                 <div class="tw-text-lg tw-text-gray-300 tw-leading-relaxed reveal-item" style="transition-delay: 0.2s;">
-                    <p class="tw-mb-4">This trip's primary objective was to explore potential sites for Taskly's expansion, evaluating five strategic areas for their suitability to host a future operational hub, which could serve as a regional development center, customer support office, or creative innovation lab.</p>
+                    <p class="tw-mb-4">This trip's primary objective was to acquire the latest research-backed insights into social media marketing trends, data analytics, and effective campaign strategies. This is crucial for Taskly to refine and optimize its digital marketing efforts, enhance user acquisition, and build a stronger online community.</p>
                     
                     <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mt-6">
                         <div class="tw-bg-primary-accent/10 tw-p-4 tw-rounded-lg tw-border tw-border-primary-accent/20">
-                            <div class="tw-text-2xl tw-font-bold tw-text-primary-accent">Infrastructure</div>
-                            <div class="tw-text-sm tw-text-gray-400">Assessment</div>
+                            <div class="tw-text-2xl tw-font-bold tw-text-primary-accent">Data-Driven</div>
+                            <div class="tw-text-sm tw-text-gray-400">Strategy Refinement</div>
                         </div>
                         <div class="tw-bg-primary-accent/10 tw-p-4 tw-rounded-lg tw-border tw-border-primary-accent/20">
-                            <div class="tw-text-2xl tw-font-bold tw-text-primary-accent">Talent Pool</div>
-                            <div class="tw-text-sm tw-text-gray-400">Evaluation</div>
+                            <div class="tw-text-2xl tw-font-bold tw-text-primary-accent">User Eng.</div>
+                            <div class="tw-text-sm tw-text-gray-400">Community Building</div>
                         </div>
                     </div>
                 </div>
@@ -563,19 +533,16 @@
                     <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
                         Detailed Itinerary
                     </span>
-                    <h2 class="gradient-title tw-text-5xl tw-mb-4">Site Research Highlights</h2>
-                    <p class="tw-text-lg tw-text-gray-400 tw-max-w-2xl tw-mx-auto">A chronological report of site visits and evaluations across five strategic areas in Siem Reap.</p>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-4">Conference Highlights</h2>
+                    <p class="tw-text-lg tw-text-gray-400 tw-max-w-2xl tw-mx-auto">A chronological report of key sessions and activities from SocialPulse 2025.</p>
                 </div>
 
                 <ul class="nav nav-tabs tw-justify-center tw-mb-4" id="tripTabs" role="tablist">
                     <li class="nav-item reveal-item" role="presentation">
-                        <button class="nav-link active" id="day1-tab" data-bs-toggle="tab" data-bs-target="#day1" type="button" role="tab" aria-controls="day1" aria-selected="true">Day 1-2</button>
+                        <button class="nav-link active" id="day1-tab" data-bs-toggle="tab" data-bs-target="#day1" type="button" role="tab" aria-controls="day1" aria-selected="true">Day 1</button>
                     </li>
                     <li class="nav-item reveal-item" role="presentation" style="transition-delay: 0.1s;">
-                        <button class="nav-link" id="day2-tab" data-bs-toggle="tab" data-bs-target="#day2" type="button" role="tab" aria-controls="day2" aria-selected="false">Day 3-4</button>
-                    </li>
-                    <li class="nav-item reveal-item" role="presentation" style="transition-delay: 0.2s;">
-                        <button class="nav-link" id="day3-tab" data-bs-toggle="tab" data-bs-target="#day3" type="button" role="tab" aria-controls="day3" aria-selected="false">Day 5</button>
+                        <button class="nav-link" id="day2-tab" data-bs-toggle="tab" data-bs-target="#day2" type="button" role="tab" aria-controls="day2" aria-selected="false">Day 2</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="tripTabContent">
@@ -588,7 +555,7 @@
                                     <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
                                         <div class="tw-flex tw-items-center tw-mb-4">
                                             <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-bus tw-text-white tw-text-lg"></i>
+                                                <i class="fas fa-plane-departure tw-text-white tw-text-lg"></i>
                                             </div>
                                             <div>
                                                 <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
@@ -598,89 +565,25 @@
                                             </div>
                                         </div>
                                         <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Departure from Laryta Phnom Penh at 8:00 AM by bus. Arrival at Laryta Siem Reap Branch at 2:50 PM and transport to Sofitel Angkor Phokeethra Golf & Spa Resort.
+                                            Departure from Laryta Phnom Penh. Arrival and transportation to The Sands Expo and Convention Centre for event registration and welcome coffee.
                                         </p>
                                         <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
                                             <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Logistics:</div>
                                             <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Bus departure PNH (8:00 AM)</li>
-                                                <li>• Arrival Siem Reap (2:50 PM)</li>
-                                                <li>• Hotel check-in (3:00 PM)</li>
+                                                <li>• Flight PNH-SIN (6:30 AM - 8:00 AM)</li>
+                                                <li>• Check-in Marina Bay Sands Hotel</li>
+                                                <li>• Event Registration (10:00 AM)</li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
                                         <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
                                         <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/8B4513/FFFFFF?text=Sofitel+Angkor+Resort" alt="Sofitel Angkor Phokeethra Golf & Spa Resort" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <img src="image/siga/img1.avif" alt="Marina Bay Sands Convention Centre" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
                                             <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
                                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Stakeholder Meeting</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Provincial Commerce Dept.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-handshake tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Government Stakeholder Meeting
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">May 18, 2025 • Morning</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Strategic meeting with Ms. Chanthy Soeun, Director of the Siem Reap Provincial Department of Commerce, discussing business registration processes, tech incentives, and investment policies crucial for Taskly's potential expansion.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Discussion Topics:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Business registration procedures</li>
-                                                <li>• Technology sector incentives</li>
-                                                <li>• Investment policy framework</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-graduation-cap tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    University Partnership Meeting
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">Afternoon Session</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Productive meeting with Paññāsāstra University of Cambodia (Siem Reap Campus) to explore talent pipeline opportunities, internship programs, and local skill availability for potential tech operations.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Areas:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Talent pipeline development</li>
-                                                <li>• Internship program setup</li>
-                                                <li>• Local skill assessment</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/800080/FFFFFF?text=University+Campus" alt="Paññāsāstra University meeting" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Academic Partnership</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Paññāsāstra University</div>
+                                                <div class="tw-font-semibold">Event Venue</div>
+                                                <div class="tw-text-sm tw-text-gray-200">The Sands Expo and Convention Centre</div>
                                             </div>
                                         </div>
                                     </div>
@@ -692,36 +595,259 @@
                                     <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
                                         <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
                                         <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/DC143C/FFFFFF?text=Final+Report+Session" alt="Team completing final analysis" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <img src="image/siga/img2.jfif" alt="Professor presenting on stage" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
                                             <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-top-4 tw-right-4 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-bg-blue-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold">
+                                                    INSIGHT
+                                                </div>
+                                            </div>
                                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Mission Complete</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Data Analysis & Report</div>
+                                                <div class="tw-font-semibold">Keynote Speaker</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Prof. Serena Lim</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
                                         <div class="tw-flex tw-items-center tw-mb-4">
                                             <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-chart-line tw-text-white tw-text-lg"></i>
+                                                <i class="fas fa-microphone-alt tw-text-white tw-text-lg"></i>
                                             </div>
                                             <div>
                                                 <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Data Analysis & Final Report
+                                                    Keynote Presentation
                                                 </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">Final Day Activities</div>
+                                                <div class="tw-text-sm tw-text-gray-400">10:30 AM - 12:00 PM</div>
                                             </div>
                                         </div>
                                         <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Comprehensive synthesis of all site data, drafting preliminary report, and considering financial and logistical implications. Final team dinner and report review to conclude the successful research mission.
+                                            "The Algorithmic Shift: Navigating New Social Media Realities" by Prof. Serena Lim. This session provided a deep dive into how platform algorithms are changing user engagement and content reach, directly impacting Taskly's organic visibility and content strategy.
+                                        </p>
+                                        <div class="tw-grid tw-grid-cols-2 tw-gap-4">
+                                            <div class="tw-bg-primary-accent/10 tw-p-3 tw-rounded-lg tw-border tw-border-primary-accent/20">
+                                                <div class="tw-text-lg tw-font-bold tw-text-primary-accent">Algorithms</div>
+                                                <div class="tw-text-xs tw-text-gray-400">Content Reach</div>
+                                            </div>
+                                            <div class="tw-bg-primary-accent/10 tw-p-3 tw-rounded-lg tw-border tw-border-primary-accent/20">
+                                                <div class="tw-text-lg tw-font-bold tw-text-primary-accent">Taskly Impact</div>
+                                                <div class="tw-text-xs tw-text-gray-400">Organic Visibility</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-users tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Afternoon Sessions & Networking
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">Oct 16, 2025 • Afternoon</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Research Session 1: "ROI in Influencer Marketing for B2B Tech." Followed by a Coffee Break & Poster Session Viewing, and a Case Study Presentation: "Building Authentic Online Communities for Software Products." Ended with Meet & Greet with research presenters.
                                         </p>
                                         <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Deliverables:</div>
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Topics:</div>
                                             <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Complete site analysis</li>
-                                                <li>• Preliminary expansion report</li>
-                                                <li>• Strategic recommendations</li>
+                                                <li>• Influencer Marketing ROI</li>
+                                                <li>• Community Building Strategies</li>
+                                                <li>• User Engagement & Feedback</li>
                                             </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <img src="image/siga/img3.jpg" alt="Audience engaged in presentation" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Engaging Sessions</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Interactive Learning</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <img src="image/siga/img4.jpg" alt="Singapore city skyline at night" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-top-4 tw-right-4 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-bg-purple-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold">
+                                                    CONNECTIONS
+                                                </div>
+                                            </div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Lavo Italian Restaurant & Rooftop Bar</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Marina Bay Sands</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-utensils tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Business Networking Dinner
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">7:00 PM - 9:00 PM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Business Networking Dinner at Lavo Italian Restaurant & Rooftop Bar, Marina Bay Sands, fostering valuable connections with industry leaders and potential partners in digital marketing.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Outcome:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Established industry connections</li>
+                                                <li>• Explored potential collaborations</li>
+                                                <li>• Gained market insights</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="day2" role="tabpanel" aria-labelledby="day2-tab">
+                        <div class="tw-relative">
+                            <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
+                            
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-brain tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    AI in Social Media Marketing
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">Oct 17, 2025 • 9:00 AM - 10:30 AM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Research Session 2: "AI in Social Media Marketing: Personalization and Predictive User Engagement." This session explored how AI tools can enhance content personalization, optimize ad spend, and predict future user behaviors, directly relevant to Taskly's growth strategies.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Takeaways:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• AI for content personalization</li>
+                                                <li>• Optimizing ad spend with AI</li>
+                                                <li>• Predicting user behavior</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <img src="image/siga/img5.jfif" alt="Panel discussion on stage" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">AI Integration</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Future of Marketing</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <img src="image/siga/img6.jpg" alt="Panel discussion on data privacy" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-top-4 tw-right-4 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-bg-green-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold">
+                                                    ETHICS
+                                                </div>
+                                            </div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Ethical Marketing</div>
+                                                <div class="tw-text-sm tw-text-gray-200">User Trust</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-lock tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Data Privacy & Ethics Panel
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">11:00 AM - 12:30 PM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Panel Discussion: "Navigating Data Privacy and Ethical Considerations in Social Media." This critical discussion addressed the evolving landscape of data regulations and brand responsibility, essential for Taskly's commitment to user trust and data security.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Importance for Taskly:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Ensures data security</li>
+                                                <li>• Builds user trust</li>
+                                                <li>• Aligns with brand responsibility</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-plane-arrival tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Closing & Departure
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">Oct 17, 2025 • Afternoon</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Closing Lunch and Final Networking, followed by Event Closing Remarks and Certificate Distribution. Final team debriefing at the hotel, summarizing key takeaways and immediate action items for Taskly. Transportation to Changi Airport for the flight back to Phnom Penh.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Outcome:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Summarized key insights</li>
+                                                <li>• Defined action items for Taskly</li>
+                                                <li>• Smooth travel logistics</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <img src="image/siga/img7.jpg" alt="Departure from Singapore" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Successful Mission</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Back to Phnom Penh</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -738,8 +864,8 @@
                         <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
                             Financial Breakdown
                         </span>
-                        <h2 class="gradient-title tw-text-4xl tw-mb-2">Investment in Research</h2>
-                        <p class="tw-text-gray-400">Comprehensive breakdown of expansion research expenses</p>
+                        <h2 class="gradient-title tw-text-4xl tw-mb-2">Investment in Learning</h2>
+                        <p class="tw-text-gray-400">Comprehensive breakdown of trip expenses</p>
                     </div>
                     
                     <div class="tw-overflow-x-auto reveal-item" style="transition-delay: 0.2s;">
@@ -753,34 +879,34 @@
                             </thead>
                             <tbody>
                                 <tr class="reveal-item">
-                                    <td data-label="Category">Busfare</td>
-                                    <td data-label="Description">Round-trip tickets Phnom Penh ↔ Siem Reap (2 pax)</td>
-                                    <td data-label="Amount (USD)" class="amount">$80</td>
+                                    <td data-label="Category">Airfare</td>
+                                    <td data-label="Description">Round-trip flights for 2 team members (PNH-SIN)</td>
+                                    <td data-label="Amount (USD)" class="amount">$500</td>
                                 </tr>
                                 <tr class="reveal-item">
                                     <td data-label="Category">Accommodation</td>
-                                    <td data-label="Description">4 nights, Borei Angkor Resort & Spa (2 rooms)</td>
-                                    <td data-label="Amount (USD)" class="amount">$400</td>
-                                </tr>
-                                <tr class="reveal-item">
-                                    <td data-label="Category">Transportation</td>
-                                    <td data-label="Description">Car rental with driver (5 days, incl. Angkor Wat travel)</td>
+                                    <td data-label="Description">1 night at Marina Bay Sands Hotel (1 room)</td>
                                     <td data-label="Amount (USD)" class="amount">$450</td>
                                 </tr>
                                 <tr class="reveal-item">
-                                    <td data-label="Category">Meals</td>
-                                    <td data-label="Description">3 meals/day x 5 days x 2 team members</td>
-                                    <td data-label="Amount (USD)" class="amount">$300</td>
+                                    <td data-label="Category">Transportation</td>
+                                    <td data-label="Description">Airport transfers, local transport (MRT/taxi)</td>
+                                    <td data-label="Amount (USD)" class="amount">$70</td>
                                 </tr>
                                 <tr class="reveal-item">
-                                    <td data-label="Category">Local Expertise</td>
-                                    <td data-label="Description">Real estate agent fees, community liaison, interpretation</td>
-                                    <td data-label="Amount (USD)" class="amount">$250</td>
+                                    <td data-label="Category">Meals</td>
+                                    <td data-label="Description">2 days x 3 meals for 2 team members</td>
+                                    <td data-label="Amount (USD)" class="amount">$200</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Event Fees</td>
+                                    <td data-label="Description">Registration for 2 attendees</td>
+                                    <td data-label="Amount (USD)" class="amount">$1000</td>
                                 </tr>
                                 <tr class="reveal-item">
                                     <td data-label="Category">Miscellaneous</td>
-                                    <td data-label="Description">Maps, SIM cards, printing, contingency</td>
-                                    <td data-label="Amount (USD)" class="amount">$150</td>
+                                    <td data-label="Description">Business cards, data roaming, contingency</td>
+                                    <td data-label="Amount (USD)" class="amount">$80</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -789,11 +915,11 @@
                     <div class="tw-mt-8 tw-pt-6 tw-border-t-2 tw-border-gradient-to-r tw-from-primary-accent tw-to-green-400 tw-flex tw-justify-between tw-items-center tw-bg-section-bg tw-p-6 tw-rounded-lg reveal-item" style="transition-delay: 0.6s;">
                         <div>
                             <span class="tw-text-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">TOTAL INVESTMENT</span>
-                            <div class="tw-text-sm tw-text-gray-400">Expansion research cost</div>
+                            <div class="tw-text-sm tw-text-gray-400">Learning & growth cost</div>
                         </div>
                         <div class="tw-text-right">
-                            <span class="tw-text-4xl tw-font-bold tw-text-primary-accent">$1,380</span>
-                            <div class="tw-text-sm tw-text-gray-400">Strategic ROI</div>
+                            <span class="tw-text-4xl tw-font-bold tw-text-primary-accent">$2300</span>
+                            <div class="tw-text-sm tw-text-gray-400">Maximizing ROI</div>
                         </div>
                     </div>
                 </div>
@@ -808,22 +934,22 @@
                     
                     <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6 tw-mb-8 staggered-grid">
                         <div class="info-card tw-p-6 tw-rounded-xl">
-                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Strategic</div>
-                            <div class="tw-text-sm tw-text-gray-400">Site Assessment</div>
+                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Latest</div>
+                            <div class="tw-text-sm tw-text-gray-400">Research Insights</div>
                         </div>
                         <div class="info-card tw-p-6 tw-rounded-xl">
-                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Expansion</div>
-                            <div class="tw-text-sm tw-text-gray-400">Opportunities</div>
+                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Optimized</div>
+                            <div class="tw-text-sm tw-text-gray-400">Digital Marketing</div>
                         </div>
                         <div class="info-card tw-p-6 tw-rounded-xl">
-                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Growth</div>
-                            <div class="tw-text-sm tw-text-gray-400">Potential</div>
+                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Stronger</div>
+                            <div class="tw-text-sm tw-text-gray-400">Online Community</div>
                         </div>
                     </div>
                     
                     <div class="info-card tw-p-8 tw-rounded-xl tw-text-left reveal-item" style="transition-delay: 0.2s;">
                         <p class="tw-text-xl tw-text-gray-300 tw-leading-relaxed tw-mb-6">
-                            The Siem Reap business trip was a major success in identifying viable expansion sites for Taskly. Headangelly Huy and Sok Eng Huot conducted detailed assessments across five diverse areas, each offering unique advantages. By engaging with local stakeholders, analyzing infrastructure, and evaluating the talent pool, the team gathered critical data to inform the company's next move.
+                            Attending "SocialPulse 2025" in Singapore was an extremely valuable and enriching experience for Sokleng Ry and Sok Eng Huot. The in-depth research presentations and discussions provided cutting-edge insights into critical aspects of social media marketing, including algorithmic changes, ROI measurement for influencer campaigns, AI integration, and ethical considerations.
                         </p>
                         
                         <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
@@ -832,32 +958,32 @@
                                 <ul class="tw-space-y-2 tw-text-gray-300">
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-check tw-text-green-400 tw-mr-3"></i>
-                                        Evaluated five strategic expansion sites
+                                        Acquired cutting-edge social media insights
                                     </li>
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-check tw-text-green-400 tw-mr-3"></i>
-                                        Assessed infrastructure and talent availability
+                                        Identified new user engagement strategies
                                     </li>
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-check tw-text-green-400 tw-mr-3"></i>
-                                        Established government and academic partnerships
+                                        Enhanced understanding of data privacy
                                     </li>
                                 </ul>
                             </div>
                             <div>
-                                <h4 class="tw-lg tw-font-semibold tw-text-primary-accent tw-mb-3">Top Contenders</h4>
+                                <h4 class="tw-lg tw-font-semibold tw-text-primary-accent tw-mb-3">Next Steps</h4>
                                 <ul class="tw-space-y-2 tw-text-gray-300">
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-arrow-right tw-text-primary-accent tw-mr-3"></i>
-                                        SAI Airport Development Zone
+                                        Implement new digital marketing campaigns
                                     </li>
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-arrow-right tw-text-primary-accent tw-mr-3"></i>
-                                        Wat Bo Area for creative innovation
+                                        Integrate AI tools for content personalization
                                     </li>
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-arrow-right tw-text-primary-accent tw-mr-3"></i>
-                                        Strategic talent pipeline established
+                                        Refine platform's sharing features
                                     </li>
                                 </ul>
                             </div>
@@ -900,26 +1026,28 @@
         // Enhanced animation script with intersection observer
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
-                threshold: 0.1
+                threshold: 0.1 // Trigger when 10% of the element is visible
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => { 
                     if (entry.isIntersecting) { 
                         entry.target.classList.add('is-visible');
+                        // For staggered-grid containers, add is-visible to trigger children animations
                         if (entry.target.classList.contains('staggered-grid')) {
                             entry.target.querySelectorAll('.expense-item').forEach((item, index) => {
                                 item.style.transitionDelay = `${index * 0.1}s`;
                                 item.classList.add('is-visible');
                             });
                         }
-                        observer.unobserve(entry.target);
+                        observer.unobserve(entry.target); // Stop observing once visible
                     } 
                 });
             }, observerOptions);
             
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             document.querySelectorAll('.staggered-grid').forEach(el => observer.observe(el));
+
 
             // Add smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -940,6 +1068,7 @@
                 const scrolled = window.pageYOffset;
                 const parallax = document.querySelector('.parallax-header');
                 if (parallax) {
+                    // Adjust speed for a more subtle effect if needed
                     const speed = scrolled * 0.3; 
                     parallax.style.transform = `translateY(${speed}px)`;
                 }
@@ -947,272 +1076,4 @@
         });
     </script>
 </body>
-</html>-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Base of Operations</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Sofitel Angkor Phokeethra Resort</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/D2691E/FFFFFF?text=Local+Khmer+Restaurant" alt="Team dinner at local restaurant" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Team Dinner</div>
-                                                <div class="tw-text-sm tw-text-gray-200">The Local Khmer Restaurant</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-utensils tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Team Dinner & Strategy
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">6:30 PM - 8:00 PM</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Team dinner at The Local Khmer Restaurant with discussion of initial impressions and strategic implications for the upcoming site visits and evaluation process.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Topics:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Assessment criteria review</li>
-                                                <li>• Site visit planning</li>
-                                                <li>• Initial market observations</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-plane tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Site Visit 1: Airport Area
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">May 15, 2025 • 1:00 PM - 2:30 PM</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Comprehensive evaluation of Siem Reap-Angkor International Airport Area, focusing on development zones including Airport City and Special Economic Zone (SEZ). Met with airport authority representatives.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Assessment Focus:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Infrastructure development</li>
-                                                <li>• Tech/innovation zones</li>
-                                                <li>• Accessibility advantages</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/4682B4/FFFFFF?text=Siem+Reap+Airport" alt="Siem Reap Airport development zone" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Site Visit 1</div>
-                                                <div class="tw-text-sm tw-text-gray-200">SAI Development Zone</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="day2" role="tabpanel" aria-labelledby="day2-tab">
-                        <div class="tw-relative">
-                            <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
-                            
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-road tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Site Visit 2: Airport Road Corridor
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">May 16, 2025 • 9:00 AM - 11:30 AM</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Evaluation of plots along the road to the new airport, focusing on sites suitable for data centers, R&D facilities, and logistics operations. Met with local land broker to understand development potential.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Focus Areas:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Data center suitability</li>
-                                                <li>• R&D facility potential</li>
-                                                <li>• Logistics infrastructure</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/228B22/FFFFFF?text=Airport+Road+Corridor" alt="Airport Road development corridor" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Site Visit 2</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Airport Road Corridor</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/CD853F/FFFFFF?text=Wat+Bo+Area" alt="Wat Bo Area by Siem Reap River" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Site Visit 3</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Wat Bo Area</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-building tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Site Visit 3: Wat Bo Area
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">12:30 PM - 4:00 PM</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Explored the east bank of the Siem Reap River, focusing on commercial and boutique space potential with co-working possibilities. Conducted informal interviews with local business owners to understand the market dynamics.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Assessment Areas:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Commercial space potential</li>
-                                                <li>• Co-working opportunities</li>
-                                                <li>• Local business ecosystem</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-users tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Site Visit 4: Pub Street Area
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">May 17, 2025 • 9:00 AM - 12:00 PM</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Comprehensive evaluation of Central Siem Reap (Sivatha Blvd), focusing on brand presence opportunities, pop-up experiences, and foot traffic studies. Met with real estate agents to understand commercial viability.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Focus Areas:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Brand presence potential</li>
-                                                <li>• Pop-up experience spaces</li>
-                                                <li>• Tourist foot traffic analysis</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/FF6347/FFFFFF?text=Pub+Street+Scene" alt="Pub Street and Old Market area" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Site Visit 4</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Pub Street & Old Market</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="day3" role="tabpanel" aria-labelledby="day3-tab">
-                        <div class="tw-relative">
-                            <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
-                            
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
-                                        <div class="tw-flex tw-items-center tw-mb-4">
-                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                                <i class="fas fa-home tw-text-white tw-text-lg"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                                    Site Visit 5: Sala Kamreuk
-                                                </h3>
-                                                <div class="tw-text-sm tw-text-gray-400">May 17, 2025 • 1:00 PM - 5:00 PM</div>
-                                            </div>
-                                        </div>
-                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                            Comprehensive evaluation of Sala Kamreuk Community Zone, focusing on residential growth patterns, workforce availability, and support center feasibility. Engaged directly with commune council and local residents.
-                                        </p>
-                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Assessment Focus:</div>
-                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                                <li>• Residential growth patterns</li>
-                                                <li>• Local workforce availability</li>
-                                                <li>• Support center viability</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/32CD32/FFFFFF?text=Sala+Kamreuk+Community" alt="Sala Kamreuk community area" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                                <div class="tw-font-semibold">Site Visit 5</div>
-                                                <div class="tw-text-sm tw-text-gray-200">Sala Kamreuk Community</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="reveal timeline-item tw-mb-16">
-                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
-                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
-                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
-                                        <div class="tw-relative tw-group">
-                                            <img src="https://via.placeholder.com/400x300/4169E1/FFFFFF?text=Government+Meeting" alt="Meeting with government officials" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw
+</html>
