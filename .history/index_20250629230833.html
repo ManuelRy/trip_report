@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskly - Contact Section Fixed</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-red: #ff4444;
+            --primary-red-hover: #ff6666;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        
+        .section-padding {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ff4444, #ff6666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-red-hover));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+        
+        .btn-custom {
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-red-hover));
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 68, 68, 0.4);
+            color: white;
+        }
+        
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 0.25rem rgba(255, 68, 68, 0.25);
+        }
+        
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 68, 68, 0.3);
+        }
+        
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-red-hover));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+        }
+        
+        /* Animation for contact cards */
+        .contact-info-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .contact-info-card:nth-child(1) { animation-delay: 0.1s; }
+        .contact-info-card:nth-child(2) { animation-delay: 0.2s; }
+        .contact-info-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Contact Section -->
+    <section class="section-padding" id="contact">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">GET IN TOUCH</h2>
+                <p class="lead text-light">Ready to master your schedule? Let's talk about how Taskly can transform your productivity.</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-effect p-5 rounded-4 mb-5">
+                        <form>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-dark text-white border-secondary" id="firstName" placeholder="First Name">
+                                        <label for="firstName" class="text-light">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-dark text-white border-secondary" id="lastName" placeholder="Last Name">
+                                        <label for="lastName" class="text-light">Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-dark text-white border-secondary" id="email" placeholder="Email">
+                                        <label for="email" class="text-light">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-dark text-white border-secondary" id="subject">
+                                            <option selected>Choose...</option>
+                                            <option value="demo">Request Demo</option>
+                                            <option value="partnership">Partnership Inquiry</option>
+                                            <option value="support">Technical Support</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <label for="subject" class="text-light">Subject</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control bg-dark text-white border-secondary" placeholder="Your message" id="message" style="height: 120px"></textarea>
+                                        <label for="message" class="text-light">Message</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-custom btn-lg">
+                                        <i class="fas fa-paper-plane me-2"></i>SEND MESSAGE
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fixed Contact Information Cards -->
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope fa-2x text-white"></i>
+                        </div>
+                        <h5 class="text-white mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase;">Email Us</h5>
+                        <p class="text-light mb-0">hello@taskly.software</p>
+                        <small class="text-muted">We'll respond within 24 hours</small>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone fa-2x text-white"></i>
+                        </div>
+                        <h5 class="text-white mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase;">Call Us</h5>
+                        <p class="text-light mb-0">+855 (0) 12 345 678</p>
+                        <small class="text-muted">Mon-Fri 9AM-6PM (GMT+7)</small>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt fa-2x text-white"></i>
+                        </div>
+                        <h5 class="text-white mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase;">Visit Us</h5>
+                        <p class="text-light mb-0">Phnom Penh, Cambodia</p>
+                        <small class="text-muted">Schedule an appointment</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Contact Methods -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-8 text-center">
+                    <div class="glass-effect p-4 rounded-4">
+                        <h6 class="text-white mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase;">Follow Us</h6>
+                        <div class="d-flex justify-content-center gap-4">
+                            <a href="#" class="text-light fs-4" aria-label="Facebook" style="transition: all 0.3s ease;">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="text-light fs-4" aria-label="Instagram" style="transition: all 0.3s ease;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-light fs-4" aria-label="LinkedIn" style="transition: all 0.3s ease;">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-light fs-4" aria-label="Twitter" style="transition: all 0.3s ease;">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Form validation and submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (!firstName || !lastName || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>SENDING...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for your message! We\'ll get back to you soon.');
+                this.reset();
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }, 2000);
+        });
+        
+        // Hover effects for social links
+        document.querySelectorAll('a[aria-label]').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.color = '#ff4444';
+                this.style.transform = 'translateY(-3px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.color = '';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Add ripple effect to contact cards
+        document.querySelectorAll('.contact-info-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 68, 68, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Copy contact info to clipboard
+        document.querySelectorAll('.contact-info-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const textElement = this.querySelector('p');
+                if (textElement) {
+                    const text = textElement.textContent;
+                    navigator.clipboard.writeText(text).then(() => {
+                        // Show temporary feedback
+                        const original = textElement.innerHTML;
+                        textElement.innerHTML = '<i class="fas fa-check text-success"></i> Copied!';
+                        setTimeout(() => {
+                            textElement.innerHTML = original;
+                        }, 1500);
+                    }).catch(() => {
+                        console.log('Copy failed');
+                    });
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        .contact-info-card {
+            cursor: pointer;
+        }
+        
+        .contact-info-card:active {
+            transform: translateY(-5px) scale(0.98);
+        }
+    </style>
+</body>
+</html>

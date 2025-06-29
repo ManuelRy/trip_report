@@ -20,7 +20,7 @@
 </head>
 
 <body>
-     <!-- Desktop Navigation -->
+    <!-- Desktop Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top desktop-only">
         <div class="container-fluid px-4">
             <!-- Brand -->
@@ -131,9 +131,6 @@
         </div>
     </nav>
 
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileSidebar()"></div>
-
     <!-- Mobile Sidebar -->
     <div class="mobile-sidebar" id="mobileSidebar">
         <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
@@ -152,47 +149,7 @@
             <a href="#services" class="sidebar-item" onclick="toggleMobileSidebar()">Services</a>
             <a href="#team" class="sidebar-item" onclick="toggleMobileSidebar()">Team</a>
             <a href="#story" class="sidebar-item" onclick="toggleMobileSidebar()">Our Story</a>
-            
-            <!-- Trip Reports Dropdown for Mobile -->
-            <div class="sidebar-dropdown">
-                <div class="sidebar-item sidebar-dropdown-toggle" onclick="toggleSidebarDropdown(event)">
-                    <span>Trip Reports</span>
-                    <i class="fas fa-chevron-down dropdown-arrow"></i>
-                </div>
-                <div class="sidebar-dropdown-content">
-                    <a href="sihanoukville.html" class="dropdown-subitem" onclick="toggleMobileSidebar()">
-                        <i class="fas fa-water text-primary"></i>
-                        <span class="fw-medium">Sihanoukville</span>
-                        <small>Client Meetings • 2 Days • Software Demo</small>
-                    </a>
-                    <a href="siem-reap.html" class="dropdown-subitem" onclick="toggleMobileSidebar()">
-                        <i class="fas fa-landmark text-success"></i>
-                        <span class="fw-medium">Siem Reap</span>
-                        <small>Market Research • 5 Days • User Testing</small>
-                    </a>
-                    <a href="mondulkiri.html" class="dropdown-subitem" onclick="toggleMobileSidebar()">
-                        <i class="fas fa-mountain text-warning"></i>
-                        <span class="fw-medium">Mondulkiri</span>
-                        <small>Team Building • 3 Days • Development Planning</small>
-                    </a>
-                    <a href="thailand.html" class="dropdown-subitem" onclick="toggleMobileSidebar()">
-                        <i class="fas fa-city text-danger"></i>
-                        <span class="fw-medium">Thailand</span>
-                        <small>Tech Conference • 3 Days • Product Launch</small>
-                    </a>
-                    <a href="singapore.html" class="dropdown-subitem" onclick="toggleMobileSidebar()">
-                        <i class="fas fa-building text-info"></i>
-                        <span class="fw-medium">Singapore</span>
-                        <small>Partnership Meetings • 2 Days • API Integration</small>
-                    </a>
-                    <a href="#reports" class="dropdown-subitem" onclick="toggleMobileSidebar()">
-                        <i class="fas fa-chart-pie text-warning"></i>
-                        <span class="fw-medium">View All Reports</span>
-                        <small>Complete Travel Summary • 15 Days Total</small>
-                    </a>
-                </div>
-            </div>
-            
+            <a href="#features" class="sidebar-item" onclick="toggleMobileSidebar()">Trip Reports</a>
             <a href="#contact" class="sidebar-item" onclick="toggleMobileSidebar()">Contact</a>
         </div>
     </div>
@@ -339,7 +296,7 @@
                 <!-- Sokleng RY - Technical Lead -->
                 <div class="col-lg-4 col-md-6">
                     <div class="card card-custom h-100">
-                        <div class="team-member-image" style="background-image: url('image/sokleng.png');">
+                        <div class="team-member-image" style="background-image: url('image/sokleng.jpg');">
                         </div>
                         <div class="card-body p-4 text-white">
                             <h3 class="h4 mb-2" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; color: var(--primary-red);">SOKLENG RY</h3>
@@ -1039,41 +996,127 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-         function toggleMobileSidebar() {
-            const sidebar = document.getElementById('mobileSidebar');
-            const overlay = document.getElementById('mobileOverlay');
-            
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            // Prevent body scroll when sidebar is open
-            if (sidebar.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-                // Close any open dropdowns when closing sidebar
-                const dropdowns = document.querySelectorAll('.sidebar-dropdown');
-                dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+        // Enhanced smooth scrolling function
+        function scrollToSection(sectionId) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                const navbar = document.querySelector('.navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                const offsetTop = target.offsetTop - navbarHeight - 20;
+                
+                // Use requestAnimationFrame for smoother scrolling
+                const startY = window.pageYOffset;
+                const targetY = Math.max(0, offsetTop);
+                const distance = targetY - startY;
+                const duration = Math.min(Math.abs(distance) * 0.5, 1200); // Dynamic duration, max 1200ms
+                let startTime = null;
+                
+                // Easing function for smooth animation
+                function easeInOutCubic(t) {
+                    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+                }
+                
+                function animateScroll(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    const ease = easeInOutCubic(progress);
+                    
+                    window.scrollTo(0, startY + (distance * ease));
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateScroll);
+                    }
+                }
+                
+                requestAnimationFrame(animateScroll);
             }
         }
-
-        function toggleSidebarDropdown(event) {
-            event.stopPropagation();
-            const dropdown = event.target.closest('.sidebar-dropdown');
-            dropdown.classList.toggle('active');
-        }
-
-        // Close sidebar when clicking on a link (except dropdown toggle)
+        
+        // Initialize smooth scrolling for all anchor links
         document.addEventListener('DOMContentLoaded', function() {
-            const sidebarLinks = document.querySelectorAll('.sidebar-item:not(.sidebar-dropdown-toggle)');
-            sidebarLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (!this.classList.contains('sidebar-dropdown-toggle')) {
-                        toggleMobileSidebar();
+            // Enhanced smooth scrolling for all navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (targetId) {
+                        scrollToSection(targetId);
                     }
                 });
             });
+            
+            // Add smooth scroll-behavior to html for fallback
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Enhanced scroll indicator click
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function() {
+                    scrollToSection('about');
+                });
+            }
+            
+            // Button ripple effects
+            document.querySelectorAll('.btn-custom').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255,255,255,0.3)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple 0.6s linear';
+                    ripple.style.pointerEvents = 'none';
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
         });
+        
+        // Parallax effect for hero section (performance optimized)
+        let parallaxTicking = false;
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            const parallax = scrolled * 0.3;
+            
+            if (heroSection && scrolled < window.innerHeight) {
+                heroSection.style.transform = `translateY(${parallax}px)`;
+            }
+            parallaxTicking = false;
+        }
+        
+        window.addEventListener('scroll', function() {
+            if (!parallaxTicking) {
+                requestAnimationFrame(updateParallax);
+                parallaxTicking = true;
+            }
+        });
+        
+        // Disable parallax on mobile for better performance
+        if (window.innerWidth <= 768) {
+            document.querySelector('.hero-section').classList.add('parallax-disable');
+        }
+        
+        // Add loading state management
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+
          document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -2085,138 +2128,6 @@
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
                 gap: 1rem;
             }
-        }
-
-        :root {
-            --primary-red: #dc3545;
-            --dark-bg: #1a1a1a;
-            --darker-bg: #0d1117;
-        }
-
-        .navbar {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .mobile-sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: linear-gradient(180deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            z-index: 1050;
-            transition: right 0.3s ease-in-out;
-            border-left: 1px solid rgba(255,255,255,0.1);
-            box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-        }
-
-        .mobile-sidebar.active {
-            right: 0;
-        }
-
-        .sidebar-item {
-            display: block;
-            padding: 15px 25px;
-            color: white;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .sidebar-item:hover {
-            background: rgba(255,255,255,0.1);
-            color: var(--primary-red);
-            text-decoration: none;
-            padding-left: 35px;
-        }
-
-        .sidebar-dropdown {
-            position: relative;
-        }
-
-        .sidebar-dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .sidebar-dropdown-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .sidebar-dropdown.active .sidebar-dropdown-content {
-            max-height: 500px;
-        }
-
-        .sidebar-dropdown.active .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .dropdown-subitem {
-            display: block;
-            padding: 12px 20px 12px 45px;
-            color: #ccc;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .dropdown-subitem:hover {
-            background: rgba(255,255,255,0.05);
-            color: var(--primary-red);
-            text-decoration: none;
-            padding-left: 55px;
-        }
-
-        .dropdown-subitem i {
-            width: 20px;
-            margin-right: 8px;
-        }
-
-        .dropdown-subitem small {
-            display: block;
-            color: #888;
-            margin-top: 2px;
-            font-size: 0.75rem;
-        }
-
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0,0,0,0.5);
-            z-index: 1040;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        @media (max-width: 768px) {
-            .desktop-only { display: none !important; }
-            .mobile-only { display: block !important; }
-        }
-
-        @media (min-width: 769px) {
-            .desktop-only { display: block !important; }
-            .mobile-only { display: none !important; }
         }
     </style>
 </body>
