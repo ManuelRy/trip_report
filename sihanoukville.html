@@ -3,47 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trip Report: Sihanoukville - Mohanokor Corp.</title>
-    
+    <title>Business Trip Report: Sihanoukville - Taskly</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
-     
-    <link rel="stylesheet" href="style.css">
+    <!-- Custom CSS for mobile sidebar and general overrides, if any, would go in style.css. Assuming it's correctly linked. -->
+    <link rel="stylesheet" href="style.css"> 
     <script>
         tailwind.config = {
             prefix: 'tw-', // Prevents conflicts with Bootstrap
             theme: {
                 extend: {
                     colors: {
-                        'primary-red': '#ff4444',
-                        'dark-bg': '#1a1a1a',
-                        'section-bg': '#2a2a2a',
+                        'primary-accent': '#20c997', /* Vibrant Blue-Green */
+                        'dark-bg': '#121212', /* Slightly darker for deeper contrast */
+                        'section-bg': '#1e1e1e',
+                        'card-bg': '#2a2a2a', /* For a subtle difference */
                     }
                 }
             }
         }
     </script>
-    
+
     <style>
         :root {
-            --primary-red: #ff4444;
-            --dark-bg: #1a1a1a;
+            --primary-accent: #20c997; /* Vibrant Blue-Green */
+            --dark-bg: #121212;
+            --section-bg: #1e1e1e;
+            --card-bg: #2a2a2a;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
-            color: #ffffff;
+            color: #ffffff; /* Reverted to white text */
         }
 
-        /* --- STYLES FOR THE DYNAMIC LAYOUT --- */
-        .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
+        /* --- STYLES FOR THE DYNAMIC LAYOUT & ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
         .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
+        .reveal.is-visible .reveal-item { opacity: 1; transform: translateY(0); }
+        /* Staggered animation for child elements */
+        .reveal.is-visible .reveal-item:nth-child(1) { transition-delay: 0.1s; }
+        .reveal.is-visible .reveal-item:nth-child(2) { transition-delay: 0.2s; }
+        .reveal.is-visible .reveal-item:nth-child(3) { transition-delay: 0.3s; }
+        .reveal.is-visible .reveal-item:nth-child(4) { transition-delay: 0.4s; }
+        .reveal.is-visible .reveal-item:nth-child(5) { transition-delay: 0.5s; }
+        /* More general staggered for lists/grids */
+        .staggered-grid > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
+        .staggered-grid.is-visible > *:nth-child(1) { transition-delay: 0.1s; }
+        .staggered-grid.is-visible > *:nth-child(2) { transition-delay: 0.2s; }
+        .staggered-grid.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
+        .staggered-grid.is-visible > *:nth-child(4) { transition-delay: 0.4s; }
+        .staggered-grid.is-visible > *:nth-child(5) { transition-delay: 0.5s; }
+        .staggered-grid.is-visible > *:nth-child(6) { transition-delay: 0.6s; }
+
+
         .parallax-header { 
             height: 80vh; 
             background-attachment: fixed; 
@@ -60,7 +79,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(0, 0, 0, 0.7));
+            background: linear-gradient(135deg, rgba(32, 201, 151, 0.3), rgba(0, 0, 0, 0.7)); /* Original gradient */
             z-index: 1;
         }
         .section-icon-bg { position: absolute; top: 50%; left: 0; transform: translateY(-50%); font-size: 16rem; color: rgba(255, 255, 255, 0.03); z-index: 0; line-height: 1; }
@@ -68,50 +87,16 @@
             font-family: 'Rajdhani', sans-serif; 
             font-weight: 700; 
             letter-spacing: 1px; 
-            background: linear-gradient(135deg, var(--primary-red), #ff8c8c, #ffb3b3); 
+            background: linear-gradient(135deg, var(--primary-accent), #6be8c2, #a7f0da); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
             background-clip: text;
             position: relative;
-            text-shadow: 0 0 30px rgba(255, 68, 68, 0.3);
+            text-shadow: 0 0 30px rgba(32, 201, 151, 0.3); /* Original shadow */
         }
         .timeline-point { 
             background-color: var(--dark-bg); 
-            border: 3px solid var(--primary-red); 
-            box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 20px rgba(255, 68, 68, 0.5); }
-            50% { box-shadow: 0 0 30px rgba(255, 68, 68, 0.8); }
-            100% { box-shadow: 0 0 20px rgba(255, 68, 68, 0.5); }
-        }
-        .expense-item { 
-            background: linear-gradient(135deg, var(--dark-bg), #252525); 
-            border: 1px solid #444; 
-            border-left: 5px solid var(--primary-red); 
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .expense-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 68, 68, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        .expense-item:hover::before {
-            left: 100%;
-        }
-        .expense-item:hover { 
-            background: linear-gradient(135deg, #2a2a2a, #353535); 
-            transform: translateX(15px) scale(1.02); 
-            box-shadow: 0 8px 25px rgba(255, 68, 68, 0.2);
-            border-left-width: 8px;
+            border: 3px solid var(--primary-accent); 
         }
         
         .investor-logo { 
@@ -124,17 +109,19 @@
         }
         .investor-logo:hover { 
             transform: scale(1.15) rotate(2deg); 
-            box-shadow: 0 8px 25px rgba(255, 68, 68, 0.2);
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.2); 
         }
 
         /* Enhanced Cards */
         .info-card {
-            background: linear-gradient(135deg, rgba(42, 42, 42, 0.9), rgba(26, 26, 26, 0.9));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, var(--card-bg), var(--section-bg));
+            backdrop-filter: blur(5px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Reverted border color */
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: #ffffff; /* Ensure text is white */
         }
         .info-card::before {
             content: '';
@@ -143,7 +130,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary-red), #ff8c8c, var(--primary-red));
+            background: linear-gradient(90deg, var(--primary-accent), #6be8c2, var(--primary-accent)); 
             background-size: 200% 100%;
             animation: shimmer 3s linear infinite;
         }
@@ -152,9 +139,9 @@
             100% { background-position: 200% 0; }
         }
         .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 68, 68, 0.2);
-            border-color: rgba(255, 68, 68, 0.3);
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px rgba(32, 201, 151, 0.2);
+            border-color: rgba(32, 201, 151, 0.3);
         }
 
         /* Enhanced Timeline */
@@ -170,65 +157,240 @@
             transform: translate(-50%, -50%);
             width: 4px;
             height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(255, 68, 68, 0.3), transparent);
+            background: linear-gradient(to bottom, transparent, rgba(32, 201, 151, 0.3), transparent); 
             z-index: 0;
-        }
-
-        /* Floating Action Button */
-        .fab-export {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, var(--primary-red), #ff6666);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 20px rgba(255, 68, 68, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        .fab-export:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(255, 68, 68, 0.6);
         }
 
         /* Stats Animation */
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
-            color: var(--primary-red);
+            color: var(--primary-accent); 
             font-family: 'Rajdhani', sans-serif;
         }
         .stat-label {
             font-size: 0.9rem;
-            color: #ccc;
+            color: #ccc; /* Reverted to light grey */
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        /* Specific text color for p in info cards - ensuring white */
+        .info-card p {
+            color: #ffffff; 
+        }
+        .info-card .tw-text-gray-400 { 
+            color: #ccc !important; /* Reverted to light grey */
+        }
+        /* For nested darker elements within cards - ensure dark-bg colors */
+        .info-card .tw-bg-dark-bg { /* Using actual dark-bg for consistency */
+            background-color: var(--dark-bg) !important;
+            color: #ffffff !important;
+        }
+        .info-card .tw-bg-dark-bg .tw-text-gray-400 { 
+            color: #ccc !important;
+        }
+        .info-card .tw-bg-dark-bg .tw-text-gray-300 { 
+            color: #ffffff !important;
+        }
+
 
         /* --- NAVIGATION CSS --- */
-        .navbar-dark { background: rgba(0,0,0,0.85) !important; backdrop-filter: blur(10px); }
-        .navbar-nav .nav-link { font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.9) !important; position: relative; transition: all 0.3s ease; }
-        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-red) !important; }
-        /* ... other nav styles ... */
+        .navbar-dark { 
+            background: rgba(0,0,0,0.85) !important; /* Reverted to dark background */
+            backdrop-filter: blur(10px); 
+            box-shadow: none; /* Removed shadow for consistency with original dark mode */
+        }
+        .navbar-dark .navbar-brand .fa-tasks { 
+            color: #ffffff !important; /* Ensure icon is white */
+        }
+        .navbar-dark .navbar-brand div:first-child { 
+            color: #ffffff !important; /* Ensure TASKLY text is white */
+        }
+        .navbar-nav .nav-link { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: rgba(255,255,255,0.9) !important; /* Reverted text color */
+            position: relative; 
+            transition: all 0.3s ease; 
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-accent) !important; }
+
+        /* Mobile Sidebar Customization */
+        .mobile-sidebar {
+            background: var(--dark-bg); /* Reverted background for sidebar */
+            color: #ffffff; /* Reverted text for sidebar */
+            border-left: 1px solid rgba(255,255,255,0.1); /* Reverted border */
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        }
+        .mobile-sidebar .border-secondary {
+            border-color: rgba(255,255,255,0.1) !important; /* Reverted border for mobile sidebar header */
+        }
+        .mobile-sidebar .btn-outline-light {
+            color: #ffffff !important; /* Reverted close button color */
+            border-color: #ccc !important; /* Reverted border color */
+        }
+        .mobile-sidebar .sidebar-item {
+            color: #ffffff; /* Reverted sidebar item text color */
+        }
+        .mobile-sidebar .sidebar-item.active {
+            background-color: var(--card-bg); /* Reverted active item background */
+            color: var(--primary-accent); /* Active item text color */
+        }
+
+
+        /* Bootstrap Tab Customization (Dark mode) */
+        .nav-tabs {
+            border-bottom: 2px solid rgba(255,255,255,0.1); /* Reverted border */
+        }
+        .nav-tabs .nav-link {
+            color: rgba(255,255,255,0.6); /* Reverted text color */
+            border: 1px solid transparent;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            margin-bottom: -2px; 
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.75rem 1.5rem;
+        }
+        .nav-tabs .nav-link:hover {
+            border-color: transparent transparent rgba(255,255,255,0.2) transparent; /* Reverted hover border */
+            color: rgba(255,255,255,0.8); /* Reverted text color */
+        }
+        .nav-tabs .nav-link.active {
+            color: var(--primary-accent);
+            background-color: var(--dark-bg); /* Reverted background */
+            border-color: var(--primary-accent) var(--primary-accent) var(--dark-bg) var(--primary-accent); /* Reverted border bottom */
+            box-shadow: 0 -3px 15px rgba(32, 201, 151, 0.2);
+        }
+        .tab-content {
+            background-color: var(--card-bg); /* Reverted background */
+            padding: 2rem;
+            border-radius: 0 0 0.75rem 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1); /* Reverted border */
+            border-top: none; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            color: #ffffff; /* Ensure text is white */
+        }
+
+        /* Table Styling (Dark mode) */
+        .expense-table {
+            width: 100%;
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 2rem;
+            border-radius: 0.75rem;
+            overflow: hidden; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .expense-table th, .expense-table td {
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.08); /* Reverted border */
+            color: #ffffff; /* Ensure text is white */
+        }
+
+        .expense-table th {
+            background-color: var(--primary-accent);
+            color: var(--dark-bg); /* Reverted text color on accent background */
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        .expense-table tbody tr {
+            background-color: var(--section-bg); /* Reverted background for rows */
+            transition: background-color 0.3s ease;
+        }
+
+        .expense-table tbody tr:hover {
+            background-color: var(--card-bg); /* Slightly lighter on hover */
+        }
+
+        .expense-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .expense-table .amount {
+            font-weight: 600;
+            color: var(--primary-accent);
+            text-align: right;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .expense-table thead {
+                display: none; 
+            }
+
+            .expense-table, .expense-table tbody, .expense-table tr, .expense-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .expense-table tr {
+                margin-bottom: 1rem;
+                border: 1px solid rgba(255,255,255,0.1); /* Reverted border */
+                border-radius: 0.75rem;
+                overflow: hidden;
+            }
+
+            .expense-table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            .expense-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: calc(50% - 30px);
+                text-align: left;
+                font-weight: 600;
+                color: rgba(255,255,255,0.6); /* Reverted text color */
+            }
+
+            .expense-table .amount {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Footer styling for dark mode */
+        footer {
+            background: linear-gradient(to right, var(--dark-bg), var(--section-bg)); /* Reverted gradient */
+            border-top: 1px solid var(--border-color); /* Reverted border */
+            color: #ffffff; /* Ensure text is white */
+        }
+        footer .tw-text-gray-400 {
+            color: #ccc !important; /* Reverted secondary text in footer */
+        }
+        footer .tw-text-white {
+            color: #ffffff !important; /* Ensure main text in footer logo is white */
+        }
+        
     </style>
 </head>
 
 <body class="tw-bg-dark-bg">
 
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top desktop-only">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top desktop-only">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
                 <div class="me-3"><i class="fas fa-tasks fa-2x text-white"></i></div>
                 <div>
                     <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1;">TASKLY</div>
-                    <div style="font-size: 0.8rem; color: var(--primary-red); font-weight: 600;">SOFTWARE</div>
+                    <div style="font-size: 0.8rem; color: var(--primary-accent); font-weight: 600;">SOFTWARE</div>
                 </div>
             </a>
-                        <!-- Main Navigation -->
             <div class="navbar-nav d-flex flex-row me-auto ms-5">
                 <a class="nav-link px-4" href="#home">Home</a>
                 <a class="nav-link px-4" href="#about">About</a>
@@ -236,17 +398,16 @@
                 <a class="nav-link px-4" href="#team">Team</a>
                 <a class="nav-link px-4" href="#story">Our Story</a>
                 
-                <!-- Trip Reports Dropdown -->
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle px-4 active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Trip Reports
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0">
                         <li>
-                            <a class="dropdown-item py-2" href="sihanoukville.html">
+                            <a class="dropdown-item py-2 active" href="sihanoukville.html">
                                 <i class="fas fa-water text-primary me-2"></i>
                                 <span class="fw-medium">Sihanoukville</span>
-                                <small class="text-muted d-block">Client Meetings • 2 Days • Software Demo</small>
+                                <small class="text-muted d-block">Investor Meetings • 2 Days • Funding Rounds</small>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider border-secondary"></li>
@@ -278,7 +439,7 @@
                             <a class="dropdown-item py-2" href="singapore.html">
                                 <i class="fas fa-building text-info me-2"></i>
                                 <span class="fw-medium">Singapore</span>
-                                <small class="text-muted d-block">Partnership Meetings • 2 Days • API Integration</small>
+                                <small class="text-muted d-block">Social Media Marketing • 2 Days</small>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider border-secondary"></li>
@@ -286,7 +447,7 @@
                             <a class="dropdown-item py-2" href="#reports">
                                 <i class="fas fa-chart-pie text-warning me-2"></i>
                                 <span class="fw-medium">View All Reports</span>
-                                <small class="text-muted d-block">Complete Travel Summary • 15 Days Total</small>
+                                <small class="text-muted d-block">Complete Travel Summary</small>
                             </a>
                         </li>
                     </ul>
@@ -308,7 +469,7 @@
                 <div class="me-2"><i class="fas fa-tasks fa-lg text-white"></i></div>
                 <div>
                     <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.2rem; line-height: 1;">TASKLY</div>
-                    <div style="font-size: 0.7rem; color: var(--primary-red); font-weight: 600;">SOFTWARE</div>
+                    <div style="font-size: 0.7rem; color: var(--primary-accent); font-weight: 600;">SOFTWARE</div>
                 </div>
             </a>
             <button class="btn btn-outline-light" type="button" onclick="toggleMobileSidebar()" aria-label="Toggle menu">
@@ -330,395 +491,583 @@
         <div>
             <a href="index.html" class="sidebar-item">Home</a>
             <a href="sihanoukville.html" class="sidebar-item active">Sihanoukville Report</a>
-            <a href="siem-reap.html" class="sidebar-item">Siem Reap Report</a>
-            <a href="index.html#contact" class="sidebar-item">Contact</a>
+            <a href="#reports" class="sidebar-item">All Trip Reports</a>
+            <a href="#contact" class="sidebar-item">Contact</a>
         </div>
     </div>
-    <div class="mobile-sidebar" id="mobileSidebar">
-        </div>
 
     <main>
-        <header class="parallax-header tw-flex tw-items-center tw-justify-center tw-text-center" style="background-image: url('image/kps/img1.png');">
-            <div class="tw-relative tw-z-10 tw-p-4">
-                <div class="tw-mb-6">
-                    <span class="tw-inline-block tw-bg-primary-red/20 tw-border tw-border-primary-red/30 tw-text-primary-red tw-px-4 tw-py-2 tw-rounded-full tw-text-sm tw-font-semibold tw-uppercase tw-tracking-wide">
+        <header class="parallax-header tw-flex tw-items-center tw-justify-center tw-text-center" style="background-image: url('null');">
+            <div class="tw-relative tw-z-10 tw-p-4 reveal">
+                <div class="tw-mb-6 reveal-item">
+                    <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-4 tw-py-2 tw-rounded-full tw-text-sm tw-font-semibold tw-uppercase tw-tracking-wide">
                         Business Trip Report
                     </span>
                 </div>
-                <h1 class="tw-font-bold tw-text-white tw-mb-4" style="font-family: 'Rajdhani', sans-serif; font-size: 4.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">
+                <h1 class="tw-font-bold tw-text-white tw-mb-4 reveal-item" style="font-family: 'Rajdhani', sans-serif; font-size: 4.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">
                     SIHANOUKVILLE
-                    <span class="tw-block tw-text-primary-red">INVESTOR SUMMIT</span>
+                    <span class="tw-block tw-text-primary-accent">INVESTOR MEETINGS</span>
                 </h1>
-                <p class="tw-text-xl tw-text-gray-200 tw-mt-4 tw-max-w-2xl tw-mx-auto">
-                    Strategic meetings with key investors to secure funding for our digital transformation initiatives
+                <p class="tw-text-xl tw-text-gray-200 tw-mt-4 tw-max-w-2xl tw-mx-auto reveal-item">
+                    Engaging with potential investors to secure strategic funding for Taskly's expansion plans and new initiatives.
                 </p>
-                <div class="tw-flex tw-justify-center tw-items-center tw-gap-8 tw-mt-8 tw-text-sm">
+                <div class="tw-flex tw-justify-center tw-items-center tw-gap-8 tw-mt-8 tw-text-sm reveal-item tw-text-white">
                     <div class="tw-flex tw-items-center tw-gap-2">
-                        <i class="fas fa-calendar-alt tw-text-primary-red"></i>
-                        <span>June 16-17, 2025</span>
+                        <i class="fas fa-calendar-alt tw-text-primary-accent"></i>
+                        <span>August 19-20, 2025</span>
                     </div>
                     <div class="tw-flex tw-items-center tw-gap-2">
-                        <i class="fas fa-users tw-text-primary-red"></i>
-                        <span>2 Team Members</span>
+                        <i class="fas fa-users tw-text-primary-accent"></i>
+                        <span>6 Team Members</span>
                     </div>
                     <div class="tw-flex tw-items-center tw-gap-2">
-                        <i class="fas fa-handshake tw-text-primary-red"></i>
-                        <span>2 Investors</span>
+                        <i class="fas fa-handshake tw-text-primary-accent"></i>
+                        <span>Investor Pitches</span>
                     </div>
                 </div>
             </div>
         </header>
         
-
         <div class="tw-py-16 tw-px-4 md:tw-px-8 tw-max-w-7xl tw-mx-auto">
 
-            <!-- Enhanced Stats Section -->
             <section class="reveal tw-mb-16">
-                <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-6">
+                <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-6 staggered-grid">
                     <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
-                        <div class="stat-number">$2.5M</div>
-                        <div class="stat-label">Investment Target</div>
-                    </div>
-                    <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Meeting Success Rate</div>
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Meeting Days</div>
                     </div>
                     <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
                         <div class="stat-number">2</div>
-                        <div class="stat-label">Days Duration</div>
+                        <div class="stat-label">Investors Met</div>
                     </div>
                     <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
-                        <div class="stat-number">85%</div>
-                        <div class="stat-label">Investor Interest</div>
+                        <div class="stat-number">Taskly</div>
+                        <div class="stat-label">Company</div>
+                    </div>
+                    <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Team Members</div>
                     </div>
                 </div>
             </section>
 
             <section class="reveal info-card tw-p-8 tw-rounded-xl tw-mb-16">
                 <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8">
-                    <div class="tw-text-center md:tw-text-left">
-                        <h3 class="tw-text-primary-red tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                    <div class="tw-text-center md:tw-text-left reveal-item">
+                        <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
                             <i class="fas fa-building tw-mr-2"></i>Company
                         </h3>
-                        <p class="tw-text-xl tw-text-gray-200">Mohanokor Corp.</p>
-                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Digital Solutions & Analytics</p>
+                        <p class="tw-text-xl tw-text-white">Taskly Tech</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Productivity Software</p>
                     </div>
-                    <div class="tw-text-center">
-                        <h3 class="tw-text-primary-red tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                    <div class="tw-text-center reveal-item" style="transition-delay: 0.2s;">
+                        <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
                             <i class="fas fa-calendar-alt tw-mr-2"></i>Trip Dates
                         </h3>
-                        <p class="tw-text-xl tw-text-gray-200">June 16 – June 17, 2025</p>
-                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">2 Days Strategic Mission</p>
+                        <p class="tw-text-xl tw-text-white">August 19 – August 20, 2025</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">2 Days of Engagements</p>
                     </div>
-                    <div class="tw-text-center md:tw-text-right">
-                        <h3 class="tw-text-primary-red tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                    <div class="tw-text-center md:tw-text-right reveal-item" style="transition-delay: 0.3s;">
+                        <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
                             <i class="fas fa-users tw-mr-2"></i>Team Members
                         </h3>
-                        <p class="tw-text-xl tw-text-gray-200">Executive Leadership</p>
-                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Sopheak Dara (CEO), Lina Kim (CFO)</p>
+                        <p class="tw-text-xl tw-text-white">Headangelly Huy, Vongsorya Uch, Sokleng Ry, Kanold Vyry, Sovandara Phallim, Sok Eng Huot</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Visionary Leader, Product Architect, Technical Lead, Growth Strategist, Growth Strategist, User Advocate</p>
                     </div>
                 </div>
             </section>
 
             <section class="reveal tw-relative tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-12 tw-items-center tw-mb-24">
-                <i class="fas fa-bullseye section-icon-bg"></i>
-                <div class="tw-relative tw-z-10">
+                <i class="fas fa-chart-bar section-icon-bg" style="color: rgba(32, 201, 151, 0.05);"></i>
+                <div class="tw-relative tw-z-10 reveal-item">
                     <div class="tw-mb-4">
-                        <span class="tw-inline-block tw-bg-primary-red/20 tw-border tw-border-primary-red/30 tw-text-primary-red tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide">
-                            Mission Overview
+                        <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide">
+                            Trip Overview
                         </span>
                     </div>
-                    <h2 class="gradient-title tw-text-5xl tw-mb-6">Strategic Investment Mission</h2>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-6">Securing Funding for Taskly's Growth</h2>
                     <p class="tw-mt-6 tw-text-xl tw-italic tw-text-gray-400 tw-leading-relaxed">
-                        "A carefully orchestrated two-day strategic mission to Sihanoukville, designed to present our expansion roadmap and secure critical funding for our digital transformation initiatives."
+                        "A critical two-day trip to Sihanoukville focused on presenting Taskly's strategic expansion plans and securing vital investment for our upcoming digital transformation initiatives, particularly those focused on enhancing Taskly's AI capabilities and seamless integration features."
                     </p>
                 </div>
-                <div class="tw-text-lg tw-text-gray-300 tw-leading-relaxed">
-                     <p class="tw-mb-4">This high-stakes trip was meticulously planned to facilitate in-depth discussions with two carefully selected potential investors, providing them with comprehensive insights into our company's robust value proposition and compelling investment opportunities.</p>
-                     
-                     <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mt-6">
-                        <div class="tw-bg-primary-red/10 tw-p-4 tw-rounded-lg tw-border tw-border-primary-red/20">
-                            <div class="tw-text-2xl tw-font-bold tw-text-primary-red">$2.5M</div>
-                            <div class="tw-text-sm tw-text-gray-400">Funding Goal</div>
+                <div class="tw-text-lg tw-text-gray-300 tw-leading-relaxed reveal-item" style="transition-delay: 0.2s;">
+                    <p class="tw-mb-4">This was a highly focused, two-day business trip to Sihanoukville, Cambodia, undertaken by a core six-member Taskly team. Operating on a lean budget, our main goal was to engage directly with two potential investors – Coastal Horizons Group and Galaxy Capital Ventures. We aimed to present Taskly's ambitious expansion plans and compelling investment opportunities, hoping to secure strategic funding vital for our upcoming digital transformation initiatives, particularly those focused on enhancing Taskly's AI capabilities and seamless integration features. The meetings were designed for efficient discussions, clear articulation of our value proposition, and building foundational relationships while being extremely cost-conscious.</p>
+                    
+                    <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mt-6">
+                        <div class="tw-bg-primary-accent/10 tw-p-4 tw-rounded-lg tw-border tw-border-primary-accent/20">
+                            <div class="tw-text-2xl tw-font-bold tw-text-primary-accent">Strategic</div>
+                            <div class="tw-text-sm tw-text-gray-400">Funding Secured</div>
                         </div>
-                        <div class="tw-bg-primary-red/10 tw-p-4 tw-rounded-lg tw-border tw-border-primary-red/20">
-                            <div class="tw-text-2xl tw-font-bold tw-text-primary-red">18mo</div>
-                            <div class="tw-text-sm tw-text-gray-400">ROI Timeline</div>
+                        <div class="tw-bg-primary-accent/10 tw-p-4 tw-rounded-lg tw-border tw-border-primary-accent/20">
+                            <div class="tw-text-2xl tw-font-bold tw-text-primary-accent">Growth</div>
+                            <div class="tw-text-sm tw-text-gray-400">Initiatives Supported</div>
                         </div>
-                     </div>
+                    </div>
                 </div>
             </section>
 
             <section class="reveal tw-mb-24">
-                <div class="tw-text-center tw-mb-16">
-                     <span class="tw-inline-block tw-bg-primary-red/20 tw-border tw-border-primary-red/30 tw-text-primary-red tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
-                        Detailed Timeline
-                     </span>
-                     <h2 class="gradient-title tw-text-5xl tw-mb-4">Mission Highlights</h2>
-                     <p class="tw-text-lg tw-text-gray-400 tw-max-w-2xl tw-mx-auto">A comprehensive chronological report of all strategic activities, meetings, and outcomes achieved during our investor summit.</p>
+                <div class="tw-text-center tw-mb-8 reveal-item">
+                    <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
+                        Detailed Itinerary
+                    </span>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-4">Meeting Highlights</h2>
+                    <p class="tw-text-lg tw-text-gray-400 tw-max-w-2xl tw-mx-auto">A chronological report of key meetings and activities in Sihanoukville.</p>
                 </div>
-                <div class="tw-relative">
-                    <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-red/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
-                    
-                    <div class="reveal timeline-item tw-mb-16">
-                        <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8">
-                            <div class="info-card tw-p-6 tw-rounded-xl">
-                                <div class="tw-flex tw-items-center tw-mb-4">
-                                    <div class="tw-bg-primary-red tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                        <i class="fas fa-plane-departure tw-text-white tw-text-lg"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                            Day 1: Arrival & First Contact
-                                        </h3>
-                                        <div class="tw-text-sm tw-text-gray-400">June 16, 2025 • 8:00 AM - 6:00 PM</div>
-                                    </div>
-                                </div>
-                                <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                    Executive team departed Phnom Penh at 8:00 AM, arriving in Sihanoukville at 8:45 AM. Strategic check-in at Independence Hotel followed by comprehensive briefing and preparation for the first high-stakes investor meeting.
-                                </p>
-                                <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
-                                    <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Achievements:</div>
-                                    <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
-                                        <li>• Seamless logistics execution</li>
-                                        <li>• Team alignment on presentation strategy</li>
-                                        <li>• Venue preparation completed</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="tw-relative tw-flex tw-justify-center tw-items-center">
-                                <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
-                                <div class="tw-relative tw-group">
-                                    <img src="image/kps/img1.png" alt="Independence Hotel - Executive Arrival" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105 group-hover:tw-shadow-3xl">
-                                    <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                    <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                        <div class="tw-font-semibold">Independence Hotel</div>
-                                        <div class="tw-text-sm tw-text-gray-200">Executive Suite Setup</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="reveal timeline-item tw-mb-16">
-                        <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8">
-                            <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first">
-                                <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
-                                <div class="tw-relative tw-group">
-                                    <img src="image/kps/img2.png" alt="Coastal Horizons Group Meeting" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
-                                    <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
-                                    <div class="tw-absolute tw-top-4 tw-right-4 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
-                                        <div class="tw-bg-green-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold">
-                                            SUCCESS
+                <ul class="nav nav-tabs tw-justify-center tw-mb-4" id="tripTabs" role="tablist">
+                    <li class="nav-item reveal-item" role="presentation">
+                        <button class="nav-link active" id="day1-tab" data-bs-toggle="tab" data-bs-target="#day1" type="button" role="tab" aria-controls="day1" aria-selected="true">Day 1</button>
+                    </li>
+                    <li class="nav-item reveal-item" role="presentation" style="transition-delay: 0.1s;">
+                        <button class="nav-link" id="day2-tab" data-bs-toggle="tab" data-bs-target="#day2" type="button" role="tab" aria-controls="day2" aria-selected="false">Day 2</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tripTabContent">
+                    <div class="tab-pane fade show active" id="day1" role="tabpanel" aria-labelledby="day1-tab">
+                        <div class="tw-relative">
+                            <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
+                            
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-bus tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Travel & Arrival by Public VIP Bus
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">August 19, 2025 • Morning (Approx. 3 hours)</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Our team departed from Phnom Penh via a comfortable but economical VIP public bus service (like Giant Ibis or Virak Buntham) to Sihanoukville. Upon arrival at the bus station, we took local tuk-tuks to our pre-booked, budget-friendly guesthouse for check-in.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Logistics:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Public VIP Bus (Phnom Penh ↔ Sihanoukville)</li>
+                                                <li>• Estimated Travel: 7:00 AM - 10:00 AM</li>
+                                                <li>• Guesthouse check-in</li>
+                                                <li>• Pre-meeting briefing session</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <!-- Removed text from placeholder image URL -->
+                                            <img src="https://placehold.co/600x400/000000/20c997" alt="Public VIP Bus in Cambodia" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Economical Travel</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Phnom Penh to Sihanoukville</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last">
-                                <div class="tw-flex tw-items-center tw-mb-4">
-                                    <div class="tw-bg-green-500 tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                        <i class="fas fa-handshake tw-text-white tw-text-lg"></i>
+
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <!-- Removed text from placeholder image URL -->
+                                            <img src="https://placehold.co/600x400/000000/20c997" alt="Meeting with Coastal Horizons Group" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-top-4 tw-right-4 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-bg-blue-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold">
+                                                    INVESTOR 1
+                                                </div>
+                                            </div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Coastal Horizons Group</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Business Lounge</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
-                                            Coastal Horizons Group
-                                        </h3>
-                                        <div class="tw-text-sm tw-text-gray-400">First Investor Meeting • 2:00 PM - 4:30 PM</div>
+                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-handshake tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Meeting with Coastal Horizons Group
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">1:00 PM - 2:30 PM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Meeting with Coastal Horizons Group at The Prince Times Hotel. We focused on Taskly's projected market growth, particularly within the fintech sector, highlighting our efficient scheduling and task management's ability to streamline operations. Mr. Kanold found our sustainable growth model particularly interesting.
+                                        </p>
+                                        <div class="tw-grid tw-grid-cols-2 tw-gap-4">
+                                            <div class="tw-bg-primary-accent/10 tw-p-3 tw-rounded-lg tw-border tw-border-primary-accent/20">
+                                                <div class="tw-lg tw-font-bold tw-text-primary-accent">Fintech Growth</div>
+                                                <div class="tw-text-xs tw-text-gray-400">Market Potential</div>
+                                            </div>
+                                            <div class="tw-bg-primary-accent/10 tw-p-3 tw-rounded-lg tw-border tw-border-primary-accent/20">
+                                                <div class="tw-lg tw-font-bold tw-text-primary-accent">Sustainable</div>
+                                                <div class="tw-xs tw-text-gray-400">Growth Model</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
-                                    A highly productive strategic discussion focusing on market growth potential and competitive advantages. Mr. Pham demonstrated significant interest in our sustainability framework and scalability roadmap.
-                                </p>
-                                <div class="tw-grid tw-grid-cols-2 tw-gap-4">
-                                    <div class="tw-bg-green-500/10 tw-p-3 tw-rounded-lg tw-border tw-border-green-500/20">
-                                        <div class="tw-text-lg tw-font-bold tw-text-green-400">High Interest</div>
-                                        <div class="tw-text-xs tw-text-gray-400">Investor Feedback</div>
+                            </div>
+                            
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-lightbulb tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Meeting with Galaxy Capital Ventures
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">3:00 PM - 4:30 PM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            The presentation emphasized Taskly's technological innovations and scalability, particularly our AI-driven analytics platform. Ms. Sok Eng Huot was genuinely keen on our AI capabilities and development roadmap. Initial discussions were very promising.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Aspects:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• AI-driven analytics platform</li>
+                                                <li>• Scalability of our platform</li>
+                                                <li>• Promising follow-up potential</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="tw-bg-primary-red/10 tw-p-3 tw-rounded-lg tw-border tw-border-primary-red/20">
-                                        <div class="tw-text-lg tw-font-bold tw-text-primary-red">$1.2M</div>
-                                        <div class="tw-text-xs tw-text-gray-400">Potential Investment</div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <!-- Removed text from placeholder image URL -->
+                                            <img src="https://placehold.co/600x400/000000/20c997" alt="Meeting with Galaxy Capital Ventures" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">AI & Scalability Focus</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Key Investor Discussion</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <!-- Removed text from placeholder image URL -->
+                                            <img src="https://placehold.co/600x400/000000/20c997" alt="Team dinner at a local eatery in Sihanoukville" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-top-4 tw-right-4 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-bg-purple-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold">
+                                                    TEAM BONDING
+                                                </div>
+                                            </div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Affordable Local Dinner</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Team Cohesion</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-utensils tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Team Dinner & Debrief
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">6:30 PM - 7:30 PM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Team dinner at a well-regarded but affordable local restaurant. This was a crucial chance for team bonding, informal debriefing, and discussion of the day's events, rather than a formal business dinner.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Outcome:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Strengthened team cohesion</li>
+                                                <li>• Informal review of meetings</li>
+                                                <li>• Prepared for Day 2 strategy</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="reveal tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-mb-16">
-                        <div class="tw-p-6">
-                            <h3 class="tw-text-3xl tw-font-bold" style="font-family: 'Rajdhani', sans-serif;"><i class="fas fa-chart-line tw-text-primary-red tw-mr-3"></i>Meeting: Galaxy Capital Ventures</h3>
-                            <p class="tw-mt-4 tw-text-gray-300">After a working lunch, the team traveled to The Prince Times Hotel. The presentation emphasized our technological scalability, with Ms. Chen particularly keen on our AI-driven analytics platform. This was followed by networking and a team debrief.</p>
-                        </div>
-                        <div class="tw-relative tw-flex tw-justify-center tw-items-center">
-                            <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
-                            <img src="image/kps/img3.png" alt="Lobby of The Prince Times Hotel" class="tw-rounded-lg tw-shadow-xl hover:tw-scale-105 tw-transition-transform tw-duration-300">
-                        </div>
-                    </div>
 
-                    
+                    <div class="tab-pane fade" id="day2" role="tabpanel" aria-labelledby="day2-tab">
+                        <div class="tw-relative">
+                            <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
+                            
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-chart-pie tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Internal Strategy Session
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">August 20, 2025 • 9:00 AM - 11:00 AM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            We held a comprehensive internal strategy session at our guesthouse or a quiet local cafe to map out detailed follow-up actions for each investor. This included preparing comprehensive documentation and scheduling subsequent virtual calls.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Actions:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Defined investor follow-up steps</li>
+                                                <li>• Prepared necessary documentation</li>
+                                                <li>• Planned virtual meetings</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <!-- Removed text from placeholder image URL -->
+                                            <img src="https://placehold.co/600x400/000000/20c997" alt="Strategic Planning Session" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Team Alignment</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Next Steps Planning</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                     <div class="reveal tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-mb-16">
-                        <div class="tw-p-6 lg:tw-order-last lg:tw-text-right">
-                            <h3 class="tw-text-3xl tw-font-bold" style="font-family: 'Rajdhani', sans-serif;">Day 2: Strategy & Departure <i class="fas fa-plane-arrival tw-text-primary-red tw-ml-3"></i></h3>
-                            <p class="tw-mt-4 tw-text-gray-300">The morning was dedicated to an internal strategy session to outline follow-up actions. After lunch at a local eatery, the team checked out and departed from Sihanoukville at 3:00 PM, arriving in Phnom Penh at 3:45 PM.</p>
-                        </div>
-                        <div class="tw-relative tw-flex tw-justify-center tw-items-center">
-                            <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
-                            <img src="image/kps/img.png" alt="Strategic planning session" class="tw-rounded-lg tw-shadow-xl hover:tw-scale-105 tw-transition-transform tw-duration-300">
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <!-- Removed text from placeholder image URL -->
+                                            <img src="https://placehold.co/600x400/000000/20c997" alt="Guesthouse Check-out" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-top-4 tw-right-4 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-bg-green-500 tw-text-white tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold">
+                                                    LOGISTICS
+                                                </div>
+                                            </div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Guesthouse Check-out</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Smooth Departure</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info-card tw-p-6 tw-rounded-xl lg:tw-order-last reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-bed tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Final Review & Check-out
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">11:00 AM - 12:30 PM</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            Final review of trip objectives and achievements, ensuring all immediate action items were covered and the team had a clear, unified path forward. This was followed by check-out from our guesthouse.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Key Actions:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Reviewed objectives</li>
+                                                <li>• Confirmed achievements</li>
+                                                <li>• Efficient check-out</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="reveal timeline-item tw-mb-16">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <div class="tw-flex tw-items-center tw-mb-4">
+                                            <div class="tw-bg-primary-accent tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
+                                                <i class="fas fa-bus-alt tw-text-white tw-text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="tw-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">
+                                                    Closing & Departure by Public VIP Bus
+                                                </h3>
+                                                <div class="tw-text-sm tw-text-gray-400">August 20, 2025 • Afternoon (Approx. 3 hours)</div>
+                                            </div>
+                                        </div>
+                                        <p class="tw-text-gray-300 tw-leading-relaxed tw-mb-4">
+                                            After a final lunch at a local Sihanoukville eatery to stay within budget, we took tuk-tuks to the Sihanoukville bus station for our smooth public VIP bus ride back to Phnom Penh.
+                                        </p>
+                                        <div class="tw-bg-dark-bg tw-p-4 tw-rounded-lg">
+                                            <div class="tw-text-sm tw-text-gray-400 tw-mb-2">Outcome:</div>
+                                            <ul class="tw-text-sm tw-text-gray-300 tw-space-y-1">
+                                                <li>• Enjoyed local cuisine</li>
+                                                <li>• Smooth travel back to Phnom Penh</li>
+                                                <li>• Successful mission conclusion</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item" style="transition-delay: 0.1s;">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <div class="tw-relative tw-group">
+                                            <!-- Removed text from placeholder image URL -->
+                                            <img src="https://placehold.co/600x400/000000/20c997" alt="Arrival in Phnom Penh by bus" class="tw-rounded-xl tw-shadow-2xl tw-transition-all tw-duration-500 group-hover:tw-scale-105">
+                                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent tw-rounded-xl tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300"></div>
+                                            <div class="tw-absolute tw-bottom-4 tw-left-4 tw-text-white tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-duration-300">
+                                                <div class="tw-font-semibold">Return Journey</div>
+                                                <div class="tw-text-sm tw-text-gray-200">Back to Phnom Penh</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section class="reveal tw-relative info-card tw-p-8 md:tw-p-12 tw-rounded-xl tw-mb-24">
-                <i class="fas fa-file-invoice-dollar section-icon-bg" style="left: auto; right: -2rem; color: rgba(255, 68, 68, 0.05);"></i>
-                 <div class="tw-relative tw-z-10">
-                    <div class="tw-text-center tw-mb-8">
-                        <span class="tw-inline-block tw-bg-primary-red/20 tw-border tw-border-primary-red/30 tw-text-primary-red tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
+                <i class="fas fa-file-invoice-dollar section-icon-bg" style="left: auto; right: -2rem; color: rgba(32, 201, 151, 0.05);"></i>
+                    <div class="tw-relative tw-z-10">
+                    <div class="tw-text-center tw-mb-8 reveal-item">
+                        <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
                             Financial Breakdown
                         </span>
-                        <h2 class="gradient-title tw-text-4xl tw-mb-2">Investment in Excellence</h2>
-                        <p class="tw-text-gray-400">Comprehensive breakdown of mission expenses</p>
+                        <h2 class="gradient-title tw-text-4xl tw-mb-2">Investment in Growth</h2>
+                        <p class="tw-text-gray-400">Comprehensive breakdown of trip expenses</p>
                     </div>
-                    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 tw-mt-8">
-                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg">
-                            <div class="tw-bg-primary-red tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                <i class="fas fa-plane-departure tw-text-white"></i>
-                            </div>
-                            <div class="tw-flex-grow">
-                                <div class="tw-font-semibold tw-text-white">Executive Airfare</div>
-                                <div class="tw-text-sm tw-text-gray-400">Round-trip for 2 executives</div>
-                            </div>
-                            <span class="tw-font-bold tw-text-xl tw-text-primary-red">$180</span>
-                        </div>
-                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg">
-                            <div class="tw-bg-primary-red tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                <i class="fas fa-hotel tw-text-white"></i>
-                            </div>
-                            <div class="tw-flex-grow">
-                                <div class="tw-font-semibold tw-text-white">Premium Accommodation</div>
-                                <div class="tw-text-sm tw-text-gray-400">Independence Hotel • 1 Night</div>
-                            </div>
-                            <span class="tw-font-bold tw-text-xl tw-text-primary-red">$150</span>
-                        </div>
-                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg">
-                            <div class="tw-bg-primary-red tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                <i class="fas fa-taxi tw-text-white"></i>
-                            </div>
-                            <div class="tw-flex-grow">
-                                <div class="tw-font-semibold tw-text-white">Executive Transportation</div>
-                                <div class="tw-text-sm tw-text-gray-400">Airport transfers & meetings</div>
-                            </div>
-                            <span class="tw-font-bold tw-text-xl tw-text-primary-red">$70</span>
-                        </div>
-                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg">
-                            <div class="tw-bg-primary-red tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                <i class="fas fa-utensils tw-text-white"></i>
-                            </div>
-                            <div class="tw-flex-grow">
-                                <div class="tw-font-semibold tw-text-white">Business Dining</div>
-                                <div class="tw-text-sm tw-text-gray-400">Meals & client entertainment</div>
-                            </div>
-                            <span class="tw-font-bold tw-text-xl tw-text-primary-red">$140</span>
-                        </div>
-                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg">
-                            <div class="tw-bg-primary-red tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                <i class="fas fa-person-shelter tw-text-white"></i>
-                            </div>
-                            <div class="tw-flex-grow">
-                                <div class="tw-font-semibold tw-text-white">Meeting Facilities</div>
-                                <div class="tw-text-sm tw-text-gray-400">Conference rooms & equipment</div>
-                            </div>
-                            <span class="tw-font-bold tw-text-xl tw-text-primary-red">$100</span>
-                        </div>
-                        <div class="expense-item tw-flex tw-items-center tw-p-4 tw-rounded-lg">
-                            <div class="tw-bg-primary-red tw-rounded-full tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mr-4">
-                                <i class="fas fa-ellipsis tw-text-white"></i>
-                            </div>
-                            <div class="tw-flex-grow">
-                                <div class="tw-font-semibold tw-text-white">Miscellaneous</div>
-                                <div class="tw-text-sm tw-text-gray-400">Materials & contingency</div>
-                            </div>
-                            <span class="tw-font-bold tw-text-xl tw-text-primary-red">$60</span>
-                        </div>
+                    
+                    <div class="tw-overflow-x-auto reveal-item" style="transition-delay: 0.2s;">
+                        <table class="expense-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th class="tw-text-right">Amount (USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Transportation</td>
+                                    <td data-label="Description">Round-trip for 6 team members via public VIP bus service (PNH ↔ Sihanoukville), plus essential local tuk-tuk/ride-hailing transport within Sihanoukville.</td>
+                                    <td data-label="Amount (USD)" class="amount">$180</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Accommodation</td>
+                                    <td data-label="Description">1 night for 6 team members at a reputable, clean guesthouse or budget hotel, likely in a large family room or two smaller rooms.</td>
+                                    <td data-label="Amount (USD)" class="amount">$120</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Meals</td>
+                                    <td data-label="Description">2 days x 3 meals for 6 team members, focusing strictly on local, budget-friendly eateries, street food, and simple restaurants. No formal business dinners included.</td>
+                                    <td data-label="Amount (USD)" class="amount">$200</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Meeting Facilities</td>
+                                    <td data-label="Description">Costs associated with informal meeting locations (e.g., coffees/light refreshments purchased during discussions at a cafe or hotel lobby, assuming no dedicated room rental fee).</td>
+                                    <td data-label="Amount (USD)" class="amount">$50</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Miscellaneous</td>
+                                    <td data-label="Description">Essential incidentals such as local SIM cards, minimal printing, and small tips for services, kept to an absolute minimum.</td>
+                                    <td data-label="Amount (USD)" class="amount">$100</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tw-mt-8 tw-pt-6 tw-border-t-2 tw-border-gradient-to-r tw-from-primary-red tw-to-red-400 tw-flex tw-justify-between tw-items-center tw-bg-dark-bg tw-p-6 tw-rounded-lg">
+
+                    <div class="tw-mt-8 tw-pt-6 tw-border-t-2 tw-border-gradient-to-r tw-from-primary-accent tw-to-green-400 tw-flex tw-justify-between tw-items-center tw-bg-section-bg tw-p-6 tw-rounded-lg reveal-item" style="transition-delay: 0.6s;">
                         <div>
                             <span class="tw-text-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">TOTAL INVESTMENT</span>
-                            <div class="tw-text-sm tw-text-gray-400">Strategic mission cost</div>
+                            <div class="tw-text-sm tw-text-gray-400">Strategic growth cost</div>
                         </div>
                         <div class="tw-text-right">
-                            <span class="tw-text-4xl tw-font-bold tw-text-primary-red">$700</span>
-                            <div class="tw-text-sm tw-text-gray-400">ROI: $2.5M potential</div>
+                            <span class="tw-text-4xl tw-font-bold tw-text-primary-accent">$650</span>
+                            <div class="tw-text-sm tw-text-gray-400">Maximizing ROI</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Floating Action Button for Export -->
-            <button class="fab-export" onclick="exportToSheets()" title="Export Financial Report">
-                <i class="fas fa-file-excel"></i>
-            </button>
-
             <section class="reveal tw-text-center tw-mb-16">
                 <div class="tw-max-w-4xl tw-mx-auto">
-                    <span class="tw-inline-block tw-bg-green-500/20 tw-border tw-border-green-500/30 tw-text-green-400 tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
+                    <span class="tw-inline-block tw-bg-green-500/20 tw-border tw-border-green-500/30 tw-text-green-400 tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4 reveal-item">
                         Mission Accomplished
                     </span>
-                    <h2 class="gradient-title tw-text-5xl tw-mb-8">Strategic Success</h2>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-8 reveal-item" style="transition-delay: 0.1s;">Strategic Success</h2>
                     
-                    <!-- Success Metrics -->
-                    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6 tw-mb-8">
+                    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6 tw-mb-8 staggered-grid">
                         <div class="info-card tw-p-6 tw-rounded-xl">
-                            <div class="tw-text-3xl tw-font-bold tw-text-green-400 tw-mb-2">100%</div>
-                            <div class="tw-text-sm tw-text-gray-400">Meeting Success Rate</div>
+                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Strong</div>
+                            <div class="tw-text-sm tw-text-gray-400">Investor Engagement</div>
                         </div>
                         <div class="info-card tw-p-6 tw-rounded-xl">
-                            <div class="tw-text-3xl tw-font-bold tw-text-primary-red tw-mb-2">$2.5M</div>
-                            <div class="tw-text-sm tw-text-gray-400">Investment Pipeline</div>
+                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Clear</div>
+                            <div class="tw-text-sm tw-text-gray-400">Expansion Plans</div>
                         </div>
                         <div class="info-card tw-p-6 tw-rounded-xl">
-                            <div class="tw-text-3xl tw-font-bold tw-text-blue-400 tw-mb-2">18mo</div>
-                            <div class="tw-text-sm tw-text-gray-400">Expected ROI Timeline</div>
+                            <div class="tw-text-3xl tw-font-bold tw-text-primary-accent tw-mb-2">Optimistic</div>
+                            <div class="tw-text-sm tw-text-gray-400">Funding Outlook</div>
                         </div>
                     </div>
                     
-                    <div class="info-card tw-p-8 tw-rounded-xl tw-text-left">
+                    <div class="info-card tw-p-8 tw-rounded-xl tw-text-left reveal-item" style="transition-delay: 0.2s;">
                         <p class="tw-text-xl tw-text-gray-300 tw-leading-relaxed tw-mb-6">
-                            The Sihanoukville investor summit was a resounding success, exceeding all primary objectives and establishing a solid foundation for our company's next growth phase. Both strategic meetings yielded exceptional outcomes, with strong investor interest and clear pathways to due diligence.
+                            This two-day business trip to Sihanoukville was an absolute success in achieving its primary goal of engaging with potential investors, all while adhering to a very lean budget. Our meetings with both Coastal Horizons Group and Galaxy Capital Ventures generated genuinely positive outcomes, with strong signals that both parties are keen to move forward into the due diligence phase.
+                        </p>
+                        <p class="tw-text-xl tw-text-gray-300 tw-leading-relaxed tw-mb-6">
+                            The Taskly team did an outstanding job articulating our company's vision, showcasing our technological prowess, and presenting a compelling case for investment, specifically highlighting our AI-driven analytics platform and robust expansion plans within the fintech sector. We're leaving Sihanoukville incredibly optimistic about securing the funding needed to truly accelerate our strategic growth initiatives. Our immediate next steps involve meticulously preparing all required follow-up documentation and scheduling those crucial virtual meetings to keep these discussions moving at full speed, proving that even with a tight budget, impactful connections can be made.
                         </p>
                         
                         <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
                             <div>
-                                <h4 class="tw-text-lg tw-font-semibold tw-text-primary-red tw-mb-3">Key Achievements</h4>
+                                <h4 class="tw-lg tw-font-semibold tw-text-primary-accent tw-mb-3">Key Achievements</h4>
                                 <ul class="tw-space-y-2 tw-text-gray-300">
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-check tw-text-green-400 tw-mr-3"></i>
-                                        Secured $2.5M investment pipeline
+                                        Successfully pitched to two key investors
                                     </li>
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-check tw-text-green-400 tw-mr-3"></i>
-                                        100% investor engagement rate
+                                        Fostered positive relationships for future collaborations
                                     </li>
                                     <li class="tw-flex tw-items-center">
                                         <i class="fas fa-check tw-text-green-400 tw-mr-3"></i>
-                                        Advanced to due diligence phase
+                                        Gained valuable feedback on our business model
                                     </li>
                                 </ul>
                             </div>
                             <div>
-                                <h4 class="tw-text-lg tw-font-semibold tw-text-primary-red tw-mb-3">Next Steps</h4>
+                                <h4 class="tw-lg tw-font-semibold tw-text-primary-accent tw-mb-3">Next Steps</h4>
                                 <ul class="tw-space-y-2 tw-text-gray-300">
                                     <li class="tw-flex tw-items-center">
-                                        <i class="fas fa-arrow-right tw-text-primary-red tw-mr-3"></i>
-                                        Complete due diligence documentation
+                                        <i class="fas fa-arrow-right tw-text-primary-accent tw-mr-3"></i>
+                                        Prepare detailed follow-up documentation
                                     </li>
                                     <li class="tw-flex tw-items-center">
-                                        <i class="fas fa-arrow-right tw-text-primary-red tw-mr-3"></i>
-                                        Schedule follow-up investor calls
+                                        <i class="fas fa-arrow-right tw-text-primary-accent tw-mr-3"></i>
+                                        Schedule virtual meetings for due diligence
                                     </li>
                                     <li class="tw-flex tw-items-center">
-                                        <i class="fas fa-arrow-right tw-text-primary-red tw-mr-3"></i>
-                                        Finalize investment terms
+                                        <i class="fas fa-arrow-right tw-text-primary-accent tw-mr-3"></i>
+                                        Refine investment proposal based on feedback
                                     </li>
                                 </ul>
                             </div>
@@ -734,18 +1083,18 @@
         <div class="tw-max-w-4xl tw-mx-auto">
             <div class="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-items-center tw-mb-4">
                 <div class="tw-flex tw-items-center tw-mb-4 md:tw-mb-0">
-                    <i class="fas fa-tasks tw-text-primary-red tw-text-2xl tw-mr-3"></i>
+                    <i class="fas fa-tasks tw-text-primary-accent tw-text-2xl tw-mr-3"></i>
                     <div>
                         <div class="tw-text-white tw-font-bold" style="font-family: 'Rajdhani', sans-serif;">TASKLY SOFTWARE</div>
-                        <div class="tw-text-xs tw-text-gray-400">Digital Solutions & Analytics</div>
+                        <div class="tw-text-xs tw-text-gray-400">Digital Solutions & Productivity</div>
                     </div>
                 </div>
                 <div class="tw-text-sm tw-text-gray-400">
-                    Report Generated: <span class="tw-text-primary-red">June 26, 2025</span>
+                    Report Generated: <span class="tw-text-primary-accent">August 30, 2025</span>
                 </div>
             </div>
             <div class="tw-border-t tw-border-gray-700 tw-pt-4">
-                <p class="tw-text-gray-400 tw-text-sm">&copy; 2025 Mohanokor Corp. All rights reserved. | Confidential Business Document</p>
+                <p class="tw-text-gray-400 tw-text-sm">&copy; 2025 Taskly. All rights reserved. | Confidential Business Document</p>
             </div>
         </div>
     </footer>
@@ -758,26 +1107,31 @@
             sidebar.classList.toggle('show'); 
         }
 
-        // Export functionality
-        function exportToSheets() {
-            alert('Exporting financial data to Google Sheets...\n\nThis would integrate with your preferred spreadsheet application.');
-        }
-
         // Enhanced animation script with intersection observer
         document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
+            const observerOptions = {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => { 
                     if (entry.isIntersecting) { 
                         entry.target.classList.add('is-visible');
-                        // Add staggered animation for expense items
-                        if (entry.target.classList.contains('expense-item')) {
-                            entry.target.style.animationDelay = Math.random() * 0.5 + 's';
+                        // For staggered-grid containers, add is-visible to trigger children animations
+                        if (entry.target.classList.contains('staggered-grid')) {
+                            entry.target.querySelectorAll('.expense-item').forEach((item, index) => {
+                                item.style.transitionDelay = `${index * 0.1}s`;
+                                item.classList.add('is-visible');
+                            });
                         }
+                        observer.unobserve(entry.target); // Stop observing once visible
                     } 
                 });
-            }, { threshold: 0.1 });
+            }, observerOptions);
             
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.staggered-grid').forEach(el => observer.observe(el));
+
 
             // Add smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -798,7 +1152,8 @@
                 const scrolled = window.pageYOffset;
                 const parallax = document.querySelector('.parallax-header');
                 if (parallax) {
-                    const speed = scrolled * 0.5;
+                    // Adjust speed for a more subtle effect if needed
+                    const speed = scrolled * 0.3; 
                     parallax.style.transform = `translateY(${speed}px)`;
                 }
             });
