@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Trip Report: Mondulkiri - Taskly</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS for mobile sidebar and general overrides, if any, would go in style.css. Assuming it's correctly linked. -->
+    <link rel="stylesheet" href="style.css"> 
+    <script>
+        tailwind.config = {
+            prefix: 'tw-', // Prevents conflicts with Bootstrap
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-accent': '#20c997', /* Vibrant Blue-Green */
+                        'dark-bg': '#121212', /* Slightly darker for deeper contrast */
+                        'section-bg': '#1e1e1e',
+                        'card-bg': '#2a2a2a', /* For a subtle difference */
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --primary-accent: #20c997; /* Vibrant Blue-Green */
+            --dark-bg: '#121212';
+            --section-bg: '#1e1e1e';
+            --card-bg: '#2a2a2a';
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+        }
+
+        /* --- STYLES FOR THE DYNAMIC LAYOUT & ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
+        .reveal.is-visible .reveal-item { opacity: 1; transform: translateY(0); }
+        /* Staggered animation for child elements */
+        .reveal.is-visible .reveal-item:nth-child(1) { transition-delay: 0.1s; }
+        .reveal.is-visible .reveal-item:nth-child(2) { transition-delay: 0.2s; }
+        .reveal.is-visible .reveal-item:nth-child(3) { transition-delay: 0.3s; }
+        .reveal.is-visible .reveal-item:nth-child(4) { transition-delay: 0.4s; }
+        .reveal.is-visible .reveal-item:nth-child(5) { transition-delay: 0.5s; }
+        /* More general staggered for lists/grids */
+        .staggered-grid > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
+        .staggered-grid.is-visible > *:nth-child(1) { transition-delay: 0.1s; }
+        .staggered-grid.is-visible > *:nth-child(2) { transition-delay: 0.2s; }
+        .staggered-grid.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
+        .staggered-grid.is-visible > *:nth-child(4) { transition-delay: 0.4s; }
+        .staggered-grid.is-visible > *:nth-child(5) { transition-delay: 0.5s; }
+        .staggered-grid.is-visible > *:nth-child(6) { transition-delay: 0.6s; }
+
+
+        .parallax-header { 
+            height: 100vh;
+            background-attachment: fixed; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+        .parallax-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(32, 201, 151, 0.3), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+        .section-icon-bg { position: absolute; top: 50%; left: 0; transform: translateY(-50%); font-size: 16rem; color: rgba(255, 255, 255, 0.03); z-index: 0; line-height: 1; }
+        .gradient-title { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            background: linear-gradient(135deg, var(--primary-accent), #6be8c2, #a7f0da); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text;
+            position: relative;
+            text-shadow: 0 0 30px rgba(32, 201, 151, 0.3);
+        }
+        .timeline-point { 
+            background-color: var(--dark-bg); 
+            border: 3px solid var(--primary-accent); 
+        }
+        
+        .investor-logo { 
+            background: linear-gradient(135deg, white, #f8f9fa); 
+            border-radius: 0.75rem; 
+            padding: 0.5rem; 
+            height: 50px; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .investor-logo:hover { 
+            transform: scale(1.15) rotate(2deg); 
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.2); 
+        }
+
+        /* Enhanced Cards */
+        .info-card {
+            background: linear-gradient(135deg, var(--card-bg), var(--section-bg));
+            backdrop-filter: blur(5px); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: #ffffff;
+        }
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-accent), #6be8c2, var(--primary-accent)); 
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .info-card:hover {
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px rgba(32, 201, 151, 0.2);
+            border-color: rgba(32, 201, 151, 0.3);
+        }
+
+        /* Enhanced Timeline */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(32, 201, 151, 0.3), transparent); 
+            z-index: 0;
+        }
+
+        /* Stats Animation */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-accent); 
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-card p {
+            color: #ffffff; 
+        }
+        .info-card .tw-text-gray-400 { 
+            color: #ccc !important;
+        }
+        .info-card .tw-bg-dark-bg {
+            background-color: var(--dark-bg) !important;
+            color: #ffffff !important;
+        }
+        .info-card .tw-bg-dark-bg .tw-text-gray-400 { 
+            color: #ccc !important;
+        }
+        .info-card .tw-bg-dark-bg .tw-text-gray-300 { 
+            color: #ffffff !important;
+        }
+
+
+        /* --- NAVIGATION CSS --- */
+        .navbar-dark { 
+            background: rgba(0,0,0,0.85) !important;
+            backdrop-filter: blur(10px); 
+            box-shadow: none;
+        }
+        .navbar-dark .navbar-brand .fa-tasks { 
+            color: #ffffff !important;
+        }
+        .navbar-dark .navbar-brand div:first-child { 
+            color: #ffffff !important;
+        }
+        .navbar-nav .nav-link { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: rgba(255,255,255,0.9) !important;
+            position: relative; 
+            transition: all 0.3s ease; 
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-accent) !important; }
+
+        /* Mobile Sidebar Customization */
+        .mobile-sidebar {
+            background: var(--dark-bg);
+            color: #ffffff;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        }
+        .mobile-sidebar .border-secondary {
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+        .mobile-sidebar .btn-outline-light {
+            color: #ffffff !important;
+            border-color: #ccc !important;
+        }
+        .mobile-sidebar .sidebar-item {
+            color: #ffffff;
+        }
+        .mobile-sidebar .sidebar-item.active {
+            background-color: var(--card-bg);
+            color: var(--primary-accent);
+        }
+
+
+        /* Bootstrap Tab Customization (Dark mode) */
+        .nav-tabs {
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+        .nav-tabs .nav-link {
+            color: rgba(255,255,255,0.6);
+            border: 1px solid transparent;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            margin-bottom: -2px; 
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.75rem 1.5rem;
+        }
+        .nav-tabs .nav-link:hover {
+            border-color: transparent transparent rgba(255,255,255,0.2) transparent;
+            color: rgba(255,255,255,0.8);
+        }
+        .nav-tabs .nav-link.active {
+            color: var(--primary-accent);
+            background-color: var(--dark-bg);
+            border-color: var(--primary-accent) var(--primary-accent) var(--dark-bg) var(--primary-accent);
+            box-shadow: 0 -3px 15px rgba(32, 201, 151, 0.2);
+        }
+        .tab-content {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 0 0 0.75rem 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-top: none; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            color: #ffffff;
+        }
+
+        /* Table Styling (Dark mode) */
+        .expense-table {
+            width: 100%;
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 2rem;
+            border-radius: 0.75rem;
+            overflow: hidden; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .expense-table th, .expense-table td {
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            color: #ffffff;
+        }
+
+        .expense-table th {
+            background-color: var(--primary-accent);
+            color: var(--dark-bg);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        .expense-table tbody tr {
+            background-color: var(--section-bg);
+            transition: background-color 0.3s ease;
+        }
+
+        .expense-table tbody tr:hover {
+            background-color: var(--card-bg);
+        }
+
+        .expense-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .expense-table .amount {
+            font-weight: 600;
+            color: var(--primary-accent);
+            text-align: right;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .expense-table thead {
+                display: none; 
+            }
+
+            .expense-table, .expense-table tbody, .expense-table tr, .expense-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .expense-table tr {
+                margin-bottom: 1rem;
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 0.75rem;
+                overflow: hidden;
+            }
+
+            .expense-table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            .expense-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: calc(50% - 30px);
+                text-align: left;
+                font-weight: 600;
+                color: rgba(255,255,255,0.6);
+            }
+
+            .expense-table .amount {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Footer styling for dark mode */
+        footer {
+            background: linear-gradient(to right, var(--dark-bg), var(--section-bg));
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+        }
+        footer .tw-text-gray-400 {
+            color: #ccc !important;
+        }
+        footer .tw-text-white {
+            color: #ffffff !important;
+        }
+        
+    </style>
+</head>
+
+<body class="tw-bg-dark-bg">
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top desktop-only">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="me-3"><i class="fas fa-tasks fa-2x text-white"></i></div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.8rem; color: var(--primary-accent); font-weight: 600;">SOFTWARE</div>
+                </div>
+            </a>
+            <div class="navbar-nav d-flex flex-row me-auto ms-5">
+                <a class="nav-link px-4" href="#home">Home</a>
+                <a class="nav-link px-4" href="#about">About</a>
+                <a class="nav-link px-4" href="#services">Services</a>
+                <a class="nav-link px-4" href="#team">Team</a>
+                <a class="nav-link px-4" href="#story">Our Story</a>
+                
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-4 active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Trip Reports
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0">
+                        <li>
+                            <a class="dropdown-item py-2" href="sihanoukville.html">
+                                <i class="fas fa-water text-primary me-2"></i>
+                                <span class="fw-medium">Sihanoukville</span>
+                                <small class="text-muted d-block">Investor Meetings • 2 Days • Funding Rounds</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="siem-reap.html">
+                                <i class="fas fa-landmark text-success me-2"></i>
+                                <span class="fw-medium">Siem Reap</span>
+                                <small class="text-muted d-block">Market Research • 5 Days • User Testing</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2 active" href="mondulkiri.html">
+                                <i class="fas fa-mountain text-warning me-2"></i>
+                                <span class="fw-medium">Mondulkiri</span>
+                                <small class="text-muted d-block">Feature Article Interview • 3 Days</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="thailand.html">
+                                <i class="fas fa-city text-danger me-2"></i>
+                                <span class="fw-medium">Thailand</span>
+                                <small class="text-muted d-block">Tech Conference • 3 Days • Product Launch</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="singapore.html">
+                                <i class="fas fa-building text-info me-2"></i>
+                                <span class="fw-medium">Singapore</span>
+                                <small class="text-muted d-block">Social Media Marketing • 2 Days</small>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider border-secondary"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#reports">
+                                <i class="fas fa-chart-pie text-warning me-2"></i>
+                                <span class="fw-medium">View All Reports</span>
+                                <small class="text-muted d-block">Complete Travel Summary</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <a class="nav-link px-4" href="#contact">Contact</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <a href="#" class="text-white" aria-label="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-white" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-dark fixed-top mobile-only">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="me-2"><i class="fas fa-tasks fa-lg text-white"></i></div>
+                <div>
+                    <div style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.2rem; line-height: 1;">TASKLY</div>
+                    <div style="font-size: 0.7rem; color: var(--primary-accent); font-weight: 600;">SOFTWARE</div>
+                </div>
+            </a>
+            <button class="btn btn-outline-light" type="button" onclick="toggleMobileSidebar()" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-tasks fa-lg text-white me-2"></i>
+                <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; color: white;">TASKLY SOFTWARE</span>
+            </div>
+            <button class="btn btn-outline-light btn-sm" onclick="toggleMobileSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div>
+            <a href="index.html" class="sidebar-item">Home</a>
+            <a href="sihanoukville.html" class="sidebar-item">Sihanoukville Report</a>
+            <a href="siem-reap.html" class="sidebar-item">Siem Reap Report</a>
+            <a href="mondulkiri.html" class="sidebar-item active">Mondulkiri Report</a>
+            <a href="#reports" class="sidebar-item">All Trip Reports</a>
+            <a href="#contact" class="sidebar-item">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <header class="parallax-header tw-flex tw-items-center tw-justify-center tw-text-center" style="background-image: url('https://placehold.co/1920x1080/1e1e1e/20c997?text=Mondulkiri+Interview');">
+            <div class="tw-relative tw-z-10 tw-p-4 reveal">
+                <div class="tw-mb-6 reveal-item">
+                    <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-4 tw-py-2 tw-rounded-full tw-text-sm tw-font-semibold tw-uppercase tw-tracking-wide">
+                        Business Trip Report
+                    </span>
+                </div>
+                <h1 class="tw-font-bold tw-text-white tw-mb-4 reveal-item" style="font-family: 'Rajdhani', sans-serif; font-size: 4.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">
+                    MONDULKIRI
+                    <span class="tw-block tw-text-primary-accent">FEATURE ARTICLE INTERVIEW</span>
+                </h1>
+                <p class="tw-text-xl tw-text-gray-200 tw-mt-4 tw-max-w-2xl tw-mx-auto reveal-item">
+                    Gathering invaluable insights from a respected retired staff member to celebrate his legacy and document Taskly's history.
+                </p>
+                <div class="tw-flex tw-justify-center tw-items-center tw-gap-8 tw-mt-8 tw-text-sm reveal-item tw-text-white">
+                    <div class="tw-flex tw-items-center tw-gap-2">
+                        <i class="fas fa-calendar-alt tw-text-primary-accent"></i>
+                        <span>January 6-8, 2025</span>
+                    </div>
+                    <div class="tw-flex tw-items-center tw-gap-2">
+                        <i class="fas fa-user tw-text-primary-accent"></i>
+                        <span>1 Team Member</span>
+                    </div>
+                    <div class="tw-flex tw-items-center tw-gap-2">
+                        <i class="fas fa-microphone-alt tw-text-primary-accent"></i>
+                        <span>In-depth Interview</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="tw-py-16 tw-px-4 md:tw-px-8 tw-max-w-7xl tw-mx-auto">
+
+            <section class="reveal tw-mb-16">
+                <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-6 staggered-grid">
+                    <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Trip Days</div>
+                    </div>
+                    <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Interview Sessions</div>
+                    </div>
+                    <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
+                        <div class="stat-number">Taskly</div>
+                        <div class="stat-label">Company</div>
+                    </div>
+                    <div class="info-card tw-p-6 tw-rounded-xl tw-text-center">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Team Member</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal info-card tw-p-8 tw-rounded-xl tw-mb-16">
+                <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8">
+                    <div class="tw-text-center md:tw-text-left reveal-item">
+                        <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                            <i class="fas fa-building tw-mr-2"></i>Company
+                        </h3>
+                        <p class="tw-text-xl tw-text-white">Taskly</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Productivity Software</p>
+                    </div>
+                    <div class="tw-text-center reveal-item" style="transition-delay: 0.2s;">
+                        <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                            <i class="fas fa-calendar-alt tw-mr-2"></i>Trip Dates
+                        </h3>
+                        <p class="tw-text-xl tw-text-white">January 6 – January 8, 2025</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">3 Days of Interviews</p>
+                    </div>
+                    <div class="tw-text-center md:tw-text-right reveal-item" style="transition-delay: 0.3s;">
+                        <h3 class="tw-text-primary-accent tw-font-semibold tw-text-lg tw-mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                            <i class="fas fa-user tw-mr-2"></i>Team Member
+                        </h3>
+                        <p class="tw-text-xl tw-text-white">Vongsorya Uch</p>
+                        <p class="tw-text-sm tw-text-gray-400 tw-mt-1">Product Architect</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal tw-relative tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-12 tw-items-center tw-mb-24">
+                <i class="fas fa-feather-alt section-icon-bg" style="color: rgba(32, 201, 151, 0.05);"></i>
+                <div class="tw-relative tw-z-10 reveal-item">
+                    <div class="tw-mb-4">
+                        <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide">
+                            Trip Overview
+                        </span>
+                    </div>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-6">Documenting a Legacy</h2>
+                    <p class="tw-mt-6 tw-text-lg tw-text-gray-300 tw-leading-relaxed">
+                        This three-day business trip to Mondulkiri, Cambodia, was undertaken by Vongsorya Uch, Taskly's Product Architect, to conduct an in-depth interview with Mr. Chan Vuthy, a highly respected retired staff member of Taskly. The material collected will be meticulously crafted into a feature article for Taskly's official magazine or internal company history, celebrating his legacy and providing a historical perspective on Taskly's journey.
+                    </p>
+                </div>
+                <div class="tw-text-lg tw-text-gray-300 tw-leading-relaxed reveal-item" style="transition-delay: 0.2s;">
+                    <h4 class="tw-font-semibold tw-text-primary-accent tw-mb-3">Interview Focus:</h4>
+                    <ul class="tw-space-y-2">
+                        <li class="tw-flex"><i class="fas fa-check tw-text-primary-accent tw-mr-3 tw-mt-1"></i>Foundational years and early challenges.</li>
+                        <li class="tw-flex"><i class="fas fa-check tw-text-primary-accent tw-mr-3 tw-mt-1"></i>Rationale behind early architectural decisions.</li>
+                        <li class="tw-flex"><i class="fas fa-check tw-text-primary-accent tw-mr-3 tw-mt-1"></i>Evolution of product vision and architecture.</li>
+                        <li class="tw-flex"><i class="fas fa-check tw-text-primary-accent tw-mr-3 tw-mt-1"></i>Impact of user feedback on development.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="reveal tw-mb-24">
+                <div class="tw-text-center tw-mb-8 reveal-item">
+                    <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
+                        Detailed Itinerary
+                    </span>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-4">Trip Highlights</h2>
+                    <p class="tw-text-lg tw-text-gray-400 tw-max-w-2xl tw-mx-auto">A chronological report of the interview sessions and activities in Mondulkiri.</p>
+                </div>
+
+                <ul class="nav nav-tabs tw-justify-center tw-mb-4" id="tripTabs" role="tablist">
+                    <li class="nav-item reveal-item" role="presentation"><button class="nav-link active" id="day1-tab" data-bs-toggle="tab" data-bs-target="#day1" type="button" role="tab" aria-controls="day1" aria-selected="true">Day 1</button></li>
+                    <li class="nav-item reveal-item" role="presentation" style="transition-delay: 0.1s;"><button class="nav-link" id="day2-tab" data-bs-toggle="tab" data-bs-target="#day2" type="button" role="tab" aria-controls="day2" aria-selected="false">Day 2</button></li>
+                    <li class="nav-item reveal-item" role="presentation" style="transition-delay: 0.2s;"><button class="nav-link" id="day3-tab" data-bs-toggle="tab" data-bs-target="#day3" type="button" role="tab" aria-controls="day3" aria-selected="false">Day 3</button></li>
+                </ul>
+                <div class="tab-content" id="tripTabContent">
+                    <!-- Day 1 Content -->
+                    <div class="tab-pane fade show active" id="day1" role="tabpanel" aria-labelledby="day1-tab">
+                        <div class="tw-relative">
+                             <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
+                             <div class="reveal timeline-item tw-mb-12">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white mb-3" style="font-family: 'Rajdhani', sans-serif;">Morning: Travel to Mondulkiri</h3>
+                                        <p class="tw-text-gray-300"><strong>8:00 AM - 1:00 PM:</strong> Scenic drive from Phnom Penh to Sen Monorom, Mondulkiri, with strategic stops.</p>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item">
+                                         <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <img src="https://placehold.co/600x400/1e1e1e/ffffff?text=Road+to+Mondulkiri" alt="Road to Mondulkiri" class="tw-rounded-xl tw-shadow-2xl">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="reveal timeline-item tw-mb-12">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                     <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
+                                         <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                                        <img src="https://placehold.co/600x400/1e1e1e/ffffff?text=Interview+Session+1" alt="Interview Session 1" class="tw-rounded-xl tw-shadow-2xl">
+                                    </div>
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white mb-3" style="font-family: 'Rajdhani', sans-serif;">Afternoon: First Interview Session</h3>
+                                        <p class="tw-text-gray-300"><strong>1:00 PM - 1:30 PM:</strong> Arrival and check-in at Phnong Retreat Resort.<br><strong>1:30 PM - 2:30 PM:</strong> Lunch and interview preparation.<br><strong>3:00 PM - 5:30 PM:</strong> First interview with Mr. Chan Vuthy at his home, focusing on Taskly's foundational years.</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="reveal timeline-item">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white mb-3" style="font-family: 'Rajdhani', sans-serif;">Evening: Note Transcription</h3>
+                                        <p class="tw-text-gray-300"><strong>7:00 PM - 8:30 PM:</strong> Dinner at the resort, followed by initial transcription of interview notes and review of audio recordings.</p>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item">
+                                         <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <img src="https://placehold.co/600x400/1e1e1e/ffffff?text=Transcription" alt="Transcription" class="tw-rounded-xl tw-shadow-2xl">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Day 2 Content -->
+                    <div class="tab-pane fade" id="day2" role="tabpanel" aria-labelledby="day2-tab">
+                         <div class="tw-relative">
+                             <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
+                             <div class="reveal timeline-item tw-mb-12">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white mb-3" style="font-family: 'Rajdhani', sans-serif;">Morning: Second Interview Session</h3>
+                                        <p class="tw-text-gray-300"><strong>10:00 AM - 12:30 PM:</strong> Second interview session with Mr. Chan Vuthy, focusing on key product milestones, feature releases, and scalability challenges.</p>
+                                    </div>
+                                    <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <img src="https://placehold.co/600x400/1e1e1e/ffffff?text=Interview+Session+2" alt="Interview Session 2" class="tw-rounded-xl tw-shadow-2xl">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="reveal timeline-item">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                     <div class="tw-relative tw-flex tw-justify-center tw-items-center lg:tw-order-first reveal-item">
+                                         <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-right-[-1.7rem]"></div>
+                                        <img src="https://placehold.co/600x400/1e1e1e/ffffff?text=Article+Outlining" alt="Article Outlining" class="tw-rounded-xl tw-shadow-2xl">
+                                    </div>
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white mb-3" style="font-family: 'Rajdhani', sans-serif;">Afternoon: Content Organization</h3>
+                                        <p class="tw-text-gray-300"><strong>2:00 PM - 5:00 PM:</strong> Content organization and preliminary outlining of the feature article, identifying key quotes and anecdotes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Day 3 Content -->
+                    <div class="tab-pane fade" id="day3" role="tabpanel" aria-labelledby="day3-tab">
+                        <div class="tw-relative">
+                             <div class="tw-absolute tw-w-1 tw-bg-gradient-to-b tw-from-transparent tw-via-primary-accent/50 tw-to-transparent tw-h-full tw-left-1/2 tw--translate-x-1/2 d-none d-lg-block"></div>
+                             <div class="reveal timeline-item">
+                                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+                                    <div class="info-card tw-p-6 tw-rounded-xl reveal-item">
+                                        <h3 class="tw-text-2xl tw-font-bold tw-text-white mb-3" style="font-family: 'Rajdhani', sans-serif;">Morning: Final Review & Departure</h3>
+                                        <p class="tw-text-gray-300"><strong>9:00 AM - 10:00 AM:</strong> Final review of notes and audio recordings.<br><strong>10:00 AM - 11:00 AM:</strong> Check-out from the Phnong Retreat Resort.<br><strong>12:00 PM - 5:00 PM:</strong> Return journey to Phnom Penh.</p>
+                                    </div>
+                                     <div class="tw-relative tw-flex tw-justify-center tw-items-center reveal-item">
+                                        <div class="timeline-point tw-absolute tw-z-10 tw-w-6 tw-h-6 tw-rounded-full d-none d-lg-block lg:tw-left-[-1.7rem]"></div>
+                                        <img src="https://placehold.co/600x400/1e1e1e/ffffff?text=Departure" alt="Departure from Mondulkiri" class="tw-rounded-xl tw-shadow-2xl">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal tw-relative info-card tw-p-8 md:tw-p-12 tw-rounded-xl tw-mb-24">
+                <i class="fas fa-file-invoice-dollar section-icon-bg" style="left: auto; right: -2rem; color: rgba(32, 201, 151, 0.05);"></i>
+                    <div class="tw-relative tw-z-10">
+                    <div class="tw-text-center tw-mb-8 reveal-item">
+                        <span class="tw-inline-block tw-bg-primary-accent/20 tw-border tw-border-primary-accent/30 tw-text-primary-accent tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4">
+                            Financial Breakdown
+                        </span>
+                        <h2 class="gradient-title tw-text-4xl tw-mb-2">Trip Expenses</h2>
+                        <p class="tw-text-gray-400">Comprehensive breakdown of trip expenses</p>
+                    </div>
+                    
+                    <div class="tw-overflow-x-auto reveal-item" style="transition-delay: 0.2s;">
+                        <table class="expense-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th class="tw-text-right">Amount (USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Transportation</td>
+                                    <td data-label="Description">Private car/SUV rental with driver (3 days)</td>
+                                    <td data-label="Amount (USD)" class="amount">$250</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Accommodation</td>
+                                    <td data-label="Description">2 nights at Phnong Retreat Resort</td>
+                                    <td data-label="Amount (USD)" class="amount">$160</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Meals</td>
+                                    <td data-label="Description">3 days x 3 meals for 1 staff</td>
+                                    <td data-label="Amount (USD)" class="amount">$90</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Interview Setup</td>
+                                    <td data-label="Description">Portable audio recorder, notebook, pens, batteries</td>
+                                    <td data-label="Amount (USD)" class="amount">$70</td>
+                                </tr>
+                                <tr class="reveal-item">
+                                    <td data-label="Category">Miscellaneous</td>
+                                    <td data-label="Description">Small thank-you gift for interviewee, contingency</td>
+                                    <td data-label="Amount (USD)" class="amount">$50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tw-mt-8 tw-pt-6 tw-border-t-2 tw-border-gradient-to-r tw-from-primary-accent tw-to-green-400 tw-flex tw-justify-between tw-items-center tw-bg-section-bg tw-p-6 tw-rounded-lg reveal-item" style="transition-delay: 0.6s;">
+                        <div>
+                            <span class="tw-text-2xl tw-font-bold tw-text-white" style="font-family: 'Rajdhani', sans-serif;">TOTAL INVESTMENT</span>
+                            <div class="tw-text-sm tw-text-gray-400">Interview & Article Research</div>
+                        </div>
+                        <div class="tw-text-right">
+                            <span class="tw-text-4xl tw-font-bold tw-text-primary-accent">$620</span>
+                            <div class="tw-text-sm tw-text-gray-400">Maximizing ROI</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reveal tw-text-center tw-mb-16">
+                <div class="tw-max-w-4xl tw-mx-auto">
+                    <span class="tw-inline-block tw-bg-green-500/20 tw-border tw-border-green-500/30 tw-text-green-400 tw-px-3 tw-py-1 tw-rounded-full tw-text-xs tw-font-semibold tw-uppercase tw-tracking-wide tw-mb-4 reveal-item">
+                        Mission Accomplished
+                    </span>
+                    <h2 class="gradient-title tw-text-5xl tw-mb-8 reveal-item" style="transition-delay: 0.1s;">Conclusion</h2>
+                    
+                    <div class="info-card tw-p-8 tw-rounded-xl tw-text-left reveal-item" style="transition-delay: 0.2s;">
+                        <p class="tw-text-xl tw-text-gray-300 tw-leading-relaxed tw-mb-6">
+                           The three-day trip to Mondulkiri was highly successful in achieving its primary objective: securing a rich and insightful interview with Mr. Chan Vuthy, Taskly's esteemed retired staff member. Vongsorya Uch effectively captured his articulate recounting of Taskly's early product development, architectural challenges, and the evolution of its user-centric design.
+                        </p>
+                        <p class="tw-text-xl tw-text-gray-300 tw-leading-relaxed">
+                           This invaluable historical perspective will serve as the cornerstone of a compelling feature article for our company magazine, reinforcing Taskly's commitment to continuous innovation and user empowerment. The Marketing team will now proceed with transcribing the full interview and drafting the article for publication.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    
+    <footer class="tw-bg-gradient-to-r tw-from-dark-bg tw-to-section-bg tw-p-8 tw-mt-12 tw-text-center tw-border-t tw-border-gray-700">
+        <div class="tw-max-w-4xl tw-mx-auto">
+            <div class="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-items-center tw-mb-4">
+                <div class="tw-flex tw-items-center tw-mb-4 md:tw-mb-0">
+                    <i class="fas fa-tasks tw-text-primary-accent tw-text-2xl tw-mr-3"></i>
+                    <div>
+                        <div class="tw-text-white tw-font-bold" style="font-family: 'Rajdhani', sans-serif;">TASKLY SOFTWARE</div>
+                        <div class="tw-text-xs tw-text-gray-400">Digital Solutions & Productivity</div>
+                    </div>
+                </div>
+                <div class="tw-text-sm tw-text-gray-400">
+                    Report Generated: <span class="tw-text-primary-accent">January 9, 2025</span>
+                </div>
+            </div>
+            <div class="tw-border-t tw-border-gray-700 tw-pt-4">
+                <p class="tw-text-gray-400 tw-text-sm">&copy; 2025 Taskly. All rights reserved. | Confidential Business Document</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobile Sidebar Toggle
+        function toggleMobileSidebar() { 
+            const sidebar = document.getElementById('mobileSidebar');
+            sidebar.classList.toggle('show'); 
+        }
+
+        // Enhanced animation script with intersection observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => { 
+                    if (entry.isIntersecting) { 
+                        entry.target.classList.add('is-visible');
+                        if (entry.target.classList.contains('staggered-grid')) {
+                            entry.target.querySelectorAll('.expense-item').forEach((item, index) => {
+                                item.style.transitionDelay = `${index * 0.1}s`;
+                                item.classList.add('is-visible');
+                            });
+                        }
+                        observer.unobserve(entry.target);
+                    } 
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.staggered-grid').forEach(el => observer.observe(el));
+
+
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add parallax effect to header
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.parallax-header');
+                if (parallax) {
+                    const speed = scrolled * 0.3; 
+                    parallax.style.transform = `translateY(${speed}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
