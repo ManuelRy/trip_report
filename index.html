@@ -587,7 +587,15 @@
         </div>
     </section>
 
-    <section class="section-padding" id="client-meetings">
+        <section class="section-padding" id="client-meetings">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title text-white">MEETING WITH CLIENTS</h2>
+                    <p class="lead text-light">Building strong partnerships and delivering exceptional solutions through meaningful client relationships</p>
+                </div>
+                
+                <!-- Client Meeting Images -->
+                <section class="section-padding" id="client-meetings">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title text-white">MEETING WITH CLIENTS</h2>
@@ -598,32 +606,28 @@
             <div class="row g-5 align-items-center mb-5">
                 <!-- First Client Meeting -->
                 <div class="col-lg-6">
-                    <div class="client-meeting-container">
-                        <img src="image/team-partnership.jpg" alt="Professional client meeting - partnership discussion" class="client-meeting-image">
-                        <div class="client-badge">
+                    <div class="story-image-container">
+                        <img src="image/team-partnership.jpg" alt="Professional client meeting - partnership discussion" class="story-image img-fluid rounded-4 shadow-lg">
+                        <div class="story-badge">
                             <i class="fas fa-handshake me-2"></i>PARTNERSHIP
-                        </div>
-                        <div class="client-overlay">
-                            <h5 class="fw-bold mb-2" style="font-family: 'Rajdhani', sans-serif;">Strategic Partnership Meeting</h5>
-                            <p class="mb-0">Establishing long-term collaborations with key industry partners to expand our market reach and enhance our service offerings.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-lg-6">
-                    <div class="client-info-card">
+                    <div class="glass-effect p-4 rounded-4">
                         <div class="meeting-icon mx-auto">
                             <i class="fas fa-users fa-lg text-white"></i>
                         </div>
                         <h3 class="h4 text-gradient mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">Strategic Partnerships</h3>
                         <p class="text-light mb-4">Our commitment to building meaningful partnerships drives our success. Through collaborative meetings and strategic discussions, we establish relationships that benefit both our clients and our growing platform.</p>
                         
-                        <div class="client-stat">
+                        <div class="story-highlight mt-4">
                             <div class="client-stat-number">50+</div>
                             <small class="text-light">Partnership Meetings</small>
                         </div>
                         
-                        <div class="client-stat">
+                        <div class="story-highlight mt-3">
                             <div class="client-stat-number">95%</div>
                             <small class="text-light">Client Satisfaction Rate</small>
                         </div>
@@ -634,32 +638,28 @@
             <!-- Second Client Meeting -->
             <div class="row g-5 align-items-center mb-5">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="client-meeting-container">
-                        <img src="image/consultation.jpg" alt="Diverse team client consultation meeting" class="client-meeting-image">
-                        <div class="client-badge partnership">
+                    <div class="story-image-container">
+                        <img src="image/consultation.jpg" alt="Diverse team client consultation meeting" class="story-image img-fluid rounded-4 shadow-lg">
+                        <div class="story-badge success">
                             <i class="fas fa-chart-line me-2"></i>CONSULTATION
-                        </div>
-                        <div class="client-overlay">
-                            <h5 class="fw-bold mb-2" style="font-family: 'Rajdhani', sans-serif;">Client Consultation Session</h5>
-                            <p class="mb-0">Providing expert guidance and customized solutions to help our clients maximize their productivity and achieve their business objectives.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-lg-6 order-lg-1">
-                    <div class="client-info-card">
+                    <div class="glass-effect p-4 rounded-4">
                         <div class="meeting-icon mx-auto">
                             <i class="fas fa-lightbulb fa-lg text-white"></i>
                         </div>
                         <h3 class="h4 text-gradient mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase;">Expert Consultation</h3>
                         <p class="text-light mb-4">We believe in understanding our clients' unique challenges and providing tailored solutions. Our consultation sessions ensure that every implementation of Taskly is optimized for maximum efficiency and user adoption.</p>
                         
-                        <div class="client-stat">
+                        <div class="story-highlight mt-4">
                             <div class="client-stat-number">200+</div>
                             <small class="text-light">Consultation Hours</small>
                         </div>
                         
-                        <div class="client-stat">
+                        <div class="story-highlight mt-3">
                             <div class="client-stat-number">40%</div>
                             <small class="text-light">Productivity Increase</small>
                         </div>
@@ -693,6 +693,9 @@
                     <p class="text-light mb-0">Growth Rate</p>
                 </div>
             </div>
+        </div>
+    </section>
+
             
             <!-- Call to Action -->
             <!-- <div class="text-center mt-5">
@@ -2208,6 +2211,105 @@
             opacity: 1;
             visibility: visible;
         }
+        .story-image-container {
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+        .story-image-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .story-image {
+            border-radius: 20px !important;
+            transition: all 0.4s ease;
+            border: 3px solid rgba(255, 68, 68, 0.2);
+        }
+
+        .story-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4) !important;
+            border-color: rgba(255, 68, 68, 0.4);
+        }
+
+        .story-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-red-hover));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(255, 68, 68, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .story-badge.success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+        }
+
+        .story-highlight {
+            padding: 15px 20px;
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 1rem;
+        }
+
+        .client-stat-number {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-red);
+        }
+
+        .meeting-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-red-hover));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .meeting-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 68, 68, 0.3);
+        }
+        </style>
 
         @media (max-width: 768px) {
             .desktop-only { display: none !important; }
